@@ -1,3 +1,5 @@
 /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/rebuild_cache.dir
 /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/edit_cache.dir
 /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/main.dir
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/Train.dir
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/Station.dir

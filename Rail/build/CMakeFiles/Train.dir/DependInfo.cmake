@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/main.cpp" "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/main.dir/src/main.cpp.o"
+  "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Train.cpp" "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/Train.dir/src/Train.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,8 +15,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/Station.dir/DependInfo.cmake"
-  "/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles/Train.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

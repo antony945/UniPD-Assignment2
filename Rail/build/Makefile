@@ -123,6 +123,86 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+#=============================================================================
+# Target rules for targets named Train
+
+# Build rule for target.
+Train: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Train
+.PHONY : Train
+
+# fast build rule for target.
+Train/fast:
+	$(MAKE) -f CMakeFiles/Train.dir/build.make CMakeFiles/Train.dir/build
+.PHONY : Train/fast
+
+#=============================================================================
+# Target rules for targets named Station
+
+# Build rule for target.
+Station: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Station
+.PHONY : Station
+
+# fast build rule for target.
+Station/fast:
+	$(MAKE) -f CMakeFiles/Station.dir/build.make CMakeFiles/Station.dir/build
+.PHONY : Station/fast
+
+src/Station.o: src/Station.cpp.o
+
+.PHONY : src/Station.o
+
+# target to build an object file
+src/Station.cpp.o:
+	$(MAKE) -f CMakeFiles/Station.dir/build.make CMakeFiles/Station.dir/src/Station.cpp.o
+.PHONY : src/Station.cpp.o
+
+src/Station.i: src/Station.cpp.i
+
+.PHONY : src/Station.i
+
+# target to preprocess a source file
+src/Station.cpp.i:
+	$(MAKE) -f CMakeFiles/Station.dir/build.make CMakeFiles/Station.dir/src/Station.cpp.i
+.PHONY : src/Station.cpp.i
+
+src/Station.s: src/Station.cpp.s
+
+.PHONY : src/Station.s
+
+# target to generate assembly for a file
+src/Station.cpp.s:
+	$(MAKE) -f CMakeFiles/Station.dir/build.make CMakeFiles/Station.dir/src/Station.cpp.s
+.PHONY : src/Station.cpp.s
+
+src/Train.o: src/Train.cpp.o
+
+.PHONY : src/Train.o
+
+# target to build an object file
+src/Train.cpp.o:
+	$(MAKE) -f CMakeFiles/Train.dir/build.make CMakeFiles/Train.dir/src/Train.cpp.o
+.PHONY : src/Train.cpp.o
+
+src/Train.i: src/Train.cpp.i
+
+.PHONY : src/Train.i
+
+# target to preprocess a source file
+src/Train.cpp.i:
+	$(MAKE) -f CMakeFiles/Train.dir/build.make CMakeFiles/Train.dir/src/Train.cpp.i
+.PHONY : src/Train.cpp.i
+
+src/Train.s: src/Train.cpp.s
+
+.PHONY : src/Train.s
+
+# target to generate assembly for a file
+src/Train.cpp.s:
+	$(MAKE) -f CMakeFiles/Train.dir/build.make CMakeFiles/Train.dir/src/Train.cpp.s
+.PHONY : src/Train.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -159,6 +239,14 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
+	@echo "... Train"
+	@echo "... Station"
+	@echo "... src/Station.o"
+	@echo "... src/Station.i"
+	@echo "... src/Station.s"
+	@echo "... src/Train.o"
+	@echo "... src/Train.i"
+	@echo "... src/Train.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

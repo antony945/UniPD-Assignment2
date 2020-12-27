@@ -8,13 +8,7 @@
 
 ../include/Station.h
 
-../include/Train.h
-
-/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/main.cpp
-iostream
--
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Station.cpp
 Station.h
 /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Station.h
-Train.h
-/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Train.h
 

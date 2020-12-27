@@ -1,5 +1,6 @@
 #include <iostream>
-#include "Rail.h"
+#include "Station.h"
+#include "Train.h"
 
 using namespace std;
 
