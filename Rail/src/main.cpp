@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Rail.h"
+
 using namespace std;
 
 int main(void) {
