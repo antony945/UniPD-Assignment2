@@ -4,22 +4,10 @@ project(Rail VERSION 1.0 LANGUAGES CXX)
 
 include_directories(include)
 
-add_library(Station 
-    include/Station.h
-    src/Station.cpp
-)
+set(EXEC main)
+file(GLOB SOURCES src/*.cpp)
 
-add_library(Train 
-    include/Train.h
-    src/Train.cpp
-)
-
-add_executable(main
-    src/main.cpp
-    src/My_func.cpp
-)
-
-target_link_libraries(main
-    Station
-    Train
+add_executable(${EXEC}
+    main.cpp    
+    ${SOURCES}
 )
