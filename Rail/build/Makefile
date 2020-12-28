@@ -149,6 +149,33 @@ Station/fast:
 	$(MAKE) -f CMakeFiles/Station.dir/build.make CMakeFiles/Station.dir/build
 .PHONY : Station/fast
 
+src/My_func.o: src/My_func.cpp.o
+
+.PHONY : src/My_func.o
+
+# target to build an object file
+src/My_func.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/My_func.cpp.o
+.PHONY : src/My_func.cpp.o
+
+src/My_func.i: src/My_func.cpp.i
+
+.PHONY : src/My_func.i
+
+# target to preprocess a source file
+src/My_func.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/My_func.cpp.i
+.PHONY : src/My_func.cpp.i
+
+src/My_func.s: src/My_func.cpp.s
+
+.PHONY : src/My_func.s
+
+# target to generate assembly for a file
+src/My_func.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/My_func.cpp.s
+.PHONY : src/My_func.cpp.s
+
 src/Station.o: src/Station.cpp.o
 
 .PHONY : src/Station.o
@@ -241,6 +268,9 @@ help:
 	@echo "... main"
 	@echo "... Train"
 	@echo "... Station"
+	@echo "... src/My_func.o"
+	@echo "... src/My_func.i"
+	@echo "... src/My_func.s"
 	@echo "... src/Station.o"
 	@echo "... src/Station.i"
 	@echo "... src/Station.s"

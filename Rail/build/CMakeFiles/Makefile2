@@ -79,12 +79,12 @@ CMakeFiles/main.dir/all: CMakeFiles/Train.dir/all
 CMakeFiles/main.dir/all: CMakeFiles/Station.dir/all
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles --progress-num=5,6 "Built target main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles --progress-num=5,6,7 "Built target main"
 .PHONY : CMakeFiles/main.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/build/CMakeFiles 0
 .PHONY : CMakeFiles/main.dir/rule

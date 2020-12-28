@@ -6,15 +6,37 @@
 
 #IncludeRegexTransform: 
 
-../include/Station.h
-
-../include/Train.h
-
-/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/main.cpp
+../include/My_func.h
 iostream
 -
 Station.h
-/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Station.h
+../include/Station.h
+Train.h
+../include/Train.h
+vector
+-
+
+../include/Station.h
+
+../include/Train.h
+iostream
+-
+Station.h
+../include/Station.h
+list
+-
+vector
+-
+
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/My_func.cpp
+My_func.h
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/My_func.h
+
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/main.cpp
+My_func.h
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/My_func.h
 Train.h
 /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Train.h
+Station.h
+/home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Station.h
 

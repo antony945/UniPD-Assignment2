@@ -16,6 +16,7 @@ add_library(Train
 
 add_executable(main
     src/main.cpp
+    src/My_func.cpp
 )
 
 target_link_libraries(main

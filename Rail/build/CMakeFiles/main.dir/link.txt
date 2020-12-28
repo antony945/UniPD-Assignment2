@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/main.dir/src/main.cpp.o  -o main  libStation.a libTrain.a 
+/usr/bin/c++     CMakeFiles/main.dir/src/main.cpp.o CMakeFiles/main.dir/src/My_func.cpp.o  -o main  libStation.a libTrain.a 
