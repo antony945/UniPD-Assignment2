@@ -1,2 +1,0 @@
-/usr/bin/ar qc libTrain.a  CMakeFiles/Train.dir/src/Train.cpp.o
-/usr/bin/ranlib libTrain.a
