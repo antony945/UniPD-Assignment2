@@ -3,7 +3,13 @@
 #include "Station.h"
 
 class MainStation : public Station {
-
+private:
+    static int NUM_OF_MAIN_STATIONS;
+public:
+    static int SIZE() { return NUM_OF_MAIN_STATIONS; }
+public:
+    // Costruttore con nome e distanza da origine (deve aumentare NUM_OF_MAIN_STATIONS)
+    MainStation(std::string, int);
 };
 
 #endif // MainStation_h
