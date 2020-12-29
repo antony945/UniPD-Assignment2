@@ -11,11 +11,11 @@
 #include <fstream>
 #include <vector>
 
-
 class Railway {
 private:
-    // File input
+    // File input per creare stazioni
     std::ifstream line_description;
+    // File input per creare treni
     std::ifstream timetables;
     // Vettore di stazioni
     std::vector<Station> stations;
