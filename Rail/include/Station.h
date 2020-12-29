@@ -1,5 +1,7 @@
 #ifndef Station_h
 #define Station_h
+#include "Train.h"
+#include <iostream>
 
 class Station {
 public:
