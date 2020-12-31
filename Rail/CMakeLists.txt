@@ -8,6 +8,5 @@ set(EXEC main)
 file(GLOB SOURCES src/*.cpp)
 
 add_executable(${EXEC}
-    main.cpp    
     ${SOURCES}
 )

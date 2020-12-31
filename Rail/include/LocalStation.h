@@ -9,7 +9,9 @@ public:
     static int SIZE() { return NUM_OF_LOCAL_STATIONS; }
 public:
     // Costruttore con nome e distanza da origine (deve aumentare NUM_OF_LOCAL_STATIONS)
-    LocalStation(std::string, int);
+    LocalStation(const std::string&, int);
+
+    bool isMain() const override { return false; }
 };
 
 #endif // LocalStation_h

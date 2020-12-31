@@ -1,7 +1,5 @@
 #ifndef Station_h
 #define Station_h
-#include "Train.h"
-#include "Rail.h"
 #include <vector>
 #include <iostream>
 
@@ -12,17 +10,17 @@ protected:
     // Distanza dall'origine
     int distance;
     // Binari standard
-    std::vector<Rail> standardRails;
-public:
-    Station(const std::string& name_, int distance_);
-    
-    std::string getName();
-    int getDistance();
+    // std::vector<Rail> standardRails;
 
 public:
-    virtual bool isMain() = 0;
-    virtual bool isFull() = 0;
-    virtual void addTrain(const Train&, int) = 0;
+    Station(const std::string&, int);
+    std::string getName() const { return name; }
+    int getDistance() const { return distance; }
+
+public:
+    virtual bool isMain() const = 0;
+    // virtual bool isFull() const = 0;
+    // virtual void addTrain(const Train&, int) = 0;
 };
 
 #endif // Station_h
