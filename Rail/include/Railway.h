@@ -3,11 +3,13 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <list>
 #include "MainStation.h"
 #include "LocalStation.h"
 #include "RegionalTrain.h"
 #include "AVTrain.h"
 #include "SuperAVTrain.h"
+#include "Rail.h"
 
 /*
 A ogni minuto che passa:
@@ -39,9 +41,11 @@ private:
     // Vettore di sole stazioni principali
     std::vector<Station*> mainStations;
     // Vettore di treni
-    std::vector<Train*> trains;
+    std::list<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
+    // Binario andata e ritorno
+    std::vector<Rail*> rails;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
@@ -65,9 +69,10 @@ public:
     // Metodo per svolgere simulazione di 1 giorno lavorativo
     void daySimulation();
 private:
-    bool isOver() const;
-    void checkEvents();
-    void addMinute();
+    // Controlla se tutti i treni hanno finito il loro viaggio
+    bool isOver();
+    // Controlla e gestisce tutti gli eventi possibili
+    void manageEvents();
 };
 
 #endif // Railway_h

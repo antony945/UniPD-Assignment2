@@ -9,23 +9,25 @@ class Train {
 protected:
     static std::vector<Station*> ALL_STATIONS;
 protected:
-    static const int MINIMUM_DISTANCE = 10;
-
     std::vector<int> timetable; // Devono avere stesso numeri di elementi di myStation
     int currentDelay;
     int id;
     bool fromOrigin;
     int currentSpeed;
     double currentDistance;
-    int currentStationIndex;
+    // Contiene indice prossima stazione da visitare (si aggiorna ogni volta che parte da una stazione)
+    int nextStationIndex;
 
 protected:
     // Costruttore
     Train(int, bool, const std::vector<int>&);
 public:
+    static const int MINIMUM_DISTANCE = 10;
     // Restituisce membri del treno
+    bool isFromOrigin() const { return fromOrigin; }
     int getCurrentSpeed() const { return currentSpeed; }
     int getCurrentDelay() const { return currentDelay; }
+    int getNextStationIndex() const { return nextStationIndex; }
     int getId() const { return id; }
     double getCurrentDistance() const { return currentDistance; }
     std::vector<int> getTimetable() const { return timetable; }
@@ -36,10 +38,10 @@ public:
     // Setta la velocità
     void setSpeed(int s) { currentSpeed = s; }
     // Setta indice stazione
-    void setIndexStation(int i) { currentStationIndex = i; }
+    void setNextStation(int i) { nextStationIndex = i; }
     // Controlla se mancano 20 km a prossima stazione
     bool nearNextStation() {
-        if(currentDistance >= ALL_STATIONS[currentStationIndex+1]->getDistance()-20)
+        if(currentDistance >= ALL_STATIONS[nextStationIndex]->getDistance()-20)
             return true;
         return false;
     }

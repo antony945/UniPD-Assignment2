@@ -7,4 +7,4 @@ Train::Train(int id_, bool fromOrigin_, const std::vector<int>& timetable_)
       currentDelay{0},
       currentSpeed{0},
       currentDistance{0},
-      currentStationIndex{0} {}
+      nextStationIndex{0} {}

@@ -13,36 +13,76 @@ void Railway::daySimulation() {
         // altri controlli che ora non mi vengono in mente
     // avanza di un minuto facendo cambiare la distanza percorsa dal treno con la funzione treno.addDistance(oneMinuteDistance)
     while(!isOver()) {
-        checkEvents();
-        addMinute();
+        manageEvents();
     }
 }
 
-// TODO: Da cambiare
-bool Railway::isOver() const {
-    // Non è solo questo perchè in realta dopo la mezzanotte del giorno deve far finire le cose
-    return currentMinutes>DAY_MINUTES;
+// TODO: Da controllare
+bool Railway::isOver() {
+    for(Train* t : trains) {
+        if(! (t->getCurrentDistance() >= stations[stations.size()-1]->getDistance()))
+            return false;
+        
+        // Togli treno dalla lista di treni dato che ha finito il viaggio
+        trains.remove(t);
+    }
+    
+    return true;
 }
 
 // TODO: Da pensare bene, parte importante
-void Railway::checkEvents() {
+void Railway::manageEvents() {
     // Controlla se succede qualcosa in quel momento
         // cerca in timetable se c'è orario di partenza o arrivo di qualche treno,
         // cerca se siamo avanti di 5 minuti rispetto a timetable e quindi se c'è da far partire il treno
         // controlla se mancano 20km a prossima stazione, in caso manda segnalazione da treno a stazione e abbassa velocita
         // controlla se distnza tra treni è maggiore uguale a 10, deve rimanere cosi, in caso cambia velocità
         // altri controlli che ora non mi vengono in mente
-}
+    
+    for(Train* t : trains) {
+        std::vector<int> trainTimetable = t->getTimetable();
 
-// TODO: Da pensare bene, parte importante
-void Railway::addMinute() {
-    // Aggiungi minuto
-    currentMinutes++;
+        /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
+        if(t->nearNextStation()) { // CONTROLLA SE DEVE INVIARE SEGNALAZIONE A PROSSIMA STAZIONE (20 KM PRIMA DI NEXTSTATIONINDEX)
+            // t->sendRequest(Station+ s);
+            // t->setNextRail(s->sendAck(Train* t));
+        } else if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE (5 KM PRIMA DI NEXTSTATIONINDEX)
+            // aggiundi treno alla coda del parcheggio
+            // park.enqueue(t);
+            // setta velocità a 0
+        } else if(t->isInStation()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE (5 KM PRIMA DI NEXTSTATIONINDEX)
+            // changeRail accetta una reference a una Rail
+            // t->changeRail(t->getNextRail());
+            // inserisci treno in vettore di rail in station corrispondente
+            // cambia velocità a 80
+        } else if(t->isArrivedAtStation()) { // CONTROLLA A CHE ORA È ARRIVATO IN STAZIONE (0 KM PRIMA DI NEXTSTATIONINDEX)
+            // cambia velocità a 0
+            // controlla e setta Ritardo (o anticipo)
+            // se è arrivato a stazione metti t->salitaPasseggeri() a true
+            // deve diventare false dopo 5 minuti
+        } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
+            // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
+            // setta velocità a 80  
+        } else if(t->isOutStation()) { // CONTROLLA SE STA USCENDO DALLA STAZIONE (5 KM DOPO DI NEXTSTATIONINDEX)
+            // t->changeRail(t->getNextRail());
+            // inserisci treno in vettore di rail in Railway
+            if(t->isFromOrigin()) {
+                // rails[0]->addTrain(t);
+            } else {
+                // rails[1]->addTrain(t);
+            }
+            // aumenta nextStationIndex di 1
+            // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
+        } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
+            // cambia velocità in modo che non ci siano più conflitti
+        } else { // SE NON CI SONO EVENTI ED È TUTTO OK
+            // Aggiungi minuto
+            currentMinutes++;
 
-    // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
-    for(auto t : trains) {
-        double minuteDistance = static_cast<double>(t->getCurrentSpeed()/60);
-        t->addDistance(minuteDistance);
+            // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
+            double minuteDistance = static_cast<double>(t->getCurrentSpeed()/60);
+            t->addDistance(minuteDistance);
+        }
     }
 }
 
