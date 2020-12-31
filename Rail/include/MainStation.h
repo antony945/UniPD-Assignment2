@@ -4,6 +4,12 @@
 
 class MainStation : public Station {
 
+public:
+	MainStation(const std::string& name_, int distance_);
+	MainStation();
+
+private:
+	bool isMain() override;
 };
 
 #endif // MainStation_h
