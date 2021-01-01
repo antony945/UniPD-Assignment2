@@ -1,90 +1,99 @@
 #include "Railway.h"
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-void Railway::daySimulation() {
-    // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
-    // Controlla se succede qualcosa in quel momento
-        // cerca in timetable se c'è orario di partenza o arrivo di qualche treno,
-        // cerca se siamo avanti di 5 minuti rispetto a timetable e quindi se c'è da far partire il treno
-        // controlla se mancano 20km a prossima stazione, in caso manda segnalazione da treno a stazione e abbassa velocita
-        // controlla se distnza tra treni è maggiore uguale a 10, deve rimanere cosi, in caso cambia velocità
-        // altri controlli che ora non mi vengono in mente
-    // avanza di un minuto facendo cambiare la distanza percorsa dal treno con la funzione treno.addDistance(oneMinuteDistance)
-    while(!isOver()) {
-        manageEvents();
-    }
-}
+// daySimulation() FINITA
+// void Railway::daySimulation() {
+//     // INIZIO
+//     output << "START\n";
+//     // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
+//     bool end = false;
+//     while(!end) {
+//         end = true;
+//         for(Train* t : trains) {
+//             if(t->hasNextStation()) {
+//                 end = false;
+//                 manageEvents(t);
+//             }
+//         }
+//     }
+//     // FINE
+//     output << "END\n";
+// }
 
-// TODO: Da controllare
-bool Railway::isOver() {
-    for(Train* t : trains) {
-        if(! (t->getCurrentDistance() >= stations[stations.size()-1]->getDistance()))
-            return false;
-        
-        // Togli treno dalla lista di treni dato che ha finito il viaggio
-        trains.remove(t);
-    }
-    
-    return true;
-}
-
-// TODO: Da pensare bene, parte importante
-void Railway::manageEvents() {
-    // Controlla se succede qualcosa in quel momento
-        // cerca in timetable se c'è orario di partenza o arrivo di qualche treno,
-        // cerca se siamo avanti di 5 minuti rispetto a timetable e quindi se c'è da far partire il treno
-        // controlla se mancano 20km a prossima stazione, in caso manda segnalazione da treno a stazione e abbassa velocita
-        // controlla se distnza tra treni è maggiore uguale a 10, deve rimanere cosi, in caso cambia velocità
-        // altri controlli che ora non mi vengono in mente
-    
-    for(Train* t : trains) {
-        std::vector<int> trainTimetable = t->getTimetable();
-
-        /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
-        if(t->nearNextStation()) { // CONTROLLA SE DEVE INVIARE SEGNALAZIONE A PROSSIMA STAZIONE (20 KM PRIMA DI NEXTSTATIONINDEX)
-            // t->sendRequest(Station+ s);
-            // t->setNextRail(s->sendAck(Train* t));
-        } else if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE (5 KM PRIMA DI NEXTSTATIONINDEX)
-            // aggiundi treno alla coda del parcheggio
-            // park.enqueue(t);
-            // setta velocità a 0
-        } else if(t->isInStation()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE (5 KM PRIMA DI NEXTSTATIONINDEX)
-            // changeRail accetta una reference a una Rail
-            // t->changeRail(t->getNextRail());
-            // inserisci treno in vettore di rail in station corrispondente
-            // cambia velocità a 80
-        } else if(t->isArrivedAtStation()) { // CONTROLLA A CHE ORA È ARRIVATO IN STAZIONE (0 KM PRIMA DI NEXTSTATIONINDEX)
-            // cambia velocità a 0
-            // controlla e setta Ritardo (o anticipo)
-            // se è arrivato a stazione metti t->salitaPasseggeri() a true
-            // deve diventare false dopo 5 minuti
-        } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
-            // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
-            // setta velocità a 80  
-        } else if(t->isOutStation()) { // CONTROLLA SE STA USCENDO DALLA STAZIONE (5 KM DOPO DI NEXTSTATIONINDEX)
-            // t->changeRail(t->getNextRail());
-            // inserisci treno in vettore di rail in Railway
-            if(t->isFromOrigin()) {
-                // rails[0]->addTrain(t);
-            } else {
-                // rails[1]->addTrain(t);
-            }
-            // aumenta nextStationIndex di 1
-            // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
-        } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
-            // cambia velocità in modo che non ci siano più conflitti
-        } else { // SE NON CI SONO EVENTI ED È TUTTO OK
-            // Aggiungi minuto
-            currentMinutes++;
-
-            // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
-            double minuteDistance = static_cast<double>(t->getCurrentSpeed()/60);
-            t->addDistance(minuteDistance);
-        }
-    }
-}
+// manageEvents() TODO: Da pensare bene, parte importante
+// void Railway::manageEvents(Train* t) {
+//     // Controlla se succede qualcosa in quel momento
+//         // cerca in timetable se c'è orario di partenza o arrivo di qualche treno,
+//         // cerca se siamo avanti di 5 minuti rispetto a timetable e quindi se c'è da far partire il treno
+//         // controlla se mancano 20km a prossima stazione, in caso manda segnalazione da treno a stazione e abbassa velocita
+//         // controlla se distnza tra treni è maggiore uguale a 10, deve rimanere cosi, in caso cambia velocità
+//         // altri controlli che ora non mi vengono in mente
+//     // avanza di un minuto facendo cambiare la distanza percorsa dal treno
+//
+//     std::vector<int> trainTimetable = t->getTimetable();
+//
+//     /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
+//     if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
+//         // Invia segnalazione a prossima stazione
+//         t->sendStopRequest(stations[t->getNextStationIndex()]);
+//         // Ricevi segnalazione da stazione
+//         // stations[t->getNextStationIndex()]->
+//         // t->setNextRail(s->sendAck(Train* t));
+//     } else if(checkTrainDistance(t, -5)) {  // 5 KM PRIMA DI NEXTSTATIONINDEX
+//         // rimuovi treno da vettore di rail in Railway
+//         if(t->isFromOrigin()) {
+//             // rails[0]->addTrain(t);
+//         } else {
+//             // rails[1]->addTrain(t);
+//         }
+//
+//         // A seconda di ciò che ha inviato la stazione (se parcheggio o numero di binario)
+//         if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE
+//             // aggiundi treno alla coda del parcheggio
+//             // park.enqueue(t);
+//             // setta velocità a 0
+//         } else if(t->hasToEnterRail()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE
+//             // changeRail accetta una reference a una Rail
+//             // t->changeRail(t->getNextRail());
+//             // inserisci treno in vettore di rail in station corrispondente
+//             // cambia velocità a 80   
+//         }
+//     } else if(checkTrainDistance(t, 0)) { // 0 KM PRIMA DI NEXTSTATIONINDEX, TODO: To check
+//         if(t->hasJustArrived(currentMinutes)) { // CONTROLLA SE È APPENA ARRIVATO IN STAZIONE È ARRIVATO IN STAZIONE
+//             // cambia velocità a 0
+//             // controlla e setta Ritardo (o anticipo)
+//             // se è arrivato a stazione metti t->salitaPasseggeri() a true
+//         } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
+//             // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
+//             // setta velocità a 80
+//         }
+//     } else if(checkTrainDistance(t, 5)) { // 5 KM DOPO DI NEXTSTATIONINDEX
+//         // Fai in modo che treno esca dalla stazione
+//         // t->changeRail(t->getNextRail());
+//         // inserisci treno in vettore di rail in Railway
+//         if(t->isFromOrigin()) {
+//             // rails[0]->addTrain(t);
+//         } else {
+//             // rails[1]->addTrain(t);
+//         }
+//        
+//         // Avanza indice di nextStation
+//         t->setNextStation();
+//
+//         // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
+//     } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
+//         // cambia velocità in modo che non ci siano più conflitti
+//     } else { // SE NON CI SONO EVENTI ED È TUTTO OK
+//         // Aggiungi minuto
+//         currentMinutes++;
+//         // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
+//         double minuteDistance = static_cast<double>(t->getCurrentSpeed()/60);
+//         t->addDistance(minuteDistance);
+//     }
+// }
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 Railway::Railway(const std::string& line_description_, const std::string& timetables_, const std::string& output_)
@@ -101,11 +110,15 @@ Railway::Railway(const std::string& line_description_, const std::string& timeta
     
     createStations();
     createTrains();
+    createRails();
 }
 
 Railway::~Railway() {
     // Libera memoria da array di Station* stations
     for(auto i : stations)
+        delete i;
+    // TODO: Libera memoria da array di Station* reverseStations
+    for(auto i : reverseStations)
         delete i;
     // Libera memoria da array di Train* trains
     for(auto i : trains)
@@ -128,7 +141,7 @@ void Railway::createStations() {
     std::string line;
     std::getline(line_description, line);
     stations.push_back(new MainStation(line, 0));
-    mainStations.push_back(stations[i++]);
+    reverseStations.push_back(new MainStation(line, 0));
 
     // Ottieni tutte le altre stazioni
     while(!line_description.eof()) {
@@ -162,12 +175,22 @@ void Railway::createStations() {
         if(type==0) {
             // Crea stazione principale
             stations.push_back(new MainStation{name, distance});
-            // Aggiungi ad array di stazioni principali
-            mainStations.push_back(stations[i++]);
+            reverseStations.push_back(new MainStation{name, distance});
         } else if(type==1) {
             // Crea stazione locale
             stations.push_back(new LocalStation{name, distance});
+            reverseStations.push_back(new LocalStation{name, distance});
         }
+    }
+
+    // Crea vettore di stazioni percorse dall'ultima alla prima
+    std::reverse(reverseStations.begin(), reverseStations.end());
+    // TODO: (forse non devo farlo)
+    // Cambia anche le distanze
+    for(int i=0, d=reverseStations[0]->getDistance(); i<reverseStations.size(); ++i) {
+        // Togli ad ogni stazione la distanza dell'ultima in modo che km 0 sia km della fine
+        int new_distance = std::abs(reverseStations[i]->getDistance() - d);
+        reverseStations[i]->setDistance(new_distance);
     }
 }
 
@@ -179,7 +202,7 @@ void Railway::createTrains() {
         // Ottieni ID
         int id;
         ss >> id;
-        // Ottieni se andata o ritorno
+        // Ottieni metodo di percorrenza di tratta
         int startingFrom;
         ss >> startingFrom;
         // Converti in bool
@@ -190,11 +213,23 @@ void Railway::createTrains() {
             fromOrigin = false;
         }
 
+        // Crea vettore di stazioni da assegnare al treno a seconda se parta o meno dall'origine
+        std::vector<Station*> trainStations;
+        if(fromOrigin)
+            trainStations = stations;
+        else
+            trainStations = reverseStations;
+
+        // Crea vettore di stazioni principali da utilizzare in checkTable
+        std::vector<Station*> mainTrainStations;
+        for(Station* s : trainStations)
+            if(s->isMain()) mainTrainStations.push_back(s);
+
         // Ottieni tipologia treno
         int type;
         ss >> type;
 
-        // Ottieni timetable treno (forse sbagliata)
+        // Ottieni timetable treno (da controllare con checkTimetable)
         std::vector<int> times;
         // Leggi orari
         for(int i=0; !ss.eof(); ++i) {
@@ -205,67 +240,25 @@ void Railway::createTrains() {
 
         if(type == 1) {
             // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(RegionalTrain::MAX_SPEED, stations, times);
-
+            checkTimetable(RegionalTrain::MAX_SPEED, trainStations, times);
             // Crea regionalTrain
-            trains.push_back(new RegionalTrain{id, fromOrigin, times});
-
-            // // Controlla se andata o ritorno
-            // if(startingFrom == 0) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS + NUM_LOCAL_STATIONS
-            //     for(int i=0, j=0; i<stations.size(); ++i) {
-            //         stations[i].addTrain(tr, times[j++]);
-            //     }
-            // } else if(startingFrom == 1) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS + NUM_LOCAL_STATIONS
-            //     for(int i=stations.size()-1, j=0; i>0; --i) {
-            //         stations[i].addTrain(tr, times[j++]);
-            //     }
-            // }            
+            trains.push_back(new RegionalTrain{id, fromOrigin, trainStations, times});      
         } else if(type == 2) {
             // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(AVTrain::MAX_SPEED, mainStations, times);
-
+            checkTimetable(AVTrain::MAX_SPEED, mainTrainStations, times);
             // Crea AVTrain
-            trains.push_back(new AVTrain{id, fromOrigin, times});
-
-            // // Controlla se andata o ritorno
-            // if(startingFrom == 0) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS
-            //     for(int i=0, j=0; i<stations.size(); ++i) {
-            //         if(stations[i].isMain())
-            //             stations[i].addTrain(tr, times[j++]);
-            //     }
-            // } else if(startingFrom == 1) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS
-            //     for(int i=stations.size()-1, j=0; i>0; --i) {
-            //         if(stations[i].isMain())
-            //             stations[i].addTrain(tr, times[j++]);
-            //     }
-            // }
+            trains.push_back(new AVTrain{id, fromOrigin, trainStations, times});
         } else if(type == 3) {
             // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(SuperAVTrain::MAX_SPEED, mainStations, times);
-
+            checkTimetable(SuperAVTrain::MAX_SPEED, mainTrainStations, times);
             // Crea SuperAVTrain
-            trains.push_back(new SuperAVTrain{id, fromOrigin, times});
-
-            // // Controlla se andata o ritorno
-            // if(startingFrom == 0) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS
-            //     for(int i=0, j=0; i<stations.size(); ++i) {
-            //         if(stations[i].isMain())
-            //             stations[i].addTrain(tr, times[j++]);
-            //     }
-            // } else if(startingFrom == 1) {
-            //     // Leggi orari sapendo che sono uguali a NUM_MAIN_STATIONS
-            //     for(int i=stations.size()-1, j=0; i>0; --i) {
-            //         if(stations[i].isMain())
-            //             stations[i].addTrain(tr, times[j++]);
-            //     }
-            // }
+            trains.push_back(new SuperAVTrain{id, fromOrigin, trainStations, times});
         }        
     }
+}
+
+void Railway::createRails() {
+
 }
 
 void Railway::checkTimetable(int fast_speed, const std::vector<Station*>& stations, std::vector<int>& times) {

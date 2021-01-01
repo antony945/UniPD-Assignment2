@@ -16,9 +16,11 @@ public:
     Station(const std::string&, int);
     std::string getName() const { return name; }
     int getDistance() const { return distance; }
+    void setDistance(int distance_) { distance = distance_; }
 
 public:
     virtual bool isMain() const = 0;
+    // virtual void incomingTrain() = 0;
     // virtual bool isFull() const = 0;
     // virtual void addTrain(const Train&, int) = 0;
 };

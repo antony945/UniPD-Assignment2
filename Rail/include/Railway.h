@@ -38,8 +38,8 @@ private:
     std::ofstream output;
     // Vettore di stazioni
     std::vector<Station*> stations;
-    // Vettore di sole stazioni principali
-    std::vector<Station*> mainStations;
+    // Vettore di stazioni percorse dall'ultima alla prima
+    std::vector<Station*> reverseStations;
     // Vettore di treni
     std::list<Train*> trains;
     // Minuti attualmente passati
@@ -55,24 +55,35 @@ public:
     ~Railway();
     // Getter per minutes
     int getCurrentMinutes() const { return currentMinutes; }
+    // Metodo per svolgere simulazione di 1 giorno lavorativo
+    // void daySimulation();
+    // Tester
+    void tester() {
+        // Ottieni lista stazioni per ogni treno
+        for(Train* t : trains) {
+            t->trainInformation(std::cout);
+        }
+    }
 
 private:
     // Inizializza vettore di stations
     void createStations();
     // Inizializza vettore di trains
     void createTrains();
+    // Inizializza vettore di rails
+    void createRails();
     // Controlla timeTable di un treno avente velocità in Km/h MAX_SPEED
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
 
-/* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-public:
-    // Metodo per svolgere simulazione di 1 giorno lavorativo
-    void daySimulation();
-private:
-    // Controlla se tutti i treni hanno finito il loro viaggio
-    bool isOver();
     // Controlla e gestisce tutti gli eventi possibili
-    void manageEvents();
+    // void manageEvents(Train* t);
+    // Controlla se treno è a tot km da stazione successiva
+    bool checkTrainDistance(Train* t, int distance_from_station) {
+        double d = stations[t->getNextStationIndex()]->getDistance()+distance_from_station;
+        double min = d-2;
+        double max = d+2;
+        return (t->getCurrentDistance()>=min && t->getCurrentDistance()<=max);
+    }
 };
 
 #endif // Railway_h

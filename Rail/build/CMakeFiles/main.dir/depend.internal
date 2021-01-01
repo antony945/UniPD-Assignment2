@@ -3,6 +3,9 @@
 
 CMakeFiles/main.dir/src/AVTrain.cpp.o
  ../include/AVTrain.h
+ ../include/LocalStation.h
+ ../include/MainStation.h
+ ../include/Station.h
  ../include/Train.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/AVTrain.cpp
 CMakeFiles/main.dir/src/LocalStation.cpp.o
@@ -20,6 +23,7 @@ CMakeFiles/main.dir/src/Railway.cpp.o
  ../include/AVTrain.h
  ../include/LocalStation.h
  ../include/MainStation.h
+ ../include/Rail.h
  ../include/Railway.h
  ../include/RegionalTrain.h
  ../include/Station.h
@@ -27,23 +31,33 @@ CMakeFiles/main.dir/src/Railway.cpp.o
  ../include/Train.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Railway.cpp
 CMakeFiles/main.dir/src/RegionalTrain.cpp.o
+ ../include/LocalStation.h
+ ../include/MainStation.h
  ../include/RegionalTrain.h
+ ../include/Station.h
  ../include/Train.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/RegionalTrain.cpp
 CMakeFiles/main.dir/src/Station.cpp.o
  ../include/Station.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Station.cpp
 CMakeFiles/main.dir/src/SuperAVTrain.cpp.o
+ ../include/LocalStation.h
+ ../include/MainStation.h
+ ../include/Station.h
  ../include/SuperAVTrain.h
  ../include/Train.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/SuperAVTrain.cpp
 CMakeFiles/main.dir/src/Train.cpp.o
+ ../include/LocalStation.h
+ ../include/MainStation.h
+ ../include/Station.h
  ../include/Train.h
  /home/antonio/Documents/GitHub/UniPD-Assignment2/Rail/src/Train.cpp
 CMakeFiles/main.dir/src/main.cpp.o
  ../include/AVTrain.h
  ../include/LocalStation.h
  ../include/MainStation.h
+ ../include/Rail.h
  ../include/Railway.h
  ../include/RegionalTrain.h
  ../include/Station.h
