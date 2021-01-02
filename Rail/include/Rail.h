@@ -8,10 +8,16 @@ protected:
 	int trainId;		//id del treno che lo sta occupando, -999 il binario è libero
 
 public:
-	bool isOccupied();
-	bool getDirOfTravel();
-	bool getTrainId();
+	bool isOccupied() const;
+	bool getDirOfTravel() const;
+	bool getTrainId() const;
 	Rail(bool dirOfTravel_);
+	Rail();
+
+	Rail(const Rail&) = delete;
+	Rail(Rail&&) = delete;
+	Rail& operator=(const Rail&) = delete;
+	Rail& operator=(Rail&&) = delete;
 };
 
 #endif // Rail_h

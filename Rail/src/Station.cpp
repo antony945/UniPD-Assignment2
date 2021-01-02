@@ -20,7 +20,7 @@ Station::Station() : name{ "" }, distance{ 0 } {
 }
 
 Station::Station(const std::string& name_, int distance_) : name{ name_ }, distance{ distance_ } {
-	//inizializzo i 4 binari (nelle posizioni pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti
+	//inizializzo i 4 binari (negli indici pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti
 	for (int i = 0; i < 4; i++) {
 		if (i % 2 == 0) {
 			Rail tmp(true);
@@ -33,7 +33,7 @@ Station::Station(const std::string& name_, int distance_) : name{ name_ }, dista
 	}
 }
 
-bool Station::isFull() {
+bool Station::isFull() const{	//non ancora definitivo... in questo modo vengono controllati anche i binari della direzione opposta. sarà da aggiungere ai treni anche una variabile per capire in che direzione devono andare
 
 	bool isFull = true;
 
@@ -45,9 +45,13 @@ bool Station::isFull() {
 	return isFull;
 }
 
-std::string Station::getName() {
+void Station::depositTrain(const Train& myTrain) {
+	trainDeposit.push_back(myTrain);
+}
+
+std::string Station::getName() const{
 	return name;
 }
-int Station::getDistance() {
+int Station::getDistance() const{
 	return distance;
 }

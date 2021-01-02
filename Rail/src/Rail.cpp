@@ -2,18 +2,20 @@
 #include <iostream>
 
 Rail::Rail(bool dirOfTravel_) : occupied{ false }, dirOfTravel{ dirOfTravel_ }, trainId{ -999 }	{}
+Rail::Rail() : occupied{ false }, dirOfTravel{ true }, trainId{ -999 }	{}	//direzione del binario settata in automatico a true(dall'origine al capolinea)
 
-bool Rail::getTrainId() {
+
+bool Rail::getTrainId() const{
 	//invece di lanciare un eccezione, avviso e restituisco un valore inusuale: -999
 	if (isOccupied() == false) std::cout << "Attenzione, il binario è libero. Nessun treno in sosta."; 
 	
 	return trainId;		
 }
 
-bool Rail::getDirOfTravel() {
+bool Rail::getDirOfTravel() const{
 	return dirOfTravel;
 }
 
-bool Rail::isOccupied() {
+bool Rail::isOccupied() const{
 	return occupied;
 }
