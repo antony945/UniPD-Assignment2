@@ -45,9 +45,9 @@
 //     } else if(checkTrainDistance(t, -5)) {  // 5 KM PRIMA DI NEXTSTATIONINDEX
 //         // rimuovi treno da vettore di rail in Railway
 //         if(t->isFromOrigin()) {
-//             // rails[0]->addTrain(t);
+//             // rails[0]->removeTrain(t);
 //         } else {
-//             // rails[1]->addTrain(t);
+//             // rails[1]->removeTrain(t);
 //         }
 //
 //         // A seconda di ciò che ha inviato la stazione (se parcheggio o numero di binario)
@@ -167,6 +167,10 @@ void Railway::createStations() {
             type = std::stoi(line.substr(endName+1, 1));
             // Estrai distanza
             distance = std::stoi(line.substr(endName+3));
+
+            // Controlla che distanza non sia minore uguale di 20km
+            if(distance <= stations[stations.size()-1]->getDistance()+20)
+                continue;
         } catch(const std::exception& e) {
             // Errore in input
             throw std::invalid_argument("ERROR. Incorrect input");
@@ -185,7 +189,6 @@ void Railway::createStations() {
 
     // Crea vettore di stazioni percorse dall'ultima alla prima
     std::reverse(reverseStations.begin(), reverseStations.end());
-    // TODO: (forse non devo farlo)
     // Cambia anche le distanze
     for(int i=0, d=reverseStations[0]->getDistance(); i<reverseStations.size(); ++i) {
         // Togli ad ogni stazione la distanza dell'ultima in modo che km 0 sia km della fine
@@ -257,6 +260,7 @@ void Railway::createTrains() {
     }
 }
 
+// TODO: Deve creare i due binari dove transitano i treni normalmente quando non sono nei binari della stazione
 void Railway::createRails() {
 
 }
