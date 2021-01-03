@@ -25,16 +25,6 @@ void Railway::daySimulation() {
 
 // manageEvents() TODO: Da pensare bene, parte importante
 void Railway::manageEvents(Train* t) {
-    // Controlla se succede qualcosa in quel momento
-        // cerca in timetable se c'è orario di partenza o arrivo di qualche treno,
-        // cerca se siamo avanti di 5 minuti rispetto a timetable e quindi se c'è da far partire il treno
-        // controlla se mancano 20km a prossima stazione, in caso manda segnalazione da treno a stazione e abbassa velocita
-        // controlla se distnza tra treni è maggiore uguale a 10, deve rimanere cosi, in caso cambia velocità
-        // altri controlli che ora non mi vengono in mente
-    // avanza di un minuto facendo cambiare la distanza percorsa dal treno
-
-    std::vector<int> trainTimetable = t->getTimetable();
-
     /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
     if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
         // Invia segnalazione a prossima stazione
