@@ -44,8 +44,6 @@ private:
     std::list<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
-    // Binario andata e ritorno
-    std::vector<Rail*> rails;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
@@ -70,8 +68,6 @@ private:
     void createStations();
     // Inizializza vettore di trains
     void createTrains();
-    // Inizializza vettore di rails
-    void createRails();
     // Controlla timeTable di un treno avente velocità in Km/h MAX_SPEED
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
 
