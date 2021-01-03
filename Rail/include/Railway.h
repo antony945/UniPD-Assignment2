@@ -56,7 +56,7 @@ public:
     // Getter per minutes
     int getCurrentMinutes() const { return currentMinutes; }
     // Metodo per svolgere simulazione di 1 giorno lavorativo
-    // void daySimulation();
+    void daySimulation();
     // Tester
     void tester() {
         // Ottieni lista stazioni per ogni treno
@@ -74,7 +74,7 @@ private:
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
 
     // Controlla e gestisce tutti gli eventi possibili
-    // void manageEvents(Train* t);
+    void manageEvents(Train* t);
     // Controlla se treno è a tot km da stazione successiva
     bool checkTrainDistance(Train* t, int distance_from_station) {
         double d = stations[t->getNextStationIndex()]->getDistance()+distance_from_station;
