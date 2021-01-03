@@ -1,8 +1,12 @@
 #include <iostream>
+#include "Railway.h"
 using namespace std;
 
 // File di test
 int main() {
-    cout << "File di test\n";
+    Railway myRailway{"line_description.txt", "timetables.txt", "output.txt"};
+    // myRailway.daySimulation();
+    myRailway.tester();
+
     return 0;
 }
