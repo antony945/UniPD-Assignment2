@@ -1,6 +1,7 @@
+//Alberto Castagnaro 1219641
 #include "Train.h"
 
-Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed) : id{id_} , left {left_} , MAX_SPEED{maxSpeed} {
+Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>& timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{timetable_} {
     currentDelay=0;
     currentSpeed=0;
     currentDistance=0;
@@ -49,7 +50,9 @@ void Train::setSpeed(double n) {
 void Train::increaseDistance() {
     if(isStopped()) stationStopTime++;
     else if(!isStopped())
+        setStop();
         currentDistance+=static_cast<int>(currentSpeed/3.6);
+
 }
 
 void Train::setStop() {
@@ -80,6 +83,10 @@ int Train::nextStationDistance() const {
 
 bool Train::isArriving() const{
     return nextStationDistance()<5000;
+}
+
+int Train::nextStationTime() {
+    return timetable[nextStationIndex];
 }
 
 Train::~Train() = default;
