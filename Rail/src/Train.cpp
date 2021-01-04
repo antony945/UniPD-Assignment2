@@ -13,6 +13,11 @@ double Train::getCurrentSpeed() const {
     return currentSpeed;
 }
 
+bool Train::getLeft() const {
+    return left;
+}
+
+
 int Train::getCurrentDelay() const {
     return currentDelay;
 }

@@ -34,6 +34,7 @@ public:
     Train& operator==(const Train&) =delete;
     // getter - functions
     double getCurrentSpeed() const;
+    bool getLeft() const;
     int getCurrentDelay() const;
     int getId() const;
     double getCurrentDistance() const;

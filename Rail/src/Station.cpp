@@ -2,11 +2,13 @@
 #include <iostream>
 #include "Rail.h"
 #include <vector>
+#include <list>
+
 
 //costruttore di default di default
 Station::Station() : name{ "" }, distance{ 0 } {
 
-	//inizializzo i 4 binari (nelle posizioni pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti
+	//inizializzo i 4 binari (nelle posizioni pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti)
 	for (int i = 0; i < 4; i++) {	
 		if (i % 2 == 0) {
 			Rail tmp(true);
@@ -33,11 +35,42 @@ Station::Station(const std::string& name_, int distance_) : name{ name_ }, dista
 	}
 }
 
-bool Station::isFull() const{	//non ancora definitivo... in questo modo vengono controllati anche i binari della direzione opposta. sarà da aggiungere ai treni anche una variabile per capire in che direzione devono andare
+bool Station::railRequest(const Train& myTrain) {
+
+	bool trainDir = myTrain.getLeft();	//direzione del treno
+
+	if (isFull(trainDir)) return false;	//se è pieno ritorno false, sarà  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
+	
+	int i;
+	
+	if (trainDir)
+		i = 0;
+	else
+		i = 1;
+
+	for (; i < standardRails.size(); i = i+2) {
+
+		if (standardRails[i].isOccupied() == false) {
+			standardRails[i].setTrainId(myTrain.getId());
+			standardRails[i].setOccupied(true);
+			break;						//esco dal for
+		}
+
+	}
+	return true;						//il treno ha ricevuto un binario su cui fermarsi
+}
+
+bool Station::isFull(bool left) const{	//controlla se i binari in una certa direzione sono pieni, left a true guarda gli indici pari, false quelli dispari
 
 	bool isFull = true;
 
-	for (int i = 0; i < standardRails.size(); i++) {	//controllo se è presente un binario libero
+	int i;
+	if (left)
+		i = 0;
+	else
+		i = 1;
+
+	for (; i < standardRails.size(); i = i + 2) {	//controllo se è presente un binario libero
 		if (standardRails[i].isOccupied() == false)
 			isFull = false;
 	}
@@ -45,7 +78,7 @@ bool Station::isFull() const{	//non ancora definitivo... in questo modo vengono 
 	return isFull;
 }
 
-void Station::depositTrain(const Train& myTrain) {
+void Station::depositTrain(Train* myTrain) {
 	trainDeposit.push_back(myTrain);
 }
 

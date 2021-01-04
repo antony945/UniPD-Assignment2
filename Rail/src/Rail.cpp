@@ -12,6 +12,13 @@ bool Rail::getTrainId() const{
 	return trainId;		
 }
 
+void Rail::setTrainId(int id){
+	trainId = id;
+}
+void Rail::setOccupied(bool occupied_){
+	occupied = occupied_;
+}
+
 bool Rail::getDirOfTravel() const{
 	return dirOfTravel;
 }
