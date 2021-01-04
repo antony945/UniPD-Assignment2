@@ -151,8 +151,7 @@ void Railway::createStations() {
             stations.push_back(new MainStation{name, distance});
         } else if(type==1) {
             // Crea stazione locale
-            stations.push_back(new LocalStation{name, distance});
-            reverseStations.push_back(new LocalStation{name, distance});
+            stations.push_back(new SecondaryStation{name, distance});
         }
     }
 

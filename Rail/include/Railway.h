@@ -7,7 +7,7 @@
 #include "Station.h"
 #include "Train.h"
 #include "MainStation.h"
-#include "LocalStation.h"
+#include "SecondaryStation.h"
 #include "RegionalTrain.h"
 #include "AVTrain.h"
 #include "SuperAVTrain.h"
