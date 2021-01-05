@@ -11,7 +11,6 @@
 #include "RegionalTrain.h"
 #include "AVTrain.h"
 #include "SuperAVTrain.h"
-#include "Rail.h"
 
 /*
 A ogni minuto che passa:
