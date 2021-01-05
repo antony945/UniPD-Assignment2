@@ -5,6 +5,8 @@
 
 class RegionalTrain : public Train {
 public:
+    static constexpr int MAX_SPEED = 160;
+public:
     RegionalTrain(int id_, bool left_,const std::vector<Station*>& stations_,const std::vector<int>& timetable_);
     RegionalTrain(const RegionalTrain&)= delete;
     RegionalTrain& operator=(const RegionalTrain&) =delete;

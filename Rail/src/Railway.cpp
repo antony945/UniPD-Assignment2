@@ -4,7 +4,7 @@
 #include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-// daySimulation() FINITA
+// daySimulation()
 void Railway::daySimulation() {
     // INIZIO
     output << "START\n";
@@ -13,7 +13,7 @@ void Railway::daySimulation() {
     while(!end) {
         end = true;
         for(Train* t : trains) {
-            if(t->hasNextStation()) {
+            if(!t->hasFinish()) {
                 end = false;
                 manageEvents(t);
             }
@@ -26,48 +26,48 @@ void Railway::daySimulation() {
 // manageEvents() TODO: Da pensare bene, parte importante
 void Railway::manageEvents(Train* t) {
     /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
-    if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
-        // Invia segnalazione a prossima stazione
-        // t->sendStopRequest(stations[t->getNextStationIndex()]);
-        // Ricevi segnalazione da stazione
-        // stations[t->getNextStationIndex()]->
-        // t->setNextRail(s->sendAck(Train* t));
-    } else if(checkTrainDistance(t, -5)) {  // 5 KM PRIMA DI NEXTSTATIONINDEX
-        // A seconda di ciò che ha inviato la stazione (se parcheggio o numero di binario)
-        if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE
-            // aggiundi treno alla vettore dei treni parcheggiati
-            // setta velocità a 0
-        } else if(t->hasToEnterRail()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE
-            // changeRail accetta una reference a una Rail
-            // t->changeRail(t->getNextRail());
-            // inserisci treno in vettore di rail in station corrispondente
-            // cambia velocità a 80   
-        }
-    } else if(checkTrainDistance(t, 0)) { // 0 KM PRIMA DI NEXTSTATIONINDEX, TODO: To check
-        if(t->hasJustArrived(currentMinutes)) { // CONTROLLA SE È APPENA ARRIVATO IN STAZIONE È ARRIVATO IN STAZIONE
-            // cambia velocità a 0
-            // controlla e setta Ritardo (o anticipo)
-            // se è arrivato a stazione metti t->salitaPasseggeri() a true
-        } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
-            // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
-            // setta velocità a 80
-        }
-    } else if(checkTrainDistance(t, 5)) { // 5 KM DOPO DI NEXTSTATIONINDEX
-        // Fai in modo che treno esca dalla stazione
-        // t->changeRail(t->getNextRail());
+    // if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
+    //     // Invia segnalazione a prossima stazione
+    //     // t->sendStopRequest(stations[t->getNextStationIndex()]);
+    //     // Ricevi segnalazione da stazione
+    //     // stations[t->getNextStationIndex()]->
+    //     // t->setNextRail(s->sendAck(Train* t));
+    // } else if(checkTrainDistance(t, -5)) {  // 5 KM PRIMA DI NEXTSTATIONINDEX
+    //     // A seconda di ciò che ha inviato la stazione (se parcheggio o numero di binario)
+    //     if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE
+    //         // aggiundi treno alla vettore dei treni parcheggiati
+    //         // setta velocità a 0
+    //     } else if(t->hasToEnterRail()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE
+    //         // changeRail accetta una reference a una Rail
+    //         // t->changeRail(t->getNextRail());
+    //         // inserisci treno in vettore di rail in station corrispondente
+    //         // cambia velocità a 80   
+    //     }
+    // } else if(checkTrainDistance(t, 0)) { // 0 KM PRIMA DI NEXTSTATIONINDEX, TODO: To check
+    //     if(t->hasJustArrived(currentMinutes)) { // CONTROLLA SE È APPENA ARRIVATO IN STAZIONE È ARRIVATO IN STAZIONE
+    //         // cambia velocità a 0
+    //         // controlla e setta Ritardo (o anticipo)
+    //         // se è arrivato a stazione metti t->salitaPasseggeri() a true
+    //     } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
+    //         // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
+    //         // setta velocità a 80
+    //     }
+    // } else if(checkTrainDistance(t, 5)) { // 5 KM DOPO DI NEXTSTATIONINDEX
+    //     // Fai in modo che treno esca dalla stazione
+    //     // t->changeRail(t->getNextRail());
        
-        // Avanza indice di nextStation
-        t->setNextStation();
+    //     // Avanza indice di nextStation
+    //     t->setNextStation();
 
-        // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
-    } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
-        // cambia velocità in modo che non ci siano più conflitti
-    } else { // SE NON CI SONO EVENTI ED È TUTTO OK
-        // Aggiungi minuto
-        currentMinutes++;
-        // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
-        t->increaseDistance();
-    }
+    //     // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
+    // } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
+    //     // cambia velocità in modo che non ci siano più conflitti
+    // } else { // SE NON CI SONO EVENTI ED È TUTTO OK
+    //     // Aggiungi minuto
+    //     currentMinutes++;
+    //     // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
+    //     t->increaseDistance();
+    // }
 }
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
@@ -222,7 +222,6 @@ void Railway::createTrains() {
         }        
     }
 }
-
 
 void Railway::checkTimetable(int fast_speed, const std::vector<Station*>& stations, std::vector<int>& times) {
     for(int i=0; i<stations.size()-1; i++) {

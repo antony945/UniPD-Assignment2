@@ -63,8 +63,7 @@ public:
     //next Station Time
     int nextStationTime();
 
-
-protected:
+public:
     virtual ~Train();
 };
 

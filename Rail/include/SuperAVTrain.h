@@ -5,6 +5,8 @@
 
 class SuperAVTrain : public Train {
 public:
+    static constexpr int MAX_SPEED = 300;
+public:
     SuperAVTrain(int id_, bool left_,const std::vector<Station*>& stations_,const std::vector<int>& timetable_);
     SuperAVTrain(const SuperAVTrain&)= delete;
     SuperAVTrain& operator=(const SuperAVTrain&) =delete;

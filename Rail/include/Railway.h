@@ -51,6 +51,15 @@ private:
 public:
     // Costruttore prende in input tre file, uno per creare stazioni, uno per creare treni, uno per restituire output, DEBUGGATO
     Railway(const std::string&, const std::string&, const std::string&);
+    // Copy constructor (disabilitato)
+    Railway(const Railway&) = delete;
+    // Move constructor (disabilitato)
+    Railway(Railway&&) = delete;
+    // Copy assignment (disabilitato)
+    Railway& operator==(const Railway&) = delete;
+    // Move assignment (disabilitato)
+    Railway& operator==(Railway&&) = delete;
+
     // Distruttore libera i file costruiti, DEBUGGATO
     ~Railway();
     // Getter per minutes
@@ -61,7 +70,8 @@ public:
     void tester() {
         // Ottieni lista stazioni per ogni treno
         for(Train* t : trains) {
-            t->trainInformation(std::cout);
+            std::cout << "TESTER\n";
+            // t->trainInformation(std::cout);
         }
     }
 
@@ -72,12 +82,11 @@ private:
     void createTrains();
     // Controlla timeTable di un treno avente velocità in Km/h MAX_SPEED
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
-
     // Controlla e gestisce tutti gli eventi possibili
     void manageEvents(Train* t);
     // Controlla se treno è a tot km da stazione successiva
     bool checkTrainDistance(Train* t, int distance_from_station) {
-        double d = stations[t->getNextStationIndex()]->getDistance()+distance_from_station;
+        double d = t->nextStationDistance()+distance_from_station;
         double min = d-2;
         double max = d+2;
         return (t->getCurrentDistance()>=min && t->getCurrentDistance()<=max);
