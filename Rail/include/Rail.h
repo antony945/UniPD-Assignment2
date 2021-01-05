@@ -15,11 +15,6 @@ public:
 	void setOccupied(bool occupied_);
 	Rail(bool dirOfTravel_);
 	Rail();
-
-	Rail(const Rail&) = delete;
-	Rail(Rail&&) = delete;
-	Rail& operator=(const Rail&) = delete;
-	Rail& operator=(Rail&&) = delete;
 };
 
 #endif // Rail_h
