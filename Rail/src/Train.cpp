@@ -1,5 +1,6 @@
 //Alberto Castagnaro 1219641
 #include "Train.h"
+#include "Station.h"
 
 Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>& timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{timetable_} {
     currentDelay=0;

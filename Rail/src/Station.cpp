@@ -1,6 +1,7 @@
 #include "Station.h"
 #include <iostream>
 #include "Rail.h"
+#include "Train.h"
 #include <vector>
 #include <list>
 
@@ -39,7 +40,7 @@ bool Station::railRequest(const Train& myTrain) {
 
 	bool trainDir = myTrain.getLeft();	//direzione del treno
 
-	if (isFull(trainDir)) return false;	//se è pieno ritorno false, sarà  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
+	if (isFull(trainDir)) return false;	//se ï¿½ pieno ritorno false, sarï¿½  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
 	
 	int i;
 	
@@ -70,7 +71,7 @@ bool Station::isFull(bool left) const{	//controlla se i binari in una certa dire
 	else
 		i = 1;
 
-	for (; i < standardRails.size(); i = i + 2) {	//controllo se è presente un binario libero
+	for (; i < standardRails.size(); i = i + 2) {	//controllo se ï¿½ presente un binario libero
 		if (standardRails[i].isOccupied() == false)
 			isFull = false;
 	}

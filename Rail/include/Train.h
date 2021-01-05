@@ -2,7 +2,8 @@
 #ifndef Train_h
 #define Train_h
 #include <vector>
-#include "Station.h"
+
+class Station;
 
 class Train {
 protected:
