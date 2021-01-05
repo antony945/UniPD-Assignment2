@@ -39,8 +39,6 @@ private:
     std::ofstream output;
     // Vettore di stazioni
     std::vector<Station*> stations;
-    // Vettore di stazioni percorse dall'ultima alla prima
-    std::vector<Station*> reverseStations;
     // Vettore di treni
     std::list<Train*> trains;
     // Minuti attualmente passati

@@ -155,9 +155,9 @@ void Railway::createStations() {
         }
     }
 
-    reverseStations = stations;
-    // Crea vettore di stazioni percorse dall'ultima alla prima
-    std::reverse(reverseStations.begin(), reverseStations.end());
+    // Controlla che ultima stazione sia principale
+    if(!stations[stations.size()-1]->isMain())
+        throw std::invalid_argument("ERROR. Last station must be a main station.");
 }
 
 void Railway::createTrains() {
@@ -180,11 +180,10 @@ void Railway::createTrains() {
         }
 
         // Crea vettore di stazioni da assegnare al treno a seconda se parta o meno dall'origine
-        std::vector<Station*> trainStations;
-        if(fromOrigin)
-            trainStations = stations;
-        else
-            trainStations = reverseStations;
+        std::vector<Station*> trainStations{stations};
+        if(!fromOrigin) {
+            std::reverse(trainStations.begin(), trainStations.end());
+        }
 
         // Crea vettore di stazioni principali da utilizzare in checkTable
         std::vector<Station*> mainTrainStations;
