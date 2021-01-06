@@ -64,13 +64,7 @@ public:
     // Metodo per svolgere simulazione di 1 giorno lavorativo
     void daySimulation();
     // Tester
-    void tester() {
-        // Ottieni lista stazioni per ogni treno
-        for(Train* t : trains) {
-            std::cout << "TESTER\n";
-            // t->trainInformation(std::cout);
-        }
-    }
+    void tester();
 
 private:
     // Inizializza vettore di stations
@@ -81,12 +75,13 @@ private:
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
     // Controlla e gestisce tutti gli eventi possibili
     void manageEvents(Train* t);
+    // Fai avanzare tutti i treni
+    void advanceTrains();
     // Controlla se treno è a tot km da stazione successiva
     bool checkTrainDistance(Train* t, int distance_from_station) {
-        double d = t->nextStationDistance()+distance_from_station;
-        double min = d-2;
-        double max = d+2;
-        return (t->getCurrentDistance()>=min && t->getCurrentDistance()<=max);
+        double min = distance_from_station-2;
+        double max = distance_from_station+2;
+        return (t->nextStationDistance()>=min && t->nextStationDistance()<=max);
     }
 };
 

@@ -4,20 +4,29 @@
 #include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
+// tester()
+void Railway::tester() {
+    output << "TESTER\n";
+}
+
 // daySimulation()
 void Railway::daySimulation() {
     // INIZIO
     output << "START\n";
     // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
-    bool end = false;
-    while(!end) {
-        end = true;
+    while(!trains.empty()) {
+        // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
-            if(!t->hasFinish()) {
-                end = false;
+            if(t->hasFinish()) {
+                trains.remove(t);
+            } else {
                 manageEvents(t);
             }
         }
+        
+        // Avanza di un minuto la simulazione
+        advanceTrains();
+
     }
     // FINE
     output << "END\n";
@@ -25,6 +34,42 @@ void Railway::daySimulation() {
 
 // manageEvents() TODO: Da pensare bene, parte importante
 void Railway::manageEvents(Train* t) {
+    // Supponiamo:
+    //      - TRENO 1 R in stazione 0 con timetable 100(partenza), 200(arrivo prima stazione secondaria), 250, 300(arrivo ultima stazione)
+    //      - TRENO 2 AV in stazione 0 con timetable 150(partenza), 250(arrivo ultima stazione)
+    //      - TRENO 3 SAV in stazione 0 con timetable 180(partenza), 220(arrivo ultima stazione)
+    
+    // Controlla posizione del treno:
+    // SE TRENO VA NORMALE
+    // |----|                      |------|                      |------|                      |----|
+    // |ST  |---------->-----------|  ST  |---------->-----------|  ST  |---------->-----------|  ST|
+    // |----|                      |----- |                      |------|                      |----|
+    // 0    5                      15 20 25                      35 40 45                      55  60
+
+    // SE TRENO VA AL CONTRARIO
+    // |----|                      |------|                      |------|                      |----|
+    // |ST  |----------<-----------|  ST  |----------<-----------|  ST  |----------<-----------|  ST|
+    // |----|                      |----- |                      |------|                      |----|
+    // 0    5                      15 20 25                      35 40 45                      55  60
+    
+    // Se non è in stazione (treno non compreso tra le barrette | S |):
+    //      - Setta velocità massima per quel determinato treno
+    //      - Controlla se con quella velocità lui e il treno subito primo dopo un minuto rispetterebbe la distanza minima di 10km, altrimenti diminuiscila
+    //      Inoltre controlla:
+    //      - Se siamo in momento di uscita dalla stazione, libera binario di stazione e aumenta nextStationIndex
+    //          - Qui controlla se c'è un treno fermo in parcheggio che deve arrivare in stazione, se si settalo in uno stato da farlo andare nel binario appena liberato
+    //      - Se siamo in momento di invio segnalazione a stazione, invia segnalazione a prossima stazione
+    //      - Se siamo in momento di arrivo alla stazione e deve parcheggiare perchè stazione piena o perchè è troppo in anticipo, fermati in parcheggio (passa in stato "in stazione")
+    //      - Se siamo in momento di arrivo alla stazione e deve mettersi in un binario, mettiti a 80km/h e vai sul binario segnalato (passa in stato "in stazione")
+    //          - In questo caso ricadono anche i treni che devono uscire dal parcheggio e mettersi in un binario
+    // Se è in stazione (treno compreso tra le barrette | S |):
+    //      - Se siamo in momento di treno al binario e deve prendere passeggeri, controlla orario di arrivo di timetable per eventuali ritardi, aspetta 5 minuti e poi mettiti in stato "deve partire"
+    //      - Se siamo in momento di treno al binario e ha gia preso i passeggeri, controlla se binario unico principale è disponibile perchè non possono partire dalla stessa stazione più treni contemporaneamente
+    //          - Se si, setta velocità a 80 km/h
+    //
+    // Dopo tutto ciò la funzione advanceTrains() farà avanzare la simulazione di un minuto e quindi i treni nel modo corretto
+
+
     /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
     // if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
     //     // Invia segnalazione a prossima stazione
@@ -63,12 +108,20 @@ void Railway::manageEvents(Train* t) {
     // } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
     //     // cambia velocità in modo che non ci siano più conflitti
     // } else { // SE NON CI SONO EVENTI ED È TUTTO OK
-    //     // Aggiungi minuto
-    //     currentMinutes++;
-    //     // In TEORIA non c'è niente da fare devi solo aggiungere la distanza in questa funzione
-    //     t->increaseDistance();
+    
     // }
 }
+
+// advanceTrains()
+void Railway::advanceTrains() {
+    for(Train* t : trains) {
+        // Avanza i minuti
+        currentMinutes++;
+        // Aggiungi distanza percorsa in un minuto ad ogni treno
+        t->increaseDistance();
+    }
+}
+
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 Railway::Railway(const std::string& line_description_, const std::string& timetables_, const std::string& output_)
