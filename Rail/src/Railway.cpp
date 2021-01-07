@@ -19,6 +19,7 @@ void Railway::daySimulation() {
         for(Train* t : trains) {
             if(t->hasFinish()) {
                 trains.remove(t);
+                delete t;
             } else {
                 manageEvents(t);
             }
@@ -54,21 +55,22 @@ void Railway::manageEvents(Train* t) {
     
     // Se non è in stazione (treno non compreso tra le barrette | S |):
     //      - Setta velocità massima per quel determinato treno
-    //      - Controlla se con quella velocità lui e il treno subito primo dopo un minuto rispetterebbe la distanza minima di 10km, altrimenti diminuiscila
+    //      - Controlla se con quella velocità lui e il treno subito prima, dopo un minuto rispetterebbero la distanza di 10km, altrimenti diminuisci velocità
     //      Inoltre controlla:
     //      - Se siamo in momento di uscita dalla stazione, libera binario di stazione e aumenta nextStationIndex
     //          - Qui controlla se c'è un treno fermo in parcheggio che deve arrivare in stazione, se si settalo in uno stato da farlo andare nel binario appena liberato
     //      - Se siamo in momento di invio segnalazione a stazione, invia segnalazione a prossima stazione
-    //      - Se siamo in momento di arrivo alla stazione e deve parcheggiare perchè stazione piena o perchè è troppo in anticipo, fermati in parcheggio (passa in stato "in stazione")
-    //      - Se siamo in momento di arrivo alla stazione e deve mettersi in un binario, mettiti a 80km/h e vai sul binario segnalato (passa in stato "in stazione")
+    //      - Se siamo in momento di arrivo alla stazione e deve parcheggiare perchè stazione piena o perchè è troppo in anticipo, fermati in parcheggio
+    //      - Se siamo in momento di arrivo alla stazione e deve mettersi in un binario, mettiti a 80km/h e vai sul binario segnalato (entra "in stazione")
     //          - In questo caso ricadono anche i treni che devono uscire dal parcheggio e mettersi in un binario
     // Se è in stazione (treno compreso tra le barrette | S |):
-    //      - Se siamo in momento di treno al binario e deve prendere passeggeri, controlla orario di arrivo di timetable per eventuali ritardi, aspetta 5 minuti e poi mettiti in stato "deve partire"
-    //      - Se siamo in momento di treno al binario e ha gia preso i passeggeri, controlla se binario unico principale è disponibile perchè non possono partire dalla stessa stazione più treni contemporaneamente
+    //      - Se siamo in momento di treno al binario e deve prendere passeggeri, controlla orario di arrivo di timetable per eventuali ritardi,
+    //        aspetta 5 minuti e poi mettiti in stato "deve partire"
+    //      - Se siamo in momento di treno al binario e ha gia preso i passeggeri, controlla se binario unico principale è disponibile perchè non possono
+    //        partire dalla stessa stazione più treni contemporaneamente
     //          - Se si, setta velocità a 80 km/h
     //
     // Dopo tutto ciò la funzione advanceTrains() farà avanzare la simulazione di un minuto e quindi i treni nel modo corretto
-
 
     /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
     // if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
@@ -114,9 +116,10 @@ void Railway::manageEvents(Train* t) {
 
 // advanceTrains()
 void Railway::advanceTrains() {
+    // Avanza i minuti
+    currentMinutes++;
+
     for(Train* t : trains) {
-        // Avanza i minuti
-        currentMinutes++;
         // Aggiungi distanza percorsa in un minuto ad ogni treno
         t->increaseDistance();
     }
