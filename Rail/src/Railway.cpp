@@ -24,7 +24,9 @@ void Railway::daySimulation() {
                 manageEvents(t);
             }
         }
-        
+
+        checkMinimumDistance();
+
         // Avanza di un minuto la simulazione
         advanceTrains();
 
@@ -33,7 +35,7 @@ void Railway::daySimulation() {
     output << "END\n";
 }
 
-// manageEvents() TODO: Da pensare bene, parte importante
+// manageEvents()
 void Railway::manageEvents(Train* t) {
     // Supponiamo:
     //      - TRENO 1 R in stazione 0 con timetable 100(partenza), 200(arrivo prima stazione secondaria), 250, 300(arrivo ultima stazione)
@@ -57,8 +59,6 @@ void Railway::manageEvents(Train* t) {
     //      - Setta velocità massima per quel determinato treno
     //      - Controlla se con quella velocità lui e il treno subito prima, dopo un minuto rispetterebbero la distanza di 10km, altrimenti diminuisci velocità
     //      Inoltre controlla:
-    //      - Se siamo in momento di uscita dalla stazione, libera binario di stazione e aumenta nextStationIndex
-    //          - Qui controlla se c'è un treno fermo in parcheggio che deve arrivare in stazione, se si settalo in uno stato da farlo andare nel binario appena liberato
     //      - Se siamo in momento di invio segnalazione a stazione, invia segnalazione a prossima stazione
     //      - Se siamo in momento di arrivo alla stazione e deve parcheggiare perchè stazione piena o perchè è troppo in anticipo, fermati in parcheggio
     //      - Se siamo in momento di arrivo alla stazione e deve mettersi in un binario, mettiti a 80km/h e vai sul binario segnalato (entra "in stazione")
@@ -69,49 +69,72 @@ void Railway::manageEvents(Train* t) {
     //      - Se siamo in momento di treno al binario e ha gia preso i passeggeri, controlla se binario unico principale è disponibile perchè non possono
     //        partire dalla stessa stazione più treni contemporaneamente
     //          - Se si, setta velocità a 80 km/h
+    //      - Se siamo in momento di uscita dalla stazione, libera binario di stazione e aumenta nextStationIndex
+    //          - Qui controlla se c'è un treno fermo in parcheggio che deve arrivare in stazione, se si settalo in uno stato da farlo andare nel binario appena liberato
     //
     // Dopo tutto ciò la funzione advanceTrains() farà avanzare la simulazione di un minuto e quindi i treni nel modo corretto
 
-    /* ---------------------------------------------------------- RILEVAZIONI CHILOMETRICHE DEL TRENO */
-    // if(checkTrainDistance(t, -20)) { // 20 KM PRIMA DI NEXTSTATIONINDEX
-    //     // Invia segnalazione a prossima stazione
-    //     // t->sendStopRequest(stations[t->getNextStationIndex()]);
-    //     // Ricevi segnalazione da stazione
-    //     // stations[t->getNextStationIndex()]->
-    //     // t->setNextRail(s->sendAck(Train* t));
-    // } else if(checkTrainDistance(t, -5)) {  // 5 KM PRIMA DI NEXTSTATIONINDEX
-    //     // A seconda di ciò che ha inviato la stazione (se parcheggio o numero di binario)
-    //     if(t->hasToPark()) { // CONTROLLA SE DEVE PARCHEGGIARE E ASPETTARE
-    //         // aggiundi treno alla vettore dei treni parcheggiati
-    //         // setta velocità a 0
-    //     } else if(t->hasToEnterRail()) { // CONTROLLA SE DEVE ENTRARE NELLA STAZIONE
-    //         // changeRail accetta una reference a una Rail
-    //         // t->changeRail(t->getNextRail());
-    //         // inserisci treno in vettore di rail in station corrispondente
-    //         // cambia velocità a 80   
-    //     }
-    // } else if(checkTrainDistance(t, 0)) { // 0 KM PRIMA DI NEXTSTATIONINDEX, TODO: To check
-    //     if(t->hasJustArrived(currentMinutes)) { // CONTROLLA SE È APPENA ARRIVATO IN STAZIONE È ARRIVATO IN STAZIONE
-    //         // cambia velocità a 0
-    //         // controlla e setta Ritardo (o anticipo)
-    //         // se è arrivato a stazione metti t->salitaPasseggeri() a true
-    //     } else if(t->hasToStart(currentMinutes)) { // CONTROLLA PARTENZE DEI TRENI DA TIMETABLE SAPENDO CHE MINUTI SONO (0 KM PRIMA DI NEXTSTATIONINDEX)
-    //         // IN QUESTO MINUTO IL TRENO T DEVE PARTIRE DALLA STAZIONE CORRENTE
-    //         // setta velocità a 80
-    //     }
-    // } else if(checkTrainDistance(t, 5)) { // 5 KM DOPO DI NEXTSTATIONINDEX
-    //     // Fai in modo che treno esca dalla stazione
-    //     // t->changeRail(t->getNextRail());
-       
-    //     // Avanza indice di nextStation
-    //     t->setNextStation();
+    // Per me isInStation deve essere vera quando treno si trova sui binari della stazione quindi ogni qualvolta è t5km avanti o indietro alla stazione
+    // false quando non è sui binari della stazione
 
-    //     // cambia velocità del treno in modo da seguire timetable (velocità compresa tra 80 e getMaxSpeed())
-    // } else if(t->checkNearestTrainDistance()) { // CONTROLLA CHE DISTANZA MINIMA TRA TRENI SIA RISPETTATA
-    //     // cambia velocità in modo che non ci siano più conflitti
-    // } else { // SE NON CI SONO EVENTI ED È TUTTO OK
-    
-    // }
+    if(t->isInStation) {
+        trainInStation(t); 
+    } else {
+        trainOutStation(t);
+    }
+}
+
+// trainOutStation()
+void Railway::trainOutStation(Train* t) {
+    // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
+    t->setMaxSpeed();
+
+    // Questa funzione deve settare le varie velocità dei treni per assicurarsi
+    // Potrei anche metterla alla fine di tutto dopo aver impostato tutti i treni alla massima velocità
+    if(checkTrainDistance(t, -20)) {
+        // Invia segnalazione in stazione
+        // (qui a seconda di quanto è piena la stazione e quanto in anticipo è rispetto all'orario vero la stazione deve dirgli se fermarsi in parcheggio o dargli un binario)
+        // t->rail = rail che gli ha detto la stazione oppure parcheggio
+        // oppure treno non tiene conto di rail sulla quale stare e ciò che tiene conto è la stazione
+    } else if(checkTrainDistance(t, -5)) {
+        // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
+        if(t->rail ha una rail) // oppure se t è presente nelle rail di nextStation (quindi diventerebbe compito di station guardare tra le sue rail)
+            t->isInStation = true;
+        else if(t->rail ha un parcheggio) {
+            // Altrimenti vai in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (isInStation rimane false)
+        }
+    }
+}
+
+// trainInStation()
+void Railway::trainInStation(Train* t) {
+    // Questa funzione deve settare alla massima velocità consentita dentro la stazione (80) la velocita
+    t->setLimitedSpeed();
+
+    if(checkTrainDistance(t, 0)) {
+        // questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
+        t->setStop();
+
+        // questa funzione deve controllare se il treno è appena arrivato al binario della stazione
+        if(t->appenaArrivato())
+            t->checkDelay();
+
+        // Questa funzione deve solo dire se stationStopTime < 5
+        // Se lo è, incrementa e ritorna vero
+        // Se non lo è (quindi uguale a 5), porta a 0 e ritorna falso            
+        if(!t->isWaiting()) {
+            // Se sta aspettando non c'è nulla da fare
+            // Appena presi i passeggeri parti dal binario con velocità settata a 80
+            t->setLimitedSpeed();
+        }
+    } else if(checkTrainDistance(t, 5)) {
+        // Se sta uscendo dalla stazione isInStation() diventa false
+        t->isInStation = false;
+        // Libera binario della stazione
+        // Controlla treni in parcheggio per vedere se c'è qualcuno che può andare
+        checkStationsPark(t->NextStation());
+        // Aumenta nextStation
+    }
 }
 
 // advanceTrains()

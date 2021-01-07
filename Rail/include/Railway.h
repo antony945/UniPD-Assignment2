@@ -73,8 +73,13 @@ private:
     void createTrains();
     // Controlla timeTable di un treno avente velocità in Km/h MAX_SPEED
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
+    
     // Controlla e gestisce tutti gli eventi possibili
     void manageEvents(Train* t);
+    // Gestisci eventi di treno in stazione
+    void trainInStation(Train* t);
+    // Gestisci eventi di treno fuori stazione
+    void trainOutStation(Train* t);
     // Fai avanzare tutti i treni
     void advanceTrains();
     // Controlla se treno è a tot km da stazione successiva
