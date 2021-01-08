@@ -12,21 +12,6 @@
 #include "AVTrain.h"
 #include "SuperAVTrain.h"
 
-/*
-A ogni minuto che passa:
--Ogni stazione controlla se ha treni (tra quelli in sosta ovviamente) che devono partire.
-    Guarda nel suo array di treni e controlla ogni orario.
-    Nel caso il treno abbia un ritardo lo somma all'ora della sua originale partenza da quella stazione.
-    Dopo aver fatto questo calcolo per tutti gli orari dei treni,
-    la stazione confronta tra i treni che devono partire, quale di questi è più veloce e fa partire quello,
-    indipendentemente dall’ordine di arrivo da questa stazione.
-    (Oppure si può anche far partire quello che è arrivato prima ma sarebbe meno efficiente secondo me).
--Ogni treno:
-	- se non fermo, incrementa la distanza percorsa in base alla sua velocità.
-	- se fermo nel deposito della stazione incrementa il suo ritardo.
-	- se non fermo, controlla la distanza dalla  prossima stazione e nel caso questa fosse inferiore a 	(?non ricordo) manda un segnale alla stazione.
-*/
-
 class Railway {
 private:
     // Minuti totali in un giorno
@@ -57,10 +42,13 @@ public:
     // Move assignment (disabilitato)
     Railway& operator==(Railway&&) = delete;
 
-    // Distruttore libera i file costruiti, DEBUGGATO
+    // Distruttore libera i file costruiti
     ~Railway();
     // Getter per minutes
     int getCurrentMinutes() const { return currentMinutes; }
+    // Minuti in stringa (es. se minuti sono 90 deve restituire 01:30)
+    // TODO: Da far fare ad alberto
+    std::string getCurrentTime() const;
     // Metodo per svolgere simulazione di 1 giorno lavorativo
     void daySimulation();
     // Tester
@@ -75,19 +63,19 @@ private:
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
     
     // Controlla e gestisce tutti gli eventi possibili
-    void manageEvents(Train* t);
+    void manageEvents(Train*);
     // Gestisci eventi di treno in stazione
-    void trainInStation(Train* t);
+    void trainInStation(Train*);
     // Gestisci eventi di treno fuori stazione
-    void trainOutStation(Train* t);
+    void trainOutStation(Train*);
+    // Make the train park
+    void parkTrain(Train*);
+    // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
+    void checkMinimumDistance();
     // Fai avanzare tutti i treni
     void advanceTrains();
     // Controlla se treno è a tot km da stazione successiva
-    bool checkTrainDistance(Train* t, int distance_from_station) {
-        double min = distance_from_station-2;
-        double max = distance_from_station+2;
-        return (t->nextStationDistance()>=min && t->nextStationDistance()<=max);
-    }
+    bool checkTrainDistance(Train*, int);
 };
 
 #endif // Railway_h

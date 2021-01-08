@@ -36,9 +36,9 @@ Station::Station(const std::string& name_, int distance_) : name{ name_ }, dista
 	}
 }
 
-bool Station::railRequest(const Train& myTrain) {
+bool Station::railRequest(Train* myTrain) {
 
-	bool trainDir = myTrain.getLeft();	//direzione del treno
+	bool trainDir = myTrain->getLeft();	//direzione del treno
 
 	if (isFull(trainDir)) return false;	//se � pieno ritorno false, sar�  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
 	
@@ -52,7 +52,7 @@ bool Station::railRequest(const Train& myTrain) {
 	for (; i < standardRails.size(); i = i+2) {
 
 		if (standardRails[i].isOccupied() == false) {
-			standardRails[i].setTrainId(myTrain.getId());
+			standardRails[i].setTrainId(myTrain->getId());
 			standardRails[i].setOccupied(true);
 			break;						//esco dal for
 		}

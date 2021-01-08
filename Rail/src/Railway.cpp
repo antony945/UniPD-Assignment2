@@ -17,20 +17,16 @@ void Railway::daySimulation() {
     while(!trains.empty()) {
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
-            if(t->hasFinish()) {
-                trains.remove(t);
-                delete t;
-            } else {
-                manageEvents(t);
-            }
+            manageEvents(t);
         }
 
+        // Controlla distanza tra treni e in caso aggiusta velocità
+        // TODO: Da far fare a Zoren
         checkMinimumDistance();
-
         // Avanza di un minuto la simulazione
         advanceTrains();
-
     }
+
     // FINE
     output << "END\n";
 }
@@ -77,7 +73,7 @@ void Railway::manageEvents(Train* t) {
     // Per me isInStation deve essere vera quando treno si trova sui binari della stazione quindi ogni qualvolta è t5km avanti o indietro alla stazione
     // false quando non è sui binari della stazione
 
-    if(t->isInStation) {
+    if(t->isInStation()) {
         trainInStation(t); 
     } else {
         trainOutStation(t);
@@ -89,52 +85,76 @@ void Railway::trainOutStation(Train* t) {
     // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
     t->setMaxSpeed();
 
-    // Questa funzione deve settare le varie velocità dei treni per assicurarsi
-    // Potrei anche metterla alla fine di tutto dopo aver impostato tutti i treni alla massima velocità
     if(checkTrainDistance(t, -20)) {
-        // Invia segnalazione in stazione
-        // (qui a seconda di quanto è piena la stazione e quanto in anticipo è rispetto all'orario vero la stazione deve dirgli se fermarsi in parcheggio o dargli un binario)
-        // t->rail = rail che gli ha detto la stazione oppure parcheggio
-        // oppure treno non tiene conto di rail sulla quale stare e ciò che tiene conto è la stazione
+        // Invia segnalazione a stazione
+        t->sendStationRequest();
     } else if(checkTrainDistance(t, -5)) {
-        // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
-        if(t->rail ha una rail) // oppure se t è presente nelle rail di nextStation (quindi diventerebbe compito di station guardare tra le sue rail)
-            t->isInStation = true;
-        else if(t->rail ha un parcheggio) {
-            // Altrimenti vai in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (isInStation rimane false)
+        if(t->itCanTransit()) {
+            // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
+            t->enterStation();
+        } else {
+            // Altrimenti vai in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
+            parkTrain(t);
         }
     }
 }
 
 // trainInStation()
 void Railway::trainInStation(Train* t) {
-    // Questa funzione deve settare alla massima velocità consentita dentro la stazione (80) la velocita
-    t->setLimitedSpeed();
+    // CONTROLLA SU CHE BINARIO DEVE PASSARE IL TRENO
+    if(t->onNormalRail())
+        t->setLimitedSpeed();
+    else
+        t->setMaxSpeed();
 
     if(checkTrainDistance(t, 0)) {
-        // questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
-        t->setStop();
+        // SOLO SE TRENO SI DEVE FERMARE
+        if(t->hasToStop()) {
+            // Questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
+            t->setStop();
 
-        // questa funzione deve controllare se il treno è appena arrivato al binario della stazione
-        if(t->appenaArrivato())
-            t->checkDelay();
+            // Questa funzione deve controllare se il treno è appena arrivato al binario della stazione
+            if(t->justArrived()) {
+                // Confronta tempo di arrivo con tempo indicato dalla timetable (funzione da override)
+                t->setDelay(currentMinutes);
+            }
 
-        // Questa funzione deve solo dire se stationStopTime < 5
-        // Se lo è, incrementa e ritorna vero
-        // Se non lo è (quindi uguale a 5), porta a 0 e ritorna falso            
-        if(!t->isWaiting()) {
-            // Se sta aspettando non c'è nulla da fare
-            // Appena presi i passeggeri parti dal binario con velocità settata a 80
-            t->setLimitedSpeed();
+            // Controlla se ultima stazione
+            if(t->hasFinish()) {
+                // togli treno da array di treni
+                trains.remove(t);
+                delete t;
+            } else {
+                // Questa funzione deve solo dire se stationStopTime < 5
+                // Se sta aspettando non c'è nulla da fare    
+                if(!t->isWaiting()) {
+                    // Appena presi i passeggeri parti dal binario con velocità settata a 80
+                    t->setLimitedSpeed();
+                }
+            }
         }
     } else if(checkTrainDistance(t, 5)) {
-        // Se sta uscendo dalla stazione isInStation() diventa false
-        t->isInStation = false;
-        // Libera binario della stazione
-        // Controlla treni in parcheggio per vedere se c'è qualcuno che può andare
-        checkStationsPark(t->NextStation());
-        // Aumenta nextStation
+        // Libera binario con dentro t e al contempo controlla in parcheggio per vedere se assegnare quel binario a qualcun altro
+        // in caso assegna il binario a uno dei treni nel parcheggi che poi si ritroverà con il "itCanTransit" uguale a true
+        // TODO: Da far fare a Zoren
+        t->NextStation()->freeRail(t);
+
+        // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation)
+        t->exitStation();
     }
+}
+
+// checkTrainDistance()
+bool Railway::checkTrainDistance(Train* t, int distance_from_station) {
+    double min = distance_from_station-2.5;
+    double max = distance_from_station+2.5;
+    return (t->nextStationDistance()>=min && t->nextStationDistance()<=max);
+}
+
+// parkTrain()
+void Railway::parkTrain(Train* t) {
+    t->NextStation()->depositTrain(t);
+    t->setStop();
 }
 
 // advanceTrains()
@@ -147,7 +167,6 @@ void Railway::advanceTrains() {
         t->increaseDistance();
     }
 }
-
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 Railway::Railway(const std::string& line_description_, const std::string& timetables_, const std::string& output_)
