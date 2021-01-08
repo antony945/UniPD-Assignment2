@@ -68,10 +68,6 @@ int Train::nextStationDistance() const {
     return stations[nextStationIndex]->getDistance()-currentDistance;
 }
 
-// bool Train::isArriving() const{
-//     return nextStationDistance()<5000;
-// }
-
 // Tell if train is waiting to make people in
 bool Train::isWaiting() {
     if(stationStopTime < 5) {

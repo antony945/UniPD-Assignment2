@@ -27,15 +27,15 @@ protected:
     int currentDistance;
     //Index that represent the next Station where the train is going
     int nextStationIndex;
-    //Timtable index
+    //Timetable index
     int timetableIndex;
-    //True if train is in a Station
+    //True if train is in station area (tra 5km prima e 5km dopo)
     bool inStation;
     //time stopped in Station
     int stationStopTime;
-    //tell train if it can transitate in station or has to park
+    // Dice se treno può transitare in stazione oppure è in parcheggio
     bool canTransit;
-    //tell which rail it will use for the station (true = normalRail, false = transitRail)
+    // true = normalRail con limite 80, false = transitRail senza limite
     bool normalRail;
 public:
     // Constructors
@@ -51,54 +51,52 @@ public:
     int getCurrentDelay() const;
     int getId() const;
     double getCurrentDistance() const; //KM
-    // set normal rail or transit rail
+    // Setta la rail sulla quale il treno andrà dentro la stazione (true se rail con limite di 80, false se quella di transito)
     void setRail(bool);
     // dice se treno sta andando sulle rail normali con limite di 80 o su quelle di transito
     bool onNormalRail() const;
     
-    // Get the answer to request at station
+    // Manda e riceve la risposta alla domanda di fermata o transito da parte del treno alla stazione 
     void sendStationRequest();
-    // true se stazione gli dà il permesso di entrare in una rail, false se deve andare in parcheggio
+    // ritorna true se treno ha il permesso da stazione di entrare in una rail, false se deve andare in parcheggio
     bool itCanTransit() const;
-    //set if train is arrived to a station
+    // setta velocità a 0
     void setStop();
-    // Set max speed
+    // Setta velocità massimo per quel particolare tipo di treno
     void setMaxSpeed();
-    // Set limited speed
+    // Setta velocità limitata da stazione (80 km/h)
     void setLimitedSpeed();
-    // Has to be true if train is in station area (is setted by outside)
+    // Ritorna vero se il treno è nell'area della stazione (tra 5km prima e 5km dopo) (viene settata dalla railway)
     bool isInStation() const;
-    // Make the train enter station
+    // Fa si che il treno entri nella stazione
     void enterStation();
-    // Make the train exit station
+    // Fa si che il treno esca dalla stazione e si aumenti nextStationIndex
     void exitStation();
 
-    //tells if train has passed all the stations
+    // Dice se il treno ha passato tutte le stazioni
     bool hasFinish() const;
-    //set speed of train
+    // Setta velocità del treno
     void setSpeed(double n);
-    //increment Distance per minute
+    // Incrementa distanza di un minuto a seconda della velocità del treno
     void increaseDistance();
-    //check if train is waiting in a station
+    // Controlla se il treno sta aspettando i passeggeri alla stazione oppure no
     bool isWaiting();
-    //check if train is just arrived
+    // Controlla se il treno è appena arrivato alla stazione
     bool justArrived() const;
 
     //return next station
     Station* NextStation() const;
-    //return Distance from next Station
+    //return Distance from next Station in km
     int nextStationDistance() const;
-    //train in range of 20 km
-    //bool isArriving() const;
 
-    //aggiora il delay in base a tempo di arrivo a stazione nextStation
+    //aggiorna il delay in base a tempo di arrivo a stazione nextStation
     //confronta argomento con elemento in posizione timetableIndex
     void setDelay(int currentMinutes);
     // controlla se treno è almeno 20 minuti in anticipo considerando che
     // questo dato verrà controllato 20km prima di stazione
     bool inAnticipo(int currentMinutes) const;
 
-    // dice se deve fermarsi alla stazione
+    // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
 public:
     virtual ~Train();
