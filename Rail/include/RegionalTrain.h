@@ -13,7 +13,6 @@ public:
     RegionalTrain(Train&&)=delete;
     RegionalTrain& operator=(RegionalTrain&&)=delete;
     ~RegionalTrain() override ;
-    bool hasToStop() const override;
 };
 
 #endif // RegionalTrain_h
