@@ -14,6 +14,9 @@ public:
     RegionalTrain& operator=(RegionalTrain&&)=delete;
     ~RegionalTrain() override ;
     bool hasToStop() const override;
+    bool isRegional() const override { return true; }
+    bool isAV() const override { return false; }
+    bool isSuperAV() const override { return false; }
 };
 
 #endif // RegionalTrain_h

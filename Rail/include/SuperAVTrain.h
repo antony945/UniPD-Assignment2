@@ -14,6 +14,9 @@ public:
     SuperAVTrain& operator=(SuperAVTrain&&)=delete;
     ~SuperAVTrain() override ;
     bool hasToStop() const override;
+    bool isRegional() const override { return false; }
+    bool isAV() const override { return false; }
+    bool isSuperAV() const override { return true; }
 };
 
 #endif // SuperAVTrain_h

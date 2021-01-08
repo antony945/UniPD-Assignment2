@@ -113,6 +113,10 @@ public:
 
     // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
+    // dice di che tipo è il treno
+    virtual bool isRegional() const = 0;
+    virtual bool isAV() const = 0;
+    virtual bool isSuperAV() const = 0;
 public:
     virtual ~Train();
 };
