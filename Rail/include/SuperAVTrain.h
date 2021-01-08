@@ -13,7 +13,7 @@ public:
     SuperAVTrain(SuperAVTrain&&)=delete;
     SuperAVTrain& operator=(SuperAVTrain&&)=delete;
     ~SuperAVTrain() override ;
-    bool isNextMainStation();
+    bool hasToStop() const override;
 };
 
 #endif // SuperAVTrain_h
