@@ -20,8 +20,11 @@ void Railway::daySimulation() {
             manageEvents(t);
         }
 
+        // Gestisci i treni parcheggiati per tutte le stazioni e in caso aggiusta velocità
+        manageParkedTrains();
+
         // Controlla distanza tra treni e in caso aggiusta velocità
-        // TODO: Da far fare a Zoren
+        // TODO: Da far fare agli altri
         checkMinimumDistance();
         // Avanza di un minuto la simulazione
         advanceTrains();
@@ -134,9 +137,9 @@ void Railway::trainInStation(Train* t) {
             }
         }
     } else if(checkTrainDistance(t, 5)) {
-        // Libera binario con dentro t e al contempo controlla in parcheggio per vedere se assegnare quel binario a qualcun altro
+        // Libera binario con dentro t e al contempo controlla in parcheggio della stazione per vedere se assegnare quel binario a qualcun altro
         // in caso assegna il binario a uno dei treni nel parcheggi che poi si ritroverà con il "itCanTransit" uguale a true
-        // TODO: Da far fare a Zoren
+        // TODO: Da far fare agli altri
         t->NextStation()->freeRail(t);
 
         // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation)
@@ -155,6 +158,15 @@ bool Railway::checkTrainDistance(Train* t, int distance_from_station) {
 void Railway::parkTrain(Train* t) {
     t->NextStation()->depositTrain(t);
     t->setStop();
+}
+
+// manageParkedTrains
+void Railway::manageParkedTrains() {
+    for(Station* s : stations) {
+        // ogni stazione si deve gestire il suo parcheggio
+        // TODO: Da far fare agli altri
+        s->manageParking();
+    }
 }
 
 // advanceTrains()

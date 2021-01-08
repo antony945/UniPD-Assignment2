@@ -72,6 +72,8 @@ private:
     void parkTrain(Train*);
     // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
     void checkMinimumDistance();
+    // Gestisci i treni parcheggiati per tutte le stazioni e quelli che vuoi far partire falli entrare in stazione
+    void manageParkedTrains();
     // Fai avanzare tutti i treni
     void advanceTrains();
     // Controlla se treno è a tot km da stazione successiva
