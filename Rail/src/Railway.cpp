@@ -14,17 +14,20 @@ void Railway::daySimulation() {
     // INIZIO
     output << "START\n";
     // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
-    while(!trains.empty()) {
+    bool end = false;
+    while(!end) {
+        end = true;
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
-            manageEvents(t);
+            if(!t->getEnd()) {
+                end = false;
+                manageEvents(t);
+            }
         }
 
         // Gestisci i treni parcheggiati per tutte le stazioni e in caso aggiusta velocità
         manageParkedTrains();
-
         // Controlla distanza tra treni e in caso aggiusta velocità
-        // TODO: Da far fare agli altri
         checkMinimumDistance();
         // Avanza di un minuto la simulazione
         advanceTrains();
@@ -90,13 +93,21 @@ void Railway::trainOutStation(Train* t) {
 
     if(checkTrainDistance(t, -20)) {
         // Invia segnalazione a stazione
-        t->sendStationRequest();
+        // Setta canTransit a true o false
+        // Setta normalRail a true se si deve fermare, a false altrimenti
+        if(t->inAnticipo(currentMinutes)) {
+            // Setta canTransit a false
+            t->setTransit(false);
+        } else {
+            // Manda segnalazione a stazione
+            t->sendStationRequest();
+        }
     } else if(checkTrainDistance(t, -5)) {
         if(t->itCanTransit()) {
             // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
             t->enterStation();
         } else {
-            // Altrimenti vai in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
+            // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
             parkTrain(t);
         }
     }
@@ -124,10 +135,15 @@ void Railway::trainInStation(Train* t) {
 
             // Controlla se ultima stazione
             if(t->hasFinish()) {
-                // togli treno da array di treni
-                trains.remove(t);
-                delete t;
+                // Stampa messaggio finale
+                // Setta fine
+                t->setEnd();
             } else {
+                // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
+                if(t->hasToStart(currentMinutes)) {
+                    return;
+                }
+
                 // Questa funzione deve solo dire se stationStopTime < 5
                 // Se sta aspettando non c'è nulla da fare    
                 if(!t->isWaiting()) {
@@ -137,12 +153,14 @@ void Railway::trainInStation(Train* t) {
             }
         }
     } else if(checkTrainDistance(t, 5)) {
-        // Libera binario con dentro t e al contempo controlla in parcheggio della stazione per vedere se assegnare quel binario a qualcun altro
-        // in caso assegna il binario a uno dei treni nel parcheggi che poi si ritroverà con il "itCanTransit" uguale a true
-        // TODO: Da far fare agli altri
-        t->NextStation()->freeRail(t);
+        if(t->onNormalRail())
+            // Libera binario con dentro t
+            t->NextStation()->freeRail(t);
+        else {
+            // Non fare nulla perchè il binario di transito in realtà non è da liberare dato chd non è mai occupato
+        }
 
-        // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation)
+        // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation e indice di indexTimetable)
         t->exitStation();
     }
 }
@@ -156,16 +174,20 @@ bool Railway::checkTrainDistance(Train* t, int distance_from_station) {
 
 // parkTrain()
 void Railway::parkTrain(Train* t) {
-    t->NextStation()->depositTrain(t);
     t->setStop();
+
+    // Se è già depositato non fare nulla altrimenti aggiungilo al parcheggio
+    t->NextStation()->depositTrain(t);
 }
 
 // manageParkedTrains
 void Railway::manageParkedTrains() {
     for(Station* s : stations) {
         // ogni stazione si deve gestire il suo parcheggio
-        // TODO: Da far fare agli altri
-        s->manageParking();
+        // se ci sono treni che devono uscire allora chiama sendRequest per inviare segnalazione da parte di treno a stazione
+        // se segnalazione va a buon fine allora canItTransit diventa true e si toglie il treno dal parcheggio
+        // altrimenti canItTransit rimane false e si aspetta
+        s->manageParking(currentMinutes);
     }
 }
 

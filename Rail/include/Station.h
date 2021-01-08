@@ -21,7 +21,7 @@ public:
     Station();
     Station(const std::string& name_, int distance_);
 
-
+    void manageParking(int currentMinutes);
     bool isFull(bool left) const;                   //metodo per vedere se i binari in una certa direzione sono pieni, left serve per capire quale direzione si vuole controllare, true verso sinistra, false verso destra
     std::string getName() const;
     int getDistance() const;

@@ -12,6 +12,7 @@ Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int max
     stationStopTime=0;
     canTransit=false;
     normalRail=true;
+    end = false;
 }
 
 double Train::getCurrentSpeed() const {
@@ -87,11 +88,17 @@ void Train::sendStationRequest() {
     // deve anche settare se gli sta dando un binario normale, setRail(true)
     // o un binario di transito, setRail(false)
     canTransit = NextStation()->railRequest(this);
+
+    // se è tanto in anticipo metti canTransit a false e metti/lascia il treno in parcheggio
 }
 
 // return if train canTransit or not
 bool Train::itCanTransit() const {
     return canTransit;
+}
+
+void Train::setTransit(bool b) {
+    canTransit = b;
 }
 
 //set if train is arrived to a station
@@ -153,6 +160,10 @@ void Train::setRail(bool r) {
 
 bool Train::onNormalRail() const {
     return normalRail;
+}
+
+bool Train::hasToStart(int currentMinutes) const {
+    return currentMinutes>=timetable[timetableIndex];
 }
 
 Train::~Train() = default;

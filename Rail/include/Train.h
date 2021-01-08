@@ -37,6 +37,8 @@ protected:
     bool canTransit;
     // true = normalRail con limite 80, false = transitRail senza limite
     bool normalRail;
+    // dice se treno ha finito completamente corsa
+    bool end;
 public:
     // Constructors
     Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed, const std::vector<int>& timetable_);
@@ -58,6 +60,8 @@ public:
     
     // Manda e riceve la risposta alla domanda di fermata o transito da parte del treno alla stazione 
     void sendStationRequest();
+    // Permetti al treno di passare o meno
+    void setTransit(bool b);
     // ritorna true se treno ha il permesso da stazione di entrare in una rail, false se deve andare in parcheggio
     bool itCanTransit() const;
     // setta velocità a 0
@@ -75,6 +79,14 @@ public:
 
     // Dice se il treno ha passato tutte le stazioni
     bool hasFinish() const;
+    
+    bool getEnd() const {
+        return end;
+    }
+
+    void setEnd() {
+        end = true;
+    }
     // Setta velocità del treno
     void setSpeed(double n);
     // Incrementa distanza di un minuto a seconda della velocità del treno
@@ -95,6 +107,9 @@ public:
     // controlla se treno è almeno 20 minuti in anticipo considerando che
     // questo dato verrà controllato 20km prima di stazione
     bool inAnticipo(int currentMinutes) const;
+
+    // dice se deve già prendere i passeggeri oppure no
+    bool hasToStart(int currentMinutes) const;
 
     // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
