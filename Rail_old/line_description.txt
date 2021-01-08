@@ -1,4 +1,0 @@
-Venezia Mestre
-Venezia Ospedale 1 15
-Mira-Mirano 1 30
-Padova 0 55
