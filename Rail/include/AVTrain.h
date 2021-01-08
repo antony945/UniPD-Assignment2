@@ -13,7 +13,7 @@ public:
     AVTrain(AVTrain&&)=delete;
     AVTrain& operator=(AVTrain&&)=delete;
     ~AVTrain() override ;
-    bool isNextMainStation();
+    bool hasToStop() const override;
 };
 
 #endif // AVTrain_h
