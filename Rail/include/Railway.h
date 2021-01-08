@@ -25,7 +25,7 @@ private:
     // Vettore di stazioni
     std::vector<Station*> stations;
     // Vettore di treni
-    std::list<Train*> trains;
+    std::vector<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
 
