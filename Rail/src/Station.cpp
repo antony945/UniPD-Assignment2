@@ -135,3 +135,14 @@ void Station::manageParking(int currentMinutes) {
 		}
 	}
 }
+
+void Station::freeRail(Train *t) {
+    bool done=false;
+    int i=0;
+    while(!done && i<standardRails.size()){
+        if(standardRails[i].getTrainId()==(t->getId())) {
+            standardRails[i].setOccupied(false);
+            standardRails[i].setTrainId(-999);
+        }
+    }
+}

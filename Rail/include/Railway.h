@@ -47,7 +47,6 @@ public:
     // Getter per minutes
     int getCurrentMinutes() const { return currentMinutes; }
     // Minuti in stringa (es. se minuti sono 90 deve restituire 01:30)
-    // TODO: Da far fare ad alberto
     std::string getCurrentTime() const;
     // Metodo per svolgere simulazione di 1 giorno lavorativo
     void daySimulation();
