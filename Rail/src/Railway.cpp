@@ -152,6 +152,12 @@ void Railway::trainInStation(Train* t) {
                 }
             }
         }
+        else {
+            //se non deve fermarsi e deve solo transitare
+            //faccio un cast per poter usare il metodo di SecondaryStation e attraversare i binari di transito
+            SecondaryStation* thisStation = dynamic_cast<SecondaryStation*>(t->NextStation());
+            thisStation->useTransitRail(t);
+        }
     } else if(checkTrainDistance(t, 5)) {
         if(t->onNormalRail())
             // Libera binario con dentro t
