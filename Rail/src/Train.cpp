@@ -1,8 +1,12 @@
 //Alberto Castagnaro 1219641
 #include "Train.h"
 #include "Station.h"
+#include<stdexcept>
+#include <utility>
 
-Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>& timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{timetable_} {
+class SpeedLimitException: std::exception{} ;
+
+Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {
     currentDelay=0;
     currentSpeed=0;
     currentDistance=0;
@@ -38,8 +42,7 @@ double Train::getCurrentDistance() const {
 // TODO: Far fare ad alberto le eccezioni e non il cout
 void Train::setSpeed(double n) {
     if(n>MAX_SPEED){
-        std::cout<<"Speed too high";
-        return;
+        throw SpeedLimitException();
     }
     if(n>80 && (nextStationDistance()<=5000 || (currentDistance-stations[nextStationIndex-1]->getDistance()<5000))){
         std::cout<<"Speed limit of 80 KM/H near stations";
@@ -49,11 +52,7 @@ void Train::setSpeed(double n) {
 }
 
 void Train::increaseDistance() {
-    currentDistance+=static_cast<double>(currentSpeed/60);
-}
-
-void Train::setStop() {
-    setSpeed(0);
+    currentDistance+=static_cast<int>(currentSpeed/60);
 }
 
 bool Train::hasFinish() const {
