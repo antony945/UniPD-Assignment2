@@ -8,6 +8,7 @@ public:
     SecondaryStation(const std::string& name_, int distance_);
     SecondaryStation();
     bool isMain() override;
+    void useTransitRail(Train* myTrain);
 
     SecondaryStation(const SecondaryStation&) = delete;
     SecondaryStation(SecondaryStation&&) = delete;

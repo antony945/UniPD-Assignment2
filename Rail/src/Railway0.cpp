@@ -16,7 +16,7 @@ void Railway::checkMinimumDistance() {
 				if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
 					trains[i]->setSpeed(trains[j]->getCurrentSpeed());
 				}
-				//se il treno in trains[j] e' piu' veloce del treno in [i] e si trova anche dietro ad esso, riduco la velocità di trains[i]
+				//se il treno in trains[j] e' piu' veloce del treno in [i] e si trova anche dietro ad esso, riduco la velocità di trains[j]
 				else if (trains[i]->getCurrentSpeed() < trains[j]->getCurrentSpeed() && trains[j]->getCurrentDistance() < trains[i]->getCurrentDistance()) {
 					trains[j]->setSpeed(trains[i]->getCurrentSpeed());
 				}
