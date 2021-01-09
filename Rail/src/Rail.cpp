@@ -16,6 +16,8 @@ void Rail::setTrainId(int id){
 	trainId = id;
 }
 void Rail::setOccupied(bool occupied_){
+	if (!occupied_) trainId = -999;	//"cancello" l'id del treno che c'era prima (anche se in realta sostituisco con un valore inusuale) 
+
 	occupied = occupied_;
 }
 
