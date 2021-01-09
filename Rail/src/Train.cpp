@@ -6,7 +6,7 @@
 
 class SpeedLimitException: std::exception{} ;
 
-Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {
+Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{timetable_} {
     currentDelay=0;
     currentSpeed=0;
     currentDistance=0;
