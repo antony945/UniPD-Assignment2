@@ -122,6 +122,18 @@ void Railway::trainInStation(Train* t) {
         t->setMaxSpeed();
 
     if(checkTrainDistance(t, 0)) {
+        // CASO SPECIALE, PRIMA STAZIONE
+        if(t->getCurrentDistance() == 0) {
+            t->setStop();
+            
+            if(t->hasToStart(currentMinutes)) {
+                t->setLimitedSpeed();
+            }
+
+            // Quando deve partire avrà velocità a 80
+            return;            
+        }
+
         // SOLO SE TRENO SI DEVE FERMARE
         if(t->hasToStop()) {
             // Questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
@@ -140,7 +152,7 @@ void Railway::trainInStation(Train* t) {
                 t->setEnd();
             } else {
                 // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
-                if(t->hasToStart(currentMinutes)) {
+                if(!t->hasToStart(currentMinutes)) {
                     return;
                 }
 
