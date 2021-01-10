@@ -60,23 +60,20 @@ private:
     void createTrains();
     // Controlla timeTable di un treno avente velocità in Km/h MAX_SPEED
     void checkTimetable(int, const std::vector<Station*>&, std::vector<int>&);
-    
     // Controlla e gestisce tutti gli eventi possibili
     void manageEvents(Train*);
     // Gestisci eventi di treno in stazione
     void trainInStation(Train*);
     // Gestisci eventi di treno fuori stazione
     void trainOutStation(Train*);
-    // Make the train park
-    void parkTrain(Train*);
     // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
     void checkMinimumDistance();
     // Gestisci i treni parcheggiati per tutte le stazioni e quelli che vuoi far partire falli entrare in stazione
     void manageParkedTrains();
     // Fai avanzare tutti i treni
     void advanceTrains();
-    // Controlla se treno è a tot km da stazione successiva
-    bool checkTrainDistance(Train*, int);
 };
+
+int absoluteValue(int x, int y);
 
 #endif // Railway_h

@@ -90,10 +90,7 @@ bool Station::isFull(bool left) const{	//controlla se i binari in una certa dire
 
 void Station::depositTrain(Train* myTrain) {
 	// Controlla se treno è gia presente in deposito, se si non aggiungerlo
-	for(Train* t : trainDeposit) {
-		if(t->getId() == myTrain->getId()) return;
-	}
-
+	// Controllo viene fatto in altra funzione
 	trainDeposit.push_back(myTrain);
 }
 
@@ -109,40 +106,46 @@ void Station::manageParking(int currentMinutes) {
 	int time_from_park_to_station = 5/(80/60);
 
 	// Prima tira fuori da stazione i treni super alta velocità che devono partire
-	for(Train* t : trainDeposit) {
-		if(t->isSuperAV() && t->hasToStart(currentMinutes+time_from_park_to_station)) {
-			t->sendStationRequest();
-			if(t->itCanTransit())
-				trainDeposit.remove(t);
+	std::list<Train*>::iterator t;
+
+	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+		if((*t)->isSuperAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+			(*t)->sendStationRequest();
+			if((*t)->itCanTransit()) {
+				trainDeposit.remove((*t));
+				(*t)->setParking(false);
+			}
 		} 
 	}
 
 	// Poi tira fuori da stazione i treni alta velocità che devono partire
-	for(Train* t : trainDeposit) {
-		if(t->isAV() && t->hasToStart(currentMinutes+time_from_park_to_station)) {
-			t->sendStationRequest();
-			if(t->itCanTransit())
-				trainDeposit.remove(t);
-		}
+	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+		if((*t)->isAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+			(*t)->sendStationRequest();
+			if((*t)->itCanTransit()) {
+				trainDeposit.remove((*t));
+				(*t)->setParking(false);
+			}
+		} 
 	}
 
 	// Infine tira fuori da stazione i treni regionali che devono partire
-	for(Train* t : trainDeposit) {
-		if(t->isRegional() && t->hasToStart(currentMinutes+time_from_park_to_station)) {
-			t->sendStationRequest();
-			if(t->itCanTransit())
-				trainDeposit.remove(t);
-		}
+	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+		if((*t)->isRegional() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+			(*t)->sendStationRequest();
+			if((*t)->itCanTransit()) {
+				trainDeposit.remove((*t));
+				(*t)->setParking(false);
+			}
+		} 
 	}
 }
 
 void Station::freeRail(Train *t) {
-    bool done=false;
-    int i=0;
-    while(!done && i<standardRails.size()){
-        if(standardRails[i].getTrainId()==(t->getId())) {
-            standardRails[i].setOccupied(false);
-            standardRails[i].setTrainId(-999);
+    for(Rail r : standardRails){
+        if(r.getTrainId() == t->getId()) {
+            r.setOccupied(false);
+			break;
         }
     }
 }

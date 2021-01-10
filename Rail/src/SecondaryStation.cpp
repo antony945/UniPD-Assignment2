@@ -12,7 +12,7 @@ SecondaryStation::SecondaryStation():Station()
 
 void SecondaryStation::useTransitRail(Train* myTrain) {
 
-	//se il treno è puntiforme possiamo immaginare che il binario di transito venga usato per pochissimi istanti e poi liberata subito
+	//se il treno ï¿½ puntiforme possiamo immaginare che il binario di transito venga usato per pochissimi istanti e poi liberata subito
 	//per simulare quindi l'attraversamento occupo il binario e lo libero subito dopo
 
 	if (myTrain->getLeft()) {	//controllo in che direzione sta andando
