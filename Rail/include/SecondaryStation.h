@@ -8,6 +8,8 @@ public:
     SecondaryStation(const std::string& name_, int distance_);
     SecondaryStation();
     bool isMain() override;
+    //metodo che simula l'utilizzo dei binari di transito
+    void useTransitRail(Train* myTrain);
 
     SecondaryStation(const SecondaryStation&) = delete;
     SecondaryStation(SecondaryStation&&) = delete;
@@ -15,8 +17,7 @@ public:
     SecondaryStation& operator=(SecondaryStation&&) = delete;
 
 private:
-    std::vector<Rail> transitRails;     //non sono sicuro che possa servire perché questi binari non sono occupabili dato che servono solo al transito, se non serve cancello
-
+    std::vector<Rail> transitRails;     
 };
 
 #endif // SecondaryStation_h
