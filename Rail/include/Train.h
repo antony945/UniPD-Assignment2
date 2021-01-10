@@ -41,6 +41,10 @@ protected:
     bool end;
     // dice se treno è in parcheggio al momento
     bool parked;
+    bool firstTimePre20;
+    bool firstTimePre5;
+    bool firstTime0;
+    bool firstTimeArrived;
 public:
     // Constructors
     Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed, const std::vector<int>& timetable_);
@@ -82,6 +86,29 @@ public:
     void enterStation();
     // Fa si che il treno esca dalla stazione e si aumenti nextStationIndex
     void exitStation();
+    // Controlla distanza da prossima stazione
+    bool checkTrainDistance(int distance_from_station) const;
+    bool firstTimePre20km() const {
+        return firstTimePre20;
+    }
+    bool firstTimePre5km() const {
+        return firstTimePre5;
+    }
+    bool firstTime0km() const {
+        return firstTime0;
+    }
+    void setFirstTimePre20km(bool b) {
+        firstTimePre20 = b;
+    }
+    void setFirstTimePre5km(bool b) {
+        firstTimePre5 = b;
+    }
+    void setFirstTime0km(bool b) {
+        firstTime0 = b;
+    }
+    void setFirstTimeArrived(bool b) {
+        firstTimeArrived = b;
+    }
 
     // Dice se il treno ha passato tutte le stazioni
     bool hasFinish() const;

@@ -114,42 +114,49 @@ void Railway::trainOutStation(Train* t) {
     // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
     t->setMaxSpeed();
 
-    if(checkTrainDistance(t, -20)) {
-        // Invia segnalazione a stazione
-        // Setta canTransit a true o false
-        // Setta normalRail a true se si deve fermare, a false altrimenti
-        if(t->inAnticipo(currentMinutes)) {
-            // Setta canTransit a false
-            t->setTransit(false);
-            output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
-        } else {
-            // Manda segnalazione a stazione
-            t->sendStationRequest();
-            // Treno ha inviato segnalazione a stazione
-            output << "Treno " << t->getId() << " ha inviato segnalazione a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-            
-            if(t->itCanTransit()) {
-                output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName() << "." << '\n';
+    if(t->checkTrainDistance(-20)) {
+        if(t->firstTimePre20km()) {
+            // Invia segnalazione a stazione
+            // Setta canTransit a true o false
+            // Setta normalRail a true se si deve fermare, a false altrimenti
+            if(t->inAnticipo(currentMinutes)) {
+                // Setta canTransit a false
+                t->setTransit(false);
+                output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
             } else {
-                output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+                // Manda segnalazione a stazione
+                t->sendStationRequest();
+                // Treno ha inviato segnalazione a stazione
+                output << "Treno " << t->getId() << " ha inviato segnalazione a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                
+                if(t->itCanTransit()) {
+                    output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName() << "." << '\n';
+                } else {
+                    output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+                }
             }
+
+            t->setFirstTimePre20km(false);
         }
-    } else if(checkTrainDistance(t, -5)) {
-        if(t->itCanTransit()) {
-            // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
-            t->enterStation();
-            // Treno ha il permesso di entrare in zona stazione
-            output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-        } else {
-            t->setStop();
+    } else if(t->checkTrainDistance(-5)) {
+        if(t->firstTimePre5km()) {
+            if(t->itCanTransit()) {
+                // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
+                t->enterStation();
+                // Treno ha il permesso di entrare in zona stazione
+                output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                t->setFirstTimePre5km(false);
+            } else {
+                t->setStop();
 
-            if(!t->isParked()) {
-                // Treno deve andare in parcheggio
-                output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                if(!t->isParked()) {
+                    // Treno deve andare in parcheggio
+                    output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                }
+
+                // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
+                t->setParking(true);
             }
-
-            // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
-            t->setParking(true);
         }
     }
 }
@@ -162,7 +169,7 @@ void Railway::trainInStation(Train* t) {
     else
         t->setMaxSpeed();
 
-    if(checkTrainDistance(t, 0)) {
+    if(t->checkTrainDistance(0)) {
         // CASO SPECIALE, PRIMA STAZIONE
         if(t->getCurrentDistance() == 0) {            
             t->setStop();
@@ -178,43 +185,48 @@ void Railway::trainInStation(Train* t) {
             return;            
         }
 
-        // SOLO SE TRENO SI DEVE FERMARE
-        if(t->hasToStop()) {
-            // Questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
-            t->setStop();
+        if(t->firstTime0km()) {
+            // SOLO SE TRENO SI DEVE FERMARE
+            if(t->hasToStop()) {
+                // Questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
+                t->setStop();
 
-            // Questa funzione deve controllare se il treno è appena arrivato al binario della stazione
-            if(t->justArrived()) {
-                // Confronta tempo di arrivo con tempo indicato dalla timetable (funzione da override)
-                t->setDelay(currentMinutes);
-                // Treno è appena arrivato in stazione
-                output << "Treno " << t->getId() << " è arrivato a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << " con " << t->getCurrentDelay() << " minuti di ritardo." << '\n';
-            }
-
-            // Controlla se ultima stazione
-            if(t->hasFinish()) {
-                // Stampa messaggio finale
-                output << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
-                // Setta fine
-                t->setEnd();
-            } else {
-                // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
-                if(!t->hasToStart(currentMinutes)) {
-                    return;
+                // Questa funzione deve controllare se il treno è appena arrivato al binario della stazione
+                if(t->justArrived()) {
+                    // Confronta tempo di arrivo con tempo indicato dalla timetable (funzione da override)
+                    t->setDelay(currentMinutes);
+                    // Treno è appena arrivato in stazione
+                    output << "Treno " << t->getId() << " è arrivato a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << " con " << t->getCurrentDelay() << " minuti di ritardo." << '\n';
+                    t->setFirstTimeArrived(false);
                 }
 
-                // Questa funzione deve solo dire se stationStopTime < 5
-                // Se sta aspettando non c'è nulla da fare 
-                if(!t->isWaiting()){
-                    // Appena presi i passeggeri parti dal binario con velocità settata a 80
-                    t->setLimitedSpeed();
-                    output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                // Controlla se ultima stazione
+                if(t->hasFinish()) {
+                    // Stampa messaggio finale
+                    output << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
+                    // Setta fine
+                    t->setEnd();
                 } else {
-                    output << "Treno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
+                    // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
+                    if(!t->hasToStart(currentMinutes)) {
+                        output << "Treno " << t->getId() << " è fermo alla stazione..." << '\n';
+                        return;
+                    }
+
+                    // Questa funzione deve solo dire se stationStopTime < 5
+                    // Se sta aspettando non c'è nulla da fare
+                    if(!t->isWaiting()){
+                        // Appena presi i passeggeri parti dal binario con velocità settata a 80
+                        t->setLimitedSpeed();
+                        output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                        t->setFirstTime0km(false);
+                    } else {
+                        output << "Treno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
+                    }
                 }
             }
         }
-    } else if(checkTrainDistance(t, 5)) {
+    } else if(t->checkTrainDistance(5)) {
         if(t->onNormalRail()) {
             // Libera binario con dentro t
             t->NextStation()->freeRail(t);
@@ -224,23 +236,11 @@ void Railway::trainInStation(Train* t) {
 
         // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation e indice di indexTimetable)
         t->exitStation();
+        t->setFirstTimePre20km(true);
+        t->setFirstTimePre5km(true);
+        t->setFirstTime0km(true);
+        t->setFirstTimeArrived(true);
     }
-}
-
-// checkTrainDistance()
-bool Railway::checkTrainDistance(Train* t, int distance_from_station) {
-    double min = distance_from_station;
-    double max = distance_from_station;
-    
-    if(distance_from_station == 0) {
-        max += 1;
-    } else {
-        double offset = static_cast<int>(t->getCurrentSpeed()/60.0) - 0.5;
-        min -= offset;
-        max += offset;
-    }
-
-    return (t->nextStationDistance()>=min && t->nextStationDistance()<=max);
 }
 
 // manageParkedTrains

@@ -18,6 +18,24 @@ Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int max
     normalRail=true;
     end = false;
     parked = false;
+    firstTimePre20 = true;
+    firstTimePre5 = true;
+    firstTime0 = true;
+    firstTimeArrived = true;
+}
+
+bool Train::checkTrainDistance(int distance_from_station) const {
+    double min = distance_from_station;
+    double max = distance_from_station;
+    
+    if(distance_from_station == 0) {
+        max += 1;
+    } else {
+        double offset = static_cast<int>(currentSpeed/60.0);
+        max += offset;
+    }
+
+    return (nextStationDistance()>=min && nextStationDistance()<=max);
 }
 
 std::vector<int> Train::getTimetable() const {
@@ -159,7 +177,7 @@ void Train::exitStation() {
 }
 
 bool Train::justArrived() const {
-    return stationStopTime==0;
+    return (stationStopTime==0) && firstTimeArrived;
 }
 
 void Train::setDelay(int currentMinutes) {
