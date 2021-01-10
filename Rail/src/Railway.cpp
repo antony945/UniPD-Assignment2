@@ -73,7 +73,7 @@ void Railway::daySimulation() {
         manageParkedTrains();
         // Controlla distanza tra treni e in caso aggiusta velocità
         // TODO: Da controllare, crea errori
-        // checkMinimumDistance();
+        checkMinimumDistance();
         // Avanza di un minuto la simulazione
         advanceTrains();
     }
@@ -133,7 +133,6 @@ void Railway::trainOutStation(Train* t) {
             } else {
                 output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
             }
-        
         }
     } else if(checkTrainDistance(t, -5)) {
         if(t->itCanTransit()) {
@@ -438,26 +437,26 @@ void Railway::checkTimetable(int fast_speed, const std::vector<Station*>& statio
         // Prendo tempo di percorrenza segnato
         // Slow speed (TODO: metterla come costante di qualche classe)
         int slow_speed = 80;
-        output << "FAST SPEED: " << fast_speed << '\n';
+        // output << "FAST SPEED: " << fast_speed << '\n';
 
         // Tempo minimo per fare la tratta (converti in km/min)
         int slow_time = static_cast<int>(slow_road/(slow_speed/60.0)) + 1;
         int fast_time = static_cast<int>(fast_road/(fast_speed/60.0)) + 1;
-        output << "SLOW_TIME: " << slow_time << '\n';
-        output << "FAST_TIME: " << fast_time << '\n';
+        // output << "SLOW_TIME: " << slow_time << '\n';
+        // output << "FAST_TIME: " << fast_time << '\n';
         int min_time = static_cast<int>(slow_time+fast_time+time_to_wait);
-        output << "MIN TIME: " << min_time << '\n';
+        // output << "MIN TIME: " << min_time << '\n';
         if(i<times.size()-1) {
             int time_to_do = times[i+1]-times[i];
             int offset = min_time-time_to_do;
 
             // Se MIN_TIME > TIME_TO_DO DEVO SPOSTARE TUTTO AVANTI DELLA DIFFERENZA TRA QUEI DUE
             if(offset > 0) {
-                output << "CAMBIATA TIMETABLE.\n";
+                output << "CAMBIATA TIMETABLE\n";
                 times[i+1] = times[i+1]+offset;
             }
         } else {
-            output << "AGGIUNTO VALORE IN TIMETABLE.\n";
+            output << "AGGIUNTO VALORE IN TIMETABLE\n";
             // Se non ci sono abbastanza orari, aggiungi l'orario minimo + 10 minuti
             times.push_back(times[i]+min_time+10);
         }
@@ -469,24 +468,26 @@ void Railway::checkMinimumDistance() {
 	int MIN_DIS = 15;		//distanza minima da rispettare (ho messo 15km per avere un margine: il treno pi� veloce da 300km/h pu� fare al massimo 5km al minuto.)
 
 	for (int i = 0; i < trains.size(); i++) {
-		for (int j = i + 1; j < trains.size(); j++) {
-			//controllo prima se i due treni stanno andando sullo stesso binario, poi se sono troppo vicini
-			if ((trains[i]->getLeft() == trains[j]->getLeft()) && (absoluteValue(trains[i]->getCurrentDistance(), trains[j]->getCurrentDistance()) < MIN_DIS)) {
-
-				//se il treno in trains[i] e' piu' veloce del treno in [j] e si trova anche dietro ad esso, riduco la velocit� di trains[i]
-				if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
-					trains[i]->setSpeed(trains[j]->getCurrentSpeed());
-				}
-				//se il treno in trains[j] e' piu' veloce del treno in [i] e si trova anche dietro ad esso, riduco la velocit� di trains[j]
-				else if (trains[i]->getCurrentSpeed() < trains[j]->getCurrentSpeed() && trains[j]->getCurrentDistance() < trains[i]->getCurrentDistance()) {
-					trains[j]->setSpeed(trains[i]->getCurrentSpeed());
-				}
-				//altrimeni anche se sono vicini quello che � pi� veloce sta davanti e non ci sono problemi
-			}
-		}
-
+        if(!trains[i]->getEnd() && trains[i]->isInStation()) {
+            for (int j = i + 1; j < trains.size(); j++) {
+                if(!trains[j]->getEnd() && trains[j]->isInStation()) {
+                    //controllo prima se i due treni stanno andando sullo stesso binario, poi se sono troppo vicini
+                    if ((trains[i]->getLeft() == trains[j]->getLeft()) && (absoluteValue(trains[i]->getCurrentDistance(), trains[j]->getCurrentDistance()) < MIN_DIS)) {
+                        std::cout << "VELOCITÀ CAMBIATA\n";
+                        //se il treno in trains[i] e' piu' veloce del treno in [j] e si trova anche dietro ad esso, riduco la velocit� di trains[i]
+                        if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
+                            trains[i]->setSpeed(trains[j]->getCurrentSpeed());
+                        }
+                        //se il treno in trains[j] e' piu' veloce del treno in [i] e si trova anche dietro ad esso, riduco la velocit� di trains[j]
+                        else if (trains[i]->getCurrentSpeed() < trains[j]->getCurrentSpeed() && trains[j]->getCurrentDistance() < trains[i]->getCurrentDistance()) {
+                            trains[j]->setSpeed(trains[i]->getCurrentSpeed());
+                        }
+                        //altrimeni anche se sono vicini quello che � pi� veloce sta davanti e non ci sono problemi
+                    }
+                }
+            }
+        }
 	}
-
 }
 
 int absoluteValue(int x, int y) {	//funzione per calcolare il valore assoluto della sottrazione
