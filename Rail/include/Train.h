@@ -24,7 +24,7 @@ protected:
     //current speed of the train (KM/H)
     double currentSpeed;
     //current distance from first Station (KM)
-    int currentDistance;
+    double currentDistance;
     //Index that represent the next Station where the train is going
     int nextStationIndex;
     //Timetable index
@@ -39,6 +39,8 @@ protected:
     bool normalRail;
     // dice se treno ha finito completamente corsa
     bool end;
+    // dice se treno è in parcheggio al momento
+    bool parked;
 public:
     // Constructors
     Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed, const std::vector<int>& timetable_);
@@ -48,6 +50,10 @@ public:
     Train& operator=(Train&&) = delete;
     
     // getter - functions
+    bool isParked() const;
+    std::vector<int> getTimetable() const;
+    int getNextStationIndex() const;
+    int getTimetableIndex() const;
     double getCurrentSpeed() const;
     bool getLeft() const;
     int getCurrentDelay() const;
@@ -95,11 +101,13 @@ public:
     bool isWaiting();
     // Controlla se il treno è appena arrivato alla stazione
     bool justArrived() const;
+    // Parcheggia il treno
+    void setParking(bool);
 
     //return next station
     Station* NextStation() const;
     //return Distance from next Station in km
-    int nextStationDistance() const;
+    double nextStationDistance() const;
 
     //aggiorna il delay in base a tempo di arrivo a stazione nextStation
     //confronta argomento con elemento in posizione timetableIndex

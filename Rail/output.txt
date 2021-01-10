@@ -1,0 +1,295 @@
+FAST SPEED: 160
+SLOW_TIME: 4
+FAST_TIME: 17
+MIN TIME: 21
+AGGIUNTO VALORE IN TIMETABLE.
+FAST SPEED: 160
+SLOW_TIME: 8
+FAST_TIME: 16
+MIN TIME: 29
+AGGIUNTO VALORE IN TIMETABLE.
+LISTA STAZIONI: Venezia Mestre; Mira-Mirano; Padova; 
+LISTA TRENI
+ID: 1
+TIMETABLE: 5; 36; 75; 
+
+---------- START ----------
+
+0
+Speed: 0 km/h
+Distance: 0 km
+
+1
+Speed: 0 km/h
+Distance: 0 km
+
+2
+Speed: 0 km/h
+Distance: 0 km
+
+3
+Speed: 0 km/h
+Distance: 0 km
+
+4
+Speed: 0 km/h
+Distance: 0 km
+
+5
+Treno 1 sta partendo da Venezia Mestre alle ore 00:05.
+Speed: 80 km/h
+Distance: 0 km
+
+6
+Speed: 80 km/h
+Distance: 1.33333 km
+
+7
+Speed: 80 km/h
+Distance: 2.66667 km
+
+8
+Speed: 80 km/h
+Distance: 4 km
+
+9
+Speed: 80 km/h
+Distance: 5.33333 km
+
+10
+Speed: 160 km/h
+Distance: 6.66667 km
+
+11
+Speed: 160 km/h
+Distance: 9.33333 km
+
+12
+Speed: 160 km/h
+Distance: 12 km
+
+13
+Speed: 160 km/h
+Distance: 14.6667 km
+
+14
+Speed: 160 km/h
+Distance: 17.3333 km
+
+15
+Speed: 160 km/h
+Distance: 20 km
+
+16
+Speed: 160 km/h
+Distance: 22.6667 km
+
+17
+Speed: 160 km/h
+Distance: 25.3333 km
+
+18
+Speed: 160 km/h
+Distance: 28 km
+
+19
+Treno 1 ha inviato segnalazione a Mira-Mirano alle ore 00:19.
+Treno 1 a breve arriverà a Mira-Mirano.
+Speed: 160 km/h
+Distance: 30.6667 km
+
+20
+Speed: 160 km/h
+Distance: 33.3333 km
+
+21
+Speed: 160 km/h
+Distance: 36 km
+
+22
+Speed: 160 km/h
+Distance: 38.6667 km
+
+23
+Speed: 160 km/h
+Distance: 41.3333 km
+
+24
+Treno 1 sta entrando in Mira-Mirano alle ore 00:24.
+Speed: 160 km/h
+Distance: 44 km
+
+25
+Speed: 80 km/h
+Distance: 46.6667 km
+
+26
+Speed: 80 km/h
+Distance: 48 km
+
+27
+Speed: 80 km/h
+Distance: 49.3333 km
+
+28
+Treno 1 è arrivato a Mira-Mirano alle ore 00:28 con -8 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+29
+Treno 1 è arrivato a Mira-Mirano alle ore 00:29 con -7 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+30
+Treno 1 è arrivato a Mira-Mirano alle ore 00:30 con -6 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+31
+Treno 1 è arrivato a Mira-Mirano alle ore 00:31 con -5 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+32
+Treno 1 è arrivato a Mira-Mirano alle ore 00:32 con -4 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+33
+Treno 1 è arrivato a Mira-Mirano alle ore 00:33 con -3 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+34
+Treno 1 è arrivato a Mira-Mirano alle ore 00:34 con -2 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+35
+Treno 1 è arrivato a Mira-Mirano alle ore 00:35 con -1 minuti di ritardo.
+Speed: 0 km/h
+Distance: 50.6667 km
+
+36
+Treno 1 è arrivato a Mira-Mirano alle ore 00:36 con 0 minuti di ritardo.
+Treno 1 sta facendo salire passeggeri...
+Speed: 0 km/h
+Distance: 50.6667 km
+
+37
+Treno 1 sta facendo salire passeggeri...
+Speed: 0 km/h
+Distance: 50.6667 km
+
+38
+Treno 1 sta facendo salire passeggeri...
+Speed: 0 km/h
+Distance: 50.6667 km
+
+39
+Treno 1 sta facendo salire passeggeri...
+Speed: 0 km/h
+Distance: 50.6667 km
+
+40
+Treno 1 sta facendo salire passeggeri...
+Speed: 0 km/h
+Distance: 50.6667 km
+
+41
+Treno 1 sta partendo da Mira-Mirano alle ore 00:41.
+Speed: 80 km/h
+Distance: 50.6667 km
+
+42
+Speed: 80 km/h
+Distance: 52 km
+
+43
+Speed: 80 km/h
+Distance: 53.3333 km
+
+44
+Speed: 80 km/h
+Distance: 54.6667 km
+
+45
+Speed: 160 km/h
+Distance: 56 km
+
+46
+Speed: 160 km/h
+Distance: 58.6667 km
+
+47
+Speed: 160 km/h
+Distance: 61.3333 km
+
+48
+Speed: 160 km/h
+Distance: 64 km
+
+49
+Speed: 160 km/h
+Distance: 66.6667 km
+
+50
+Speed: 160 km/h
+Distance: 69.3333 km
+
+51
+Speed: 160 km/h
+Distance: 72 km
+
+52
+Speed: 160 km/h
+Distance: 74.6667 km
+
+53
+Speed: 160 km/h
+Distance: 77.3333 km
+
+54
+Treno 1 ha inviato segnalazione a Padova alle ore 00:54.
+Treno 1 a breve arriverà a Padova.
+Speed: 160 km/h
+Distance: 80 km
+
+55
+Speed: 160 km/h
+Distance: 82.6667 km
+
+56
+Speed: 160 km/h
+Distance: 85.3333 km
+
+57
+Speed: 160 km/h
+Distance: 88 km
+
+58
+Speed: 160 km/h
+Distance: 90.6667 km
+
+59
+Speed: 160 km/h
+Distance: 93.3333 km
+
+60
+Treno 1 sta entrando in Padova alle ore 01:00.
+Speed: 160 km/h
+Distance: 96 km
+
+61
+Speed: 80 km/h
+Distance: 98.6667 km
+
+62
+Treno 1 è arrivato a Padova alle ore 01:02 con -13 minuti di ritardo.
+Treno 1 ha terminato la sua corsa.
+Speed: 0 km/h
+Distance: 100 km
+
+63
+---------- END ----------

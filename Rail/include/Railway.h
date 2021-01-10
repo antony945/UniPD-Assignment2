@@ -28,6 +28,8 @@ private:
     std::vector<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
+    // Tiene conto se attualmente l'evento è stato riportato
+    bool reported;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
@@ -67,8 +69,6 @@ private:
     void trainInStation(Train*);
     // Gestisci eventi di treno fuori stazione
     void trainOutStation(Train*);
-    // Make the train park
-    void parkTrain(Train*);
     // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
     void checkMinimumDistance();
     // Gestisci i treni parcheggiati per tutte le stazioni e quelli che vuoi far partire falli entrare in stazione
@@ -78,5 +78,7 @@ private:
     // Controlla se treno è a tot km da stazione successiva
     bool checkTrainDistance(Train*, int);
 };
+
+int absoluteValue(int x, int y);
 
 #endif // Railway_h

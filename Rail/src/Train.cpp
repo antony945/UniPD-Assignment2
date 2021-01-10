@@ -6,7 +6,7 @@
 
 class SpeedLimitException: std::exception{} ;
 
-Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {
+Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , stations{stations_}, MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {
     currentDelay=0;
     currentSpeed=0;
     currentDistance=0;
@@ -17,6 +17,39 @@ Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int max
     canTransit=false;
     normalRail=true;
     end = false;
+    parked = false;
+}
+
+std::vector<int> Train::getTimetable() const {
+    return timetable;
+}
+
+bool Train::isParked() const {
+    return parked;
+}
+
+void Train::setParking(bool p) {
+    if(p = true) {
+        setStop();
+        // Se è già depositato non fare nulla altrimenti aggiungilo al parcheggio
+        if(!parked) {
+            parked = p;
+            NextStation()->depositTrain(this);
+        }
+    } else {
+        setLimitedSpeed();
+        if(parked) {
+            parked = p;
+        }
+    }
+}
+
+int Train::getNextStationIndex() const {
+    return nextStationIndex;
+}
+
+int Train::getTimetableIndex() const {
+    return timetableIndex;
 }
 
 double Train::getCurrentSpeed() const {
@@ -39,20 +72,16 @@ double Train::getCurrentDistance() const {
     return currentDistance;
 }
 
-// TODO: Far fare ad alberto le eccezioni e non il cout
 void Train::setSpeed(double n) {
     if(n>MAX_SPEED){
         throw SpeedLimitException();
     }
-    if(n>80 && (nextStationDistance()<=5000 || (currentDistance-stations[nextStationIndex-1]->getDistance()<5000))){
-        std::cout<<"Speed limit of 80 KM/H near stations";
-        return;
-    }
+
     currentSpeed=n;
 }
 
 void Train::increaseDistance() {
-    currentDistance+=static_cast<int>(currentSpeed/60);
+    currentDistance+=(currentSpeed/60);
 }
 
 bool Train::hasFinish() const {
@@ -64,8 +93,8 @@ Station* Train::NextStation() const {
 }
 
 // TODO: Da modificare a seconda di left o meno
-int Train::nextStationDistance() const {
-    return stations[nextStationIndex]->getDistance()-currentDistance;
+double Train::nextStationDistance() const {
+    return currentDistance-stations[nextStationIndex]->getDistance();
 }
 
 // Tell if train is waiting to make people in
@@ -87,8 +116,6 @@ void Train::sendStationRequest() {
     // deve anche settare se gli sta dando un binario normale, setRail(true)
     // o un binario di transito, setRail(false)
     canTransit = NextStation()->railRequest(this);
-
-    // se è tanto in anticipo metti canTransit a false e metti/lascia il treno in parcheggio
 }
 
 // return if train canTransit or not
