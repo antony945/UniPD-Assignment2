@@ -28,8 +28,6 @@ private:
     std::vector<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
-    // Tiene conto se attualmente l'evento è stato riportato
-    bool reported;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
@@ -50,8 +48,8 @@ public:
     int getCurrentMinutes() const { return currentMinutes; }
     // Minuti in stringa (es. se minuti sono 90 deve restituire 01:30)
     std::string getCurrentTime() const;
-    // Metodo per svolgere simulazione di 1 giorno lavorativo
-    void daySimulation();
+    // Metodo per svolgere simulazione di linea ferroviaria
+    void startSimulation();
     // Tester
     void tester();
 
@@ -74,7 +72,5 @@ private:
     // Fai avanzare tutti i treni
     void advanceTrains();
 };
-
-int absoluteValue(int x, int y);
 
 #endif // Railway_h

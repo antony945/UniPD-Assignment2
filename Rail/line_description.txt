@@ -1,5 +1,5 @@
 Venezia Mestre
-Mira-Mirano 0 15
-Busa di Vigonza 0 80
-Vigonza-Pianiga 0 110
-Padova 0 150
+Vicenza 1 50
+Verona 1 100
+Brescia 1 200
+Milano 0 300

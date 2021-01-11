@@ -4,7 +4,7 @@
 #include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-// tester()
+// tester() - CORRETTA
 void Railway::tester() {
     output << "-------- LISTA STAZIONI --------\n";
     for(auto s : stations) {
@@ -35,26 +35,8 @@ void Railway::tester() {
     output << '\n';
 }
 
-std::string Railway::getCurrentTime() const {
-    int hour = currentMinutes/60;
-    int minutes = currentMinutes%60;
-    std::string s;
-    
-    if(hour < 10) {
-        s += "0";
-    }
-    s += std::to_string(hour);
-    s += ":";
-    
-    if(minutes < 10) {
-        s += "0";
-    }
-    s += std::to_string(minutes);
-    return s;
-}
-
-// daySimulation()
-void Railway::daySimulation() {
+// daySimulation() - CORRETTA (forse)
+void Railway::startSimulation() {
     // INIZIO
     output << "---------- START ----------\n";
     // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
@@ -62,7 +44,11 @@ void Railway::daySimulation() {
     while(!end) {
         end = true;
 
-        output << '\n' << getCurrentTime() << '\n';
+        if(currentMinutes%DAY_MINUTES == 0) {
+            output << "GIORNO " << currentMinutes/DAY_MINUTES << '\n'; 
+        }
+
+        // output << '\n' << getCurrentTime() << '\n';
 
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
@@ -80,7 +66,7 @@ void Railway::daySimulation() {
         manageParkedTrains();
         // Controlla distanza tra treni e in caso aggiusta velocità
         // TODO: Da controllare, crea errori
-        //checkMinimumDistance();
+        checkMinimumDistance();
 
         for(Train* t : trains) {
             if(!t->getEnd()) {
@@ -98,7 +84,7 @@ void Railway::daySimulation() {
     output << "\n---------- END ----------\n";
 }
 
-// manageEvents()
+// manageEvents() - CORRETTA
 void Railway::manageEvents(Train* t) {
     // Supponiamo:
     //      - TRENO 1 R in stazione 0 con timetable 100(partenza), 200(arrivo prima stazione secondaria), 250, 300(arrivo ultima stazione)
@@ -112,7 +98,7 @@ void Railway::manageEvents(Train* t) {
     }
 }
 
-// trainOutStation()
+// trainOutStation() - CORRETTA (forse)
 void Railway::trainOutStation(Train* t) {
     // std::cout << t->nextStationDistance() << '\n';
 
@@ -172,7 +158,7 @@ void Railway::trainOutStation(Train* t) {
     // QUI È CIÒ CHE FA SE NON HA EVENTI DA GESTIRE, OVVERO PROCEDERE CON VELOCITÀ MAX_SPEED
 }
 
-// trainInStation()
+// trainInStation() - CORRETTA (forse)
 void Railway::trainInStation(Train* t) {
     // std::cout << t->nextStationDistance() << '\n';
 
@@ -273,7 +259,7 @@ void Railway::trainInStation(Train* t) {
     // SEMPLICEMENTE PROSEGUE CON VELOCITÀ GIUSTA
 }
 
-// manageParkedTrains
+// manageParkedTrains - CORRETTA (forse)
 void Railway::manageParkedTrains() {
     for(Station* s : stations) {
         // ogni stazione si deve gestire il suo parcheggio
@@ -284,7 +270,7 @@ void Railway::manageParkedTrains() {
     }
 }
 
-// advanceTrains()
+// advanceTrains() - CORRETTA
 void Railway::advanceTrains() {
     // Avanza i minuti
     currentMinutes++;
@@ -302,8 +288,7 @@ Railway::Railway(const std::string& line_description_, const std::string& timeta
     : line_description{line_description_},
       timetables{timetables_},
       output{output_},
-      currentMinutes{0},
-      reported{false} {
+      currentMinutes{0} {
     if(!line_description.is_open())
         throw std::invalid_argument("ERROR. Unable to open line_description file.");
     if(!timetables.is_open())
@@ -450,6 +435,26 @@ void Railway::createTrains() {
             trains.push_back(new SuperAVTrain{id, fromOrigin, trainStations, times});
         }        
     }
+}
+
+// CORRETTA
+std::string Railway::getCurrentTime() const {
+    int min = currentMinutes%DAY_MINUTES;
+    int hour = min/60;
+    int minutes = min%60;
+    std::string s;
+    
+    if(hour < 10) {
+        s += "0";
+    }
+    s += std::to_string(hour);
+    s += ":";
+    
+    if(minutes < 10) {
+        s += "0";
+    }
+    s += std::to_string(minutes);
+    return s;
 }
 
 // DA CONTROLLARE
