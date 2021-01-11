@@ -44,6 +44,7 @@ protected:
     bool firstTimePre20;
     bool firstTime0;
     bool firstTimeArrived;
+    int stationRail;
 public:
     // Constructors
     Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed, const std::vector<int>& timetable_);
@@ -53,8 +54,14 @@ public:
     Train& operator=(Train&&) = delete;
     
     void park();
-
     // getter - functions
+
+    void setStationRail(int r) {
+        stationRail = r;
+    }
+    int getStationRail() const {
+        return stationRail;
+    }
     bool isParked() const;
     std::vector<int> getTimetable() const;
     std::vector<Station*> getStations() const { return stations; }

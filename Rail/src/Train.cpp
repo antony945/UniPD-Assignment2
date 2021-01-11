@@ -21,6 +21,7 @@ Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int max
     firstTimePre20 = true;
     firstTime0 = true;
     firstTimeArrived = true;
+    stationRail = -1;
 }
 
 std::vector<int> Train::getTimetable() const {
@@ -32,19 +33,7 @@ bool Train::isParked() const {
 }
 
 void Train::setParking(bool p) {
-    if(p = true) {
-        setStop();
-        // Se è già depositato non fare nulla altrimenti aggiungilo al parcheggio
-        if(!parked) {
-            parked = p;
-            NextStation()->depositTrain(this);
-        }
-    } else {
-        setLimitedSpeed();
-        if(parked) {
-            parked = p;
-        }
-    }
+    parked = p;
 }
 
 int Train::getNextStationIndex() const {
@@ -213,6 +202,7 @@ void Train::park() {
 
     setStop();
     parked = true;
+    NextStation()->depositTrain(this);
 }
 
 

@@ -56,13 +56,13 @@ std::string Railway::getCurrentTime() const {
 // daySimulation()
 void Railway::daySimulation() {
     // INIZIO
-    output << "---------- START ----------\n\n";
+    output << "---------- START ----------\n";
     // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
     bool end = false;
     while(!end) {
         end = true;
 
-        //output << getCurrentMinutes() << '\n';
+        output << '\n' << getCurrentTime() << '\n';
 
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
@@ -105,19 +105,6 @@ void Railway::manageEvents(Train* t) {
     //      - TRENO 2 AV in stazione 0 con timetable 150(partenza), 250(arrivo ultima stazione)
     //      - TRENO 3 SAV in stazione 0 con timetable 180(partenza), 220(arrivo ultima stazione)
     
-    // Controlla posizione del treno:
-    // SE TRENO VA NORMALE
-    // |----|                      |------|                      |------|                      |----|
-    // |ST  |---------->-----------|  ST  |---------->-----------|  ST  |---------->-----------|  ST|
-    // |----|                      |----- |                      |------|                      |----|
-    // 0    5                      15 20 25                      35 40 45                      55  60
-
-    // SE TRENO VA AL CONTRARIO
-    // |----|                      |------|                      |------|                      |----|
-    // |ST  |----------<-----------|  ST  |----------<-----------|  ST  |----------<-----------|  ST|
-    // |----|                      |----- |                      |------|                      |----|
-    // 0    5                      15 20 25                      35 40 45                      55  60
-
     if(t->isInStation()) {
         trainInStation(t); 
     } else {
@@ -127,8 +114,7 @@ void Railway::manageEvents(Train* t) {
 
 // trainOutStation()
 void Railway::trainOutStation(Train* t) {
-    std::cout << "FUORI STAZIONE\n";
-    std::cout << t->nextStationDistance() << '\n';
+    // std::cout << t->nextStationDistance() << '\n';
 
     // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
     t->setMaxSpeed();
@@ -139,14 +125,15 @@ void Railway::trainOutStation(Train* t) {
             // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
             t->enterStation();
             // Treno ha il permesso di entrare in zona stazione
-            output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+            output << "Treno " << t->getId() << " sta entrando a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
         } else {
             // QUA DEVE ANDARE IN PARCHEGGIO
             if(!t->isParked()) {
                 t->park();
                 // Treno deve andare in parcheggio
-                output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                output << "Treno " << t->getId() << " è andato in parcheggio a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
             }
+            t->setStop();
         }
 
         return;
@@ -158,7 +145,7 @@ void Railway::trainOutStation(Train* t) {
         if(t->inAnticipo(currentMinutes)) {
             // Setta canTransit a false
             t->setTransit(false);
-            output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+            output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio a " << t->NextStation()->getName() << "." << '\n';
             t->setFirstTimePre20km(false);
             return;
         }
@@ -170,14 +157,13 @@ void Railway::trainOutStation(Train* t) {
         output << "Treno " << t->getId() << " ha inviato segnalazione a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
         
         if(t->itCanTransit()) {
-            output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName() << "." << '\n';
-            output << "Ha il binario ";
+            output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName();
             if(t->onNormalRail())
-                output << "normale.\n";
+                output << " al binario " << t->getStationRail() << ".\n";
             else
-                output << "di transito.\n";
+                output << " al binario di transito.\n";
         } else {
-            output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+            output << "Stazione piena. Treno " << t->getId() << " andrà in parcheggio a " << t->NextStation()->getName() << "." << '\n';
         }
         t->setFirstTimePre20km(false);
         return;
@@ -188,8 +174,7 @@ void Railway::trainOutStation(Train* t) {
 
 // trainInStation()
 void Railway::trainInStation(Train* t) {
-    std::cout << "IN STAZIONE\n";
-    std::cout << t->nextStationDistance() << '\n';
+    // std::cout << t->nextStationDistance() << '\n';
 
     // CONTROLLA SU CHE BINARIO DEVE PASSARE IL TRENO
     if(t->onNormalRail())
@@ -223,8 +208,13 @@ void Railway::trainInStation(Train* t) {
             if(t->hasToStart(currentMinutes)) {
                 // Treno sta partendo da stazione
                 t->sendStationRequest();
+                if(!t->itCanTransit()) {
+                    output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                    return;
+                }
                 t->setLimitedSpeed();
-                output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                t->setDelay(currentMinutes);
+                output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << " con " << t->getCurrentDelay() << " minuti di ritardo." << '\n';
                 t->setFirstTime0km(false);
             }
 
@@ -260,7 +250,7 @@ void Railway::trainInStation(Train* t) {
         // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
         if(!t->hasToStart(currentMinutes)) {
             t->setStop();
-            output << "Treno " << t->getId() << " è fermo alla stazione..." << '\n';
+            // output << "\tTreno " << t->getId() << " è fermo alla stazione..." << '\n';
             return;
         }
 
@@ -268,7 +258,7 @@ void Railway::trainInStation(Train* t) {
         if(t->isWaiting()){
             // Qui sta aspettando i passeggeri che salgano
             t->setStop();
-            output << "Treno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
+            // output << "\tTreno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
             return;
         } else {
             // Appena presi i passeggeri parti dal binario con velocità settata a 80

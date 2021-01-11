@@ -1,0 +1,308 @@
+-------- LISTA STAZIONI --------
+Venezia Mestre; Busa di Vigonza; Vigonza-Pianiga; Padova; 
+
+------- LISTA TRENI --------
+ID: 1
+TIMETABLE: 5; 48; 79; 114; 
+STAZIONI: Venezia Mestre, 0; Busa di Vigonza, 80; Vigonza-Pianiga, 110; Padova, 150; 
+ID: 2
+TIMETABLE: 6; 49; 80; 115; 
+STAZIONI: Venezia Mestre, 0; Busa di Vigonza, 80; Vigonza-Pianiga, 110; Padova, 150; 
+ID: 3
+TIMETABLE: 7; 50; 81; 116; 
+STAZIONI: Venezia Mestre, 0; Busa di Vigonza, 80; Vigonza-Pianiga, 110; Padova, 150; 
+
+---------- START ----------
+
+00:00
+
+00:01
+
+00:02
+
+00:03
+
+00:04
+
+00:05
+Treno 1 sta partendo da Venezia Mestre alle ore 00:05 con 0 minuti di ritardo.
+
+00:06
+Treno 2 sta partendo da Venezia Mestre alle ore 00:06 con 0 minuti di ritardo.
+
+00:07
+Treno 3 sta partendo da Venezia Mestre alle ore 00:07.
+
+00:08
+Treno 3 sta partendo da Venezia Mestre alle ore 00:08.
+
+00:09
+Treno 1 sta uscendo da Venezia Mestre alle ore 00:09.
+Treno 3 sta partendo da Venezia Mestre alle ore 00:09 con 2 minuti di ritardo.
+
+00:10
+Treno 2 sta uscendo da Venezia Mestre alle ore 00:10.
+
+00:11
+
+00:12
+
+00:13
+Treno 3 sta uscendo da Venezia Mestre alle ore 00:13.
+
+00:14
+
+00:15
+
+00:16
+
+00:17
+
+00:18
+
+00:19
+
+00:20
+
+00:21
+
+00:22
+
+00:23
+
+00:24
+
+00:25
+
+00:26
+
+00:27
+
+00:28
+
+00:29
+
+00:30
+Treno 1 ha inviato segnalazione a Busa di Vigonza alle ore 00:30.
+Treno 1 a breve arriverà a Busa di Vigonza al binario 0.
+
+00:31
+Treno 2 ha inviato segnalazione a Busa di Vigonza alle ore 00:31.
+Treno 2 a breve arriverà a Busa di Vigonza al binario 2.
+
+00:32
+
+00:33
+
+00:34
+Treno 3 ha inviato segnalazione a Busa di Vigonza alle ore 00:34.
+Stazione piena. Treno 3 andrà in parcheggio a Busa di Vigonza.
+
+00:35
+
+00:36
+Treno 1 sta entrando a Busa di Vigonza alle ore 00:36.
+
+00:37
+Treno 1 è arrivato a Busa di Vigonza alle ore 00:37 con -11 minuti di ritardo.
+Treno 2 sta entrando a Busa di Vigonza alle ore 00:37.
+
+00:38
+Treno 2 è arrivato a Busa di Vigonza alle ore 00:38 con -11 minuti di ritardo.
+
+00:39
+
+00:40
+Treno 3 è andato in parcheggio a Busa di Vigonza alle ore 00:40.
+
+00:41
+
+00:42
+
+00:43
+
+00:44
+
+00:45
+
+00:46
+
+00:47
+
+00:48
+
+00:49
+
+00:50
+
+00:51
+
+00:52
+
+00:53
+Treno 1 sta partendo da Busa di Vigonza alle ore 00:53.
+
+00:54
+Treno 2 sta partendo da Busa di Vigonza alle ore 00:54.
+
+00:55
+
+00:56
+
+00:57
+Treno 1 sta uscendo da Busa di Vigonza alle ore 00:57.
+
+00:58
+Treno 2 sta uscendo da Busa di Vigonza alle ore 00:58.
+Treno 3 sta entrando a Busa di Vigonza alle ore 00:58.
+
+00:59
+Treno 1 ha inviato segnalazione a Vigonza-Pianiga alle ore 00:59.
+Treno 1 a breve arriverà a Vigonza-Pianiga al binario 0.
+
+01:00
+Treno 2 ha inviato segnalazione a Vigonza-Pianiga alle ore 01:00.
+Treno 2 a breve arriverà a Vigonza-Pianiga al binario 2.
+Treno 3 è arrivato a Busa di Vigonza alle ore 01:00 con 10 minuti di ritardo.
+
+01:01
+
+01:02
+
+01:03
+
+01:04
+
+01:05
+Treno 1 sta entrando a Vigonza-Pianiga alle ore 01:05.
+Treno 3 sta partendo da Busa di Vigonza alle ore 01:05.
+
+01:06
+Treno 2 sta entrando a Vigonza-Pianiga alle ore 01:06.
+
+01:07
+Treno 1 è arrivato a Vigonza-Pianiga alle ore 01:07 con -12 minuti di ritardo.
+
+01:08
+Treno 2 è arrivato a Vigonza-Pianiga alle ore 01:08 con -12 minuti di ritardo.
+
+01:09
+Treno 3 sta uscendo da Busa di Vigonza alle ore 01:09.
+
+01:10
+
+01:11
+Treno 3 ha inviato segnalazione a Vigonza-Pianiga alle ore 01:11.
+Stazione piena. Treno 3 andrà in parcheggio a Vigonza-Pianiga.
+
+01:12
+
+01:13
+
+01:14
+
+01:15
+
+01:16
+
+01:17
+Treno 3 è andato in parcheggio a Vigonza-Pianiga alle ore 01:17.
+
+01:18
+
+01:19
+
+01:20
+
+01:21
+
+01:22
+
+01:23
+
+01:24
+Treno 1 sta partendo da Vigonza-Pianiga alle ore 01:24.
+
+01:25
+Treno 2 sta partendo da Vigonza-Pianiga alle ore 01:25.
+
+01:26
+
+01:27
+
+01:28
+Treno 1 sta uscendo da Vigonza-Pianiga alle ore 01:28.
+
+01:29
+Treno 2 sta uscendo da Vigonza-Pianiga alle ore 01:29.
+Treno 3 sta entrando a Vigonza-Pianiga alle ore 01:29.
+
+01:30
+
+01:31
+Treno 3 è arrivato a Vigonza-Pianiga alle ore 01:31 con 10 minuti di ritardo.
+
+01:32
+
+01:33
+
+01:34
+Treno 1 ha inviato segnalazione a Padova alle ore 01:34.
+Treno 1 a breve arriverà a Padova al binario 0.
+
+01:35
+Treno 2 ha inviato segnalazione a Padova alle ore 01:35.
+Treno 2 a breve arriverà a Padova al binario 2.
+
+01:36
+Treno 3 sta partendo da Vigonza-Pianiga alle ore 01:36.
+
+01:37
+
+01:38
+
+01:39
+Treno 1 sta entrando a Padova alle ore 01:39.
+
+01:40
+Treno 2 sta entrando a Padova alle ore 01:40.
+Treno 3 sta uscendo da Vigonza-Pianiga alle ore 01:40.
+
+01:41
+
+01:42
+Treno 1 è arrivato a Padova alle ore 01:42 con -12 minuti di ritardo.
+Treno 1 ha terminato la sua corsa.
+
+01:43
+Treno 2 è arrivato a Padova alle ore 01:43 con -12 minuti di ritardo.
+Treno 2 ha terminato la sua corsa.
+
+01:44
+
+01:45
+
+01:46
+Treno 3 ha inviato segnalazione a Padova alle ore 01:46.
+Treno 3 a breve arriverà a Padova al binario 0.
+
+01:47
+
+01:48
+
+01:49
+
+01:50
+
+01:51
+
+01:52
+Treno 3 sta entrando a Padova alle ore 01:52.
+
+01:53
+Treno 3 è arrivato a Padova alle ore 01:53 con -3 minuti di ritardo.
+Treno 3 ha terminato la sua corsa.
+
+01:54
+
+---------- END ----------
