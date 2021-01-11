@@ -21,6 +21,10 @@ Station::Station(const std::string& name_, int distanceLeft_) : name{ name_ }, d
 	}
 }
 
+bool Station::parkEmpty() {
+	return trainDeposit.size()==0;
+}
+
 bool Station::railRequest(Train* myTrain) {
 	if(myTrain->hasToStop()) {
 		// Se si deve fermare dì al treno di passare su binari normali
@@ -28,6 +32,7 @@ bool Station::railRequest(Train* myTrain) {
 
 		bool trainDir = myTrain->getLeft();	//direzione del treno
 
+		if(!parkEmpty()) return false;
 		if (isFull(trainDir)) return false;	//se � pieno ritorno false, sar�  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
 		
 		int i;
@@ -98,37 +103,86 @@ void Station::manageParking(int currentMinutes) {
 	// Prima tira fuori da stazione i treni super alta velocità che devono partire
 	std::list<Train*>::iterator t;
 
-	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
-		if((*t)->isSuperAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
-			(*t)->sendStationRequest();
-			if((*t)->itCanTransit()) {
-				(*t)->setParking(false);
-				trainDeposit.remove((*t));
+	// Finchè la stazione non è piena e il parcheggio non è vuoto
+	// Scorro tutti i treni, vedo quello che avrebbe la timetable corrente prima di tutti gli altri
+	// A quello li lo faccio entrare dentro
+
+	while(!isFull(true) && !trainDeposit.empty()) {
+		// controllo i treni nel deposito a sinistra
+		Train* to_remove = trainDeposit.front();
+		int max_delay = to_remove->nextStationTime();
+
+		for(Train* t : trainDeposit) {
+			if(t->getLeft()) {
+				int i = t->nextStationTime();
+				if(i < max_delay) {
+					max_delay = i;
+					to_remove = t;
+				}
 			}
-		} 
+		}
+
+		// Devo far uscire il treno to_remove
+		to_remove->setTransit(true);
+		to_remove->setParking(false);
+		to_remove->setLimitedSpeed();
+		trainDeposit.remove(to_remove);
 	}
 
-	// Poi tira fuori da stazione i treni alta velocità che devono partire
-	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
-		if((*t)->isAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
-			(*t)->sendStationRequest();
-			if((*t)->itCanTransit()) {
-				(*t)->setParking(false);
-				trainDeposit.remove((*t));
+	while(!isFull(false) && !trainDeposit.empty()) {
+		// controllo i treni nel deposito a destra
+		Train* to_remove = trainDeposit.front();
+		int max_delay = to_remove->nextStationTime();
+
+		for(Train* t : trainDeposit) {
+			if(!t->getLeft()) {
+				int i = t->nextStationTime();
+				if(i < max_delay) {
+					max_delay = i;
+					to_remove = t;
+				}
 			}
-		} 
+		}
+
+		// Devo far uscire il treno to_remove
+		to_remove->setTransit(true);
+		to_remove->setParking(false);
+		trainDeposit.remove(to_remove);
 	}
 
-	// Infine tira fuori da stazione i treni regionali che devono partire
-	for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
-		if((*t)->isRegional() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
-			(*t)->sendStationRequest();
-			if((*t)->itCanTransit()) {
-				(*t)->setParking(false);
-				trainDeposit.remove((*t));
-			}
-		} 
-	}
+
+
+	// for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+	// 	if((*t)->isSuperAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+	// 		(*t)->sendStationRequest();
+	// 		if((*t)->itCanTransit()) {
+	// 			(*t)->setParking(false);
+	// 			trainDeposit.remove((*t));
+	// 		}
+	// 	} 
+	// }
+
+	// // Poi tira fuori da stazione i treni alta velocità che devono partire
+	// for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+	// 	if((*t)->isAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+	// 		(*t)->sendStationRequest();
+	// 		if((*t)->itCanTransit()) {
+	// 			(*t)->setParking(false);
+	// 			trainDeposit.remove((*t));
+	// 		}
+	// 	} 
+	// }
+
+	// // Infine tira fuori da stazione i treni regionali che devono partire
+	// for(t = trainDeposit.begin(); t!=trainDeposit.end(); ++t) {
+	// 	if((*t)->isRegional() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
+	// 		(*t)->sendStationRequest();
+	// 		if((*t)->itCanTransit()) {
+	// 			(*t)->setParking(false);
+	// 			trainDeposit.remove((*t));
+	// 		}
+	// 	} 
+	// }
 }
 
 void Station::freeRail(Train *t) {

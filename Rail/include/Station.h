@@ -30,6 +30,7 @@ public:
     bool railRequest(Train* myTrain);        //metodo per chiedere se ci sono binari disponibili per il treno //restituisce false se i binari sono pieni
     void depositTrain(Train* myTrain);       //quando la richiesta per un binario di un treno non pu� essere soddisfatta, il treno viene messo nel deposito
     virtual bool isMain() = 0;
+    bool parkEmpty();
 
     Station(const Station&) = delete;
     Station(Station&&) = delete;

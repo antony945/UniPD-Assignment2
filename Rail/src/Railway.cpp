@@ -62,7 +62,7 @@ void Railway::daySimulation() {
     while(!end) {
         end = true;
 
-        // output << getCurrentMinutes() << '\n';
+        //output << getCurrentMinutes() << '\n';
 
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
@@ -70,9 +70,6 @@ void Railway::daySimulation() {
                 // output << "TRENO " << t->getId() << '\n';
                 end = false;
                 manageEvents(t);
-                //output << "Speed: " << t->getCurrentSpeed() << " km/h\n";
-                //output << "Distance: " << t->getCurrentDistance() << " km\n";
-                //output << '\n';
             }
             
             // std::cout << "INDEX STATION: " << t->getNextStationIndex() << '\n';
@@ -83,7 +80,16 @@ void Railway::daySimulation() {
         manageParkedTrains();
         // Controlla distanza tra treni e in caso aggiusta velocità
         // TODO: Da controllare, crea errori
-        checkMinimumDistance();
+        //checkMinimumDistance();
+
+        for(Train* t : trains) {
+            if(!t->getEnd()) {
+                //output << "Speed: " << t->getCurrentSpeed() << " km/h\n";
+                //output << "Distance: " << t->getCurrentDistance() << " km\n";
+                //output << '\n';
+            }
+        }
+
         // Avanza di un minuto la simulazione
         advanceTrains();
     }
@@ -136,13 +142,11 @@ void Railway::trainOutStation(Train* t) {
             output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
         } else {
             // QUA DEVE ANDARE IN PARCHEGGIO
-            t->setStop();
             if(!t->isParked()) {
+                t->park();
                 // Treno deve andare in parcheggio
                 output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
             }
-            // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
-            t->setParking(true);
         }
 
         return;
@@ -213,7 +217,7 @@ void Railway::trainInStation(Train* t) {
     // QUI È AL BINARIO, TRA 0 E 5
     if(t->nextStationDistance() >= 0 && t->firstTime0km() && t->hasToStop()) {
         // CASO SPECIALE, PRIMA STAZIONE
-        if(t->getCurrentDistance() == 0) {            
+        if(t->getCurrentDistance() == 0) { 
             t->setStop();
             
             if(t->hasToStart(currentMinutes)) {
@@ -241,7 +245,7 @@ void Railway::trainInStation(Train* t) {
         // CASO SPECIALE, ULTIMA STAZIONE (0 < nextStationDistance < 1.5)
         if(t->hasFinish()) {
             // Stampa messaggio finale
-            std::cout << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
+            output << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
             // Setta fine
             t->setEnd();
             // Set stop
@@ -378,7 +382,7 @@ void Railway::createStations() {
             distance = std::stoi(line.substr(endName+3));
 
             // Controlla che distanza non sia minore uguale di 20km
-            if(distance <= stations[stations.size()-1]->getDistanceLeft()+25)
+            if(distance <= stations[stations.size()-1]->getDistanceLeft()+20)
                 continue;
         } catch(const std::exception& e) {
             // Errore in input
@@ -464,12 +468,12 @@ void Railway::checkMinimumDistance() {
 	int MIN_DIS = 15;		//distanza minima da rispettare (ho messo 15km per avere un margine: il treno pi� veloce da 300km/h pu� fare al massimo 5km al minuto.)
 
 	for (int i = 0; i < trains.size(); i++) {
-        if(!trains[i]->getEnd() && trains[i]->isInStation()) {
+        if(!trains[i]->getEnd() && !trains[i]->isInStation()) {
             for (int j = i + 1; j < trains.size(); j++) {
-                if(!trains[j]->getEnd() && trains[j]->isInStation()) {
+                if(!trains[j]->getEnd() && !trains[j]->isInStation()) {
                     //controllo prima se i due treni stanno andando sullo stesso binario, poi se sono troppo vicini
                     if ((trains[i]->getLeft() == trains[j]->getLeft()) && (std::abs(trains[i]->getCurrentDistance() - trains[j]->getCurrentDistance()) < MIN_DIS)) {
-                        std::cout << "VELOCITÀ CAMBIATA\n";
+                        output << "VELOCITÀ CAMBIATA\n";
                         //se il treno in trains[i] e' piu' veloce del treno in [j] e si trova anche dietro ad esso, riduco la velocit� di trains[i]
                         if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
                             trains[i]->setSpeed(trains[j]->getCurrentSpeed());

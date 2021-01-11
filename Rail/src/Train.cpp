@@ -205,4 +205,15 @@ bool Train::hasToStart(int currentMinutes) const {
     return currentMinutes>=timetable[timetableIndex];
 }
 
+void Train::park() {
+    if(left)
+        currentDistance = NextStation()->getDistanceLeft()-5;
+    else
+        currentDistance = NextStation()->getDistanceRight()-5;
+
+    setStop();
+    parked = true;
+}
+
+
 Train::~Train() = default;

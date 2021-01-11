@@ -52,6 +52,8 @@ public:
     Train(Train&&) = delete;
     Train& operator=(Train&&) = delete;
     
+    void park();
+
     // getter - functions
     bool isParked() const;
     std::vector<int> getTimetable() const;
@@ -68,6 +70,10 @@ public:
     // dice se treno sta andando sulle rail normali con limite di 80 o su quelle di transito
     bool onNormalRail() const;
     
+    int nextStationTime() const {
+        return timetable[timetableIndex];
+    }
+
     // Manda e riceve la risposta alla domanda di fermata o transito da parte del treno alla stazione 
     void sendStationRequest();
     // Permetti al treno di passare o meno
