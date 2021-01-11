@@ -6,7 +6,7 @@
 
 class SpeedLimitException: std::exception{} ;
 
-Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , stations{stations_}, MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {
+Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed,const std::vector<int>&  timetable_) : id{id_} , left {left_} , stations{stations_}, MAX_SPEED{maxSpeed}, timetable{std::move(timetable_)} {    
     currentDelay=0;
     currentSpeed=0;
     currentDistance=0;
@@ -19,23 +19,8 @@ Train::Train(int id_, bool left_,const std::vector<Station*>& stations_, int max
     end = false;
     parked = false;
     firstTimePre20 = true;
-    firstTimePre5 = true;
     firstTime0 = true;
     firstTimeArrived = true;
-}
-
-bool Train::checkTrainDistance(int distance_from_station) const {
-    double min = distance_from_station;
-    double max = distance_from_station;
-    
-    if(distance_from_station == 0) {
-        max += 1;
-    } else {
-        double offset = static_cast<int>(currentSpeed/60.0);
-        max += offset;
-    }
-
-    return (nextStationDistance()>=min && nextStationDistance()<=max);
 }
 
 std::vector<int> Train::getTimetable() const {
@@ -103,7 +88,10 @@ void Train::increaseDistance() {
 }
 
 bool Train::hasFinish() const {
-    return currentDistance>=stations[stations.size()-1]->getDistance();
+    if(left)
+        return currentDistance>=stations[stations.size()-1]->getDistanceLeft();
+    else
+        return currentDistance>=stations[stations.size()-1]->getDistanceRight();
 }
 
 Station* Train::NextStation() const {
@@ -112,10 +100,12 @@ Station* Train::NextStation() const {
 
 // TODO: Da modificare a seconda di left o meno
 double Train::nextStationDistance() const {
-    return currentDistance-stations[nextStationIndex]->getDistance();
+    if(left)
+        return currentDistance-stations[nextStationIndex]->getDistanceLeft();
+    else
+        return currentDistance-stations[nextStationIndex]->getDistanceRight();
 }
 
-// Tell if train is waiting to make people in
 bool Train::isWaiting() {
     if(stationStopTime < 5) {
         stationStopTime++;
@@ -127,7 +117,7 @@ bool Train::isWaiting() {
     }
 }
 
-// Get the answer to request at station
+// TODO: DA CONTROLLARE
 void Train::sendStationRequest() {
     // rail request deve tenere conto di t->hasToStop oppure no, se vuole solo
     // transitare o si deve anche fermare
@@ -136,7 +126,6 @@ void Train::sendStationRequest() {
     canTransit = NextStation()->railRequest(this);
 }
 
-// return if train canTransit or not
 bool Train::itCanTransit() const {
     return canTransit;
 }
@@ -164,16 +153,23 @@ void Train::setLimitedSpeed() {
 bool Train::isInStation() const {
     return inStation;
 }
+
 // Make the train enter station
 void Train::enterStation() {
     inStation = true;
 }
+
 // Make the train exit station
+// TODO: DA CONTROLLARE
 void Train::exitStation() {
     inStation = false;
     nextStationIndex++;
     if(hasToStop())
         timetableIndex++;
+
+    setFirstTimePre20km(true);
+    setFirstTime0km(true);
+    setFirstTimeArrived(true);
 }
 
 bool Train::justArrived() const {
@@ -181,11 +177,10 @@ bool Train::justArrived() const {
 }
 
 void Train::setDelay(int currentMinutes) {
-    if(hasToStop()) {
-        currentDelay = currentMinutes - timetable[timetableIndex];
-    } // altrimenti non devi settare delay, non si sta fermando
+    currentDelay = currentMinutes - timetable[timetableIndex];
 }
 
+// TODO: DA CONTROLLARE
 bool Train::inAnticipo(int currentMinutes) const {
     if(hasToStop()) {
         // se si deve fermare, controlla se il currentMinutes è molto minore (almeno 20 minuti) dell'orario indicato nella timetable

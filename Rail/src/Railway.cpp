@@ -6,13 +6,13 @@
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
 // tester()
 void Railway::tester() {
-    output << "LISTA STAZIONI: ";
+    output << "-------- LISTA STAZIONI --------\n";
     for(auto s : stations) {
         output << s->getName() << "; ";
     }
-    output << '\n';
+    output << "\n\n";
 
-    output << "LISTA TRENI\n";
+    output << "------- LISTA TRENI --------\n";
     for(auto t : trains) {
         output << "ID: " << t->getId() << '\n';
         output << "TIMETABLE: ";
@@ -20,7 +20,17 @@ void Railway::tester() {
             output << tt << "; ";
         }
         output << '\n';
-    
+        output << "STAZIONI: ";
+        for(auto ts : t->getStations()) {
+            output << ts->getName() << ", ";
+            if(t->getLeft()) {
+                output << ts->getDistanceLeft();
+            } else {
+                output << ts->getDistanceRight();
+            }
+            output << "; ";
+        }
+        output << '\n';
     }
     output << '\n';
 }
@@ -52,7 +62,7 @@ void Railway::daySimulation() {
     while(!end) {
         end = true;
 
-        output << getCurrentMinutes() << '\n';
+        // output << getCurrentMinutes() << '\n';
 
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
@@ -60,13 +70,13 @@ void Railway::daySimulation() {
                 // output << "TRENO " << t->getId() << '\n';
                 end = false;
                 manageEvents(t);
-                output << "Speed: " << t->getCurrentSpeed() << " km/h\n";
-                output << "Distance: " << t->getCurrentDistance() << " km\n";
-                output << '\n';
+                //output << "Speed: " << t->getCurrentSpeed() << " km/h\n";
+                //output << "Distance: " << t->getCurrentDistance() << " km\n";
+                //output << '\n';
             }
             
-            //std::cout << "INDEX STATION: " << t->getNextStationIndex() << '\n';
-            //std::cout << "INDEX TIMETABLE: " << t->getTimetableIndex() << '\n';
+            // std::cout << "INDEX STATION: " << t->getNextStationIndex() << '\n';
+            // std::cout << "INDEX TIMETABLE: " << t->getTimetableIndex() << '\n';
         }
 
         // Gestisci i treni parcheggiati per tutte le stazioni e in caso aggiusta velocità
@@ -79,7 +89,7 @@ void Railway::daySimulation() {
     }
 
     // FINE
-    output << "---------- END ----------\n";
+    output << "\n---------- END ----------\n";
 }
 
 // manageEvents()
@@ -111,65 +121,97 @@ void Railway::manageEvents(Train* t) {
 
 // trainOutStation()
 void Railway::trainOutStation(Train* t) {
+    std::cout << "FUORI STAZIONE\n";
+    std::cout << t->nextStationDistance() << '\n';
+
     // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
     t->setMaxSpeed();
 
-    if(t->checkTrainDistance(-20)) {
-        if(t->firstTimePre20km()) {
-            // Invia segnalazione a stazione
-            // Setta canTransit a true o false
-            // Setta normalRail a true se si deve fermare, a false altrimenti
-            if(t->inAnticipo(currentMinutes)) {
-                // Setta canTransit a false
-                t->setTransit(false);
-                output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
-            } else {
-                // Manda segnalazione a stazione
-                t->sendStationRequest();
-                // Treno ha inviato segnalazione a stazione
-                output << "Treno " << t->getId() << " ha inviato segnalazione a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-                
-                if(t->itCanTransit()) {
-                    output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName() << "." << '\n';
-                } else {
-                    output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
-                }
+    // QUI È MAGGIORE DI -5, DEVE ENTRARE IN STAZIONE
+    if(t->nextStationDistance() >= -5) {
+        if(t->itCanTransit()) {
+            // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
+            t->enterStation();
+            // Treno ha il permesso di entrare in zona stazione
+            output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+        } else {
+            // QUA DEVE ANDARE IN PARCHEGGIO
+            t->setStop();
+            if(!t->isParked()) {
+                // Treno deve andare in parcheggio
+                output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
             }
-
-            t->setFirstTimePre20km(false);
+            // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
+            t->setParking(true);
         }
-    } else if(t->checkTrainDistance(-5)) {
-        if(t->firstTimePre5km()) {
-            if(t->itCanTransit()) {
-                // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
-                t->enterStation();
-                // Treno ha il permesso di entrare in zona stazione
-                output << "Treno " << t->getId() << " sta entrando in " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-                t->setFirstTimePre5km(false);
-            } else {
-                t->setStop();
 
-                if(!t->isParked()) {
-                    // Treno deve andare in parcheggio
-                    output << "Treno " << t->getId() << " è andato in parcheggio di " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-                }
-
-                // Altrimenti vai/rimani in parcheggio aspettando l'autorizzazione per uscire dal parcheggio (non entrare in stazione)
-                t->setParking(true);
-            }
-        }
+        return;
     }
+
+    // QUA È TRA -20 E -5
+    if(t->nextStationDistance() >= -20 && t->firstTimePre20km()) {
+        // QUI È IN ANTICIPO, NON INVIA SEGNALAZIONE, SI METTE CHE ANDRÀ IN PARCHEGGIO
+        if(t->inAnticipo(currentMinutes)) {
+            // Setta canTransit a false
+            t->setTransit(false);
+            output << "Treno " << t->getId() << " in anticipo. Andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+            t->setFirstTimePre20km(false);
+            return;
+        }
+
+        // QUI MANDA LA SEGNALAZIONE E ASPETTA RISPOSTA
+        // Manda segnalazione a stazione
+        t->sendStationRequest();
+        // Treno ha inviato segnalazione a stazione
+        output << "Treno " << t->getId() << " ha inviato segnalazione a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+        
+        if(t->itCanTransit()) {
+            output << "Treno " << t->getId() << " a breve arriverà a " << t->NextStation()->getName() << "." << '\n';
+            output << "Ha il binario ";
+            if(t->onNormalRail())
+                output << "normale.\n";
+            else
+                output << "di transito.\n";
+        } else {
+            output << "Treno " << t->getId() << " andrà in parcheggio di " << t->NextStation()->getName() << "." << '\n';
+        }
+        t->setFirstTimePre20km(false);
+        return;
+    }
+
+    // QUI È CIÒ CHE FA SE NON HA EVENTI DA GESTIRE, OVVERO PROCEDERE CON VELOCITÀ MAX_SPEED
 }
 
 // trainInStation()
 void Railway::trainInStation(Train* t) {
+    std::cout << "IN STAZIONE\n";
+    std::cout << t->nextStationDistance() << '\n';
+
     // CONTROLLA SU CHE BINARIO DEVE PASSARE IL TRENO
     if(t->onNormalRail())
         t->setLimitedSpeed();
     else
         t->setMaxSpeed();
 
-    if(t->checkTrainDistance(0)) {
+    // QUI È MAGGIORE DI 5
+    if(t->nextStationDistance() >= 5) {
+        if(t->onNormalRail()) {
+            // Libera binario con dentro t
+            t->NextStation()->freeRail(t);
+            t->setMaxSpeed();
+        } else {
+            // Non fare nulla perchè il binario di transito in realtà non è da liberare dato chd non è mai occupato
+        }
+
+        // Treno ha il permesso di entrare in zona stazione
+        output << "Treno " << t->getId() << " sta uscendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+        // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation e indice di indexTimetable)
+        t->exitStation();
+        return;
+    }
+
+    // QUI È AL BINARIO, TRA 0 E 5
+    if(t->nextStationDistance() >= 0 && t->firstTime0km() && t->hasToStop()) {
         // CASO SPECIALE, PRIMA STAZIONE
         if(t->getCurrentDistance() == 0) {            
             t->setStop();
@@ -179,68 +221,62 @@ void Railway::trainInStation(Train* t) {
                 t->sendStationRequest();
                 t->setLimitedSpeed();
                 output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+                t->setFirstTime0km(false);
             }
 
             // Quando deve partire avrà velocità a 80
             return;            
         }
-
-        if(t->firstTime0km()) {
-            // SOLO SE TRENO SI DEVE FERMARE
-            if(t->hasToStop()) {
-                // Questa funzione deve fare fermare il treno ogni qualvolta viene richiamata (quindi mette velocita a 0)
-                t->setStop();
-
-                // Questa funzione deve controllare se il treno è appena arrivato al binario della stazione
-                if(t->justArrived()) {
-                    // Confronta tempo di arrivo con tempo indicato dalla timetable (funzione da override)
-                    t->setDelay(currentMinutes);
-                    // Treno è appena arrivato in stazione
-                    output << "Treno " << t->getId() << " è arrivato a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << " con " << t->getCurrentDelay() << " minuti di ritardo." << '\n';
-                    t->setFirstTimeArrived(false);
-                }
-
-                // Controlla se ultima stazione
-                if(t->hasFinish()) {
-                    // Stampa messaggio finale
-                    output << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
-                    // Setta fine
-                    t->setEnd();
-                } else {
-                    // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
-                    if(!t->hasToStart(currentMinutes)) {
-                        output << "Treno " << t->getId() << " è fermo alla stazione..." << '\n';
-                        return;
-                    }
-
-                    // Questa funzione deve solo dire se stationStopTime < 5
-                    // Se sta aspettando non c'è nulla da fare
-                    if(!t->isWaiting()){
-                        // Appena presi i passeggeri parti dal binario con velocità settata a 80
-                        t->setLimitedSpeed();
-                        output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
-                        t->setFirstTime0km(false);
-                    } else {
-                        output << "Treno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
-                    }
-                }
-            }
+    
+        // Questa funzione deve controllare se il treno è appena arrivato al binario della stazione
+        if(t->justArrived()) {
+            t->setStop();
+            // Confronta tempo di arrivo con tempo indicato dalla timetable (funzione da override)
+            t->setDelay(currentMinutes);
+            // Treno è appena arrivato in stazione
+            output << "Treno " << t->getId() << " è arrivato a " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << " con " << t->getCurrentDelay() << " minuti di ritardo." << '\n';
+            t->setFirstTimeArrived(false);
         }
-    } else if(t->checkTrainDistance(5)) {
-        if(t->onNormalRail()) {
-            // Libera binario con dentro t
+
+        // CASO SPECIALE, ULTIMA STAZIONE (0 < nextStationDistance < 1.5)
+        if(t->hasFinish()) {
+            // Stampa messaggio finale
+            std::cout << "Treno " << t->getId() << " ha terminato la sua corsa." << '\n';
+            // Setta fine
+            t->setEnd();
+            // Set stop
+            t->setStop();
+            // Libera binario
             t->NextStation()->freeRail(t);
-        } else {
-            // Non fare nulla perchè il binario di transito in realtà non è da liberare dato chd non è mai occupato
+            t->setFirstTime0km(false);
+            return;
         }
 
-        // Fai uscire il treno dalla stazione (qui incrementa indice di nextStation e indice di indexTimetable)
-        t->exitStation();
-        t->setFirstTimePre20km(true);
-        t->setFirstTimePre5km(true);
-        t->setFirstTime0km(true);
-        t->setFirstTimeArrived(true);
+        // CASO NORMALE, STAZIONI INTERMEDIE
+        // Se è arrivato qualche minuto in anticipo aspetta orario di partenza
+        if(!t->hasToStart(currentMinutes)) {
+            t->setStop();
+            output << "Treno " << t->getId() << " è fermo alla stazione..." << '\n';
+            return;
+        }
+
+        // Qui siamo sicuramente >= al suo orario nella timetable
+        if(t->isWaiting()){
+            // Qui sta aspettando i passeggeri che salgano
+            t->setStop();
+            output << "Treno " << t->getId() << " sta facendo salire passeggeri..." << '\n';
+            return;
+        } else {
+            // Appena presi i passeggeri parti dal binario con velocità settata a 80
+            t->setLimitedSpeed();
+            output << "Treno " << t->getId() << " sta partendo da " << t->NextStation()->getName() << " alle ore " << getCurrentTime() << "." << '\n';
+            t->setFirstTime0km(false);
+            return;
+        }
     }
+
+    // QUI È TRA -5 E 0
+    // SEMPLICEMENTE PROSEGUE CON VELOCITÀ GIUSTA
 }
 
 // manageParkedTrains
@@ -267,6 +303,7 @@ void Railway::advanceTrains() {
 }
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
+// CORRETTA
 Railway::Railway(const std::string& line_description_, const std::string& timetables_, const std::string& output_)
     : line_description{line_description_},
       timetables{timetables_},
@@ -282,8 +319,12 @@ Railway::Railway(const std::string& line_description_, const std::string& timeta
     
     createStations();
     createTrains();
+    for(Train* t : trains) {
+        t->checkTimetable();
+    }
 }
 
+// CORRETTA
 Railway::~Railway() {
     // Libera memoria da array di Station* stations
     for(auto i : stations)
@@ -303,6 +344,7 @@ Railway::~Railway() {
     output.close();
 }
 
+// CORRETTA
 void Railway::createStations() {
     // Ottieni stazione principale
     int i = 0;
@@ -336,7 +378,7 @@ void Railway::createStations() {
             distance = std::stoi(line.substr(endName+3));
 
             // Controlla che distanza non sia minore uguale di 20km
-            if(distance <= stations[stations.size()-1]->getDistance()+20)
+            if(distance <= stations[stations.size()-1]->getDistanceLeft()+25)
                 continue;
         } catch(const std::exception& e) {
             // Errore in input
@@ -355,8 +397,16 @@ void Railway::createStations() {
     // Controlla che ultima stazione sia principale
     if(!stations[stations.size()-1]->isMain())
         throw std::invalid_argument("ERROR. Last station must be a main station.");
+
+    // Imposta anche distanze se va da capolinea a origine
+    int c = stations[stations.size()-1]->getDistanceLeft();
+    for(Station* s : stations) {
+        int new_distance = std::abs(s->getDistanceLeft()-c);
+        s->setDistanceRight(new_distance);
+    }
 }
 
+// CORRETTA
 void Railway::createTrains() {
     while(!timetables.eof()) {
         std::string line;
@@ -382,11 +432,6 @@ void Railway::createTrains() {
             std::reverse(trainStations.begin(), trainStations.end());
         }
 
-        // Crea vettore di stazioni principali da utilizzare in checkTable
-        std::vector<Station*> mainTrainStations;
-        for(Station* s : trainStations)
-            if(s->isMain()) mainTrainStations.push_back(s);
-
         // Ottieni tipologia treno
         int type;
         ss >> type;
@@ -401,68 +446,19 @@ void Railway::createTrains() {
         }
 
         if(type == 1) {
-            // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(RegionalTrain::MAX_SPEED, trainStations, times);
             // Crea regionalTrain
             trains.push_back(new RegionalTrain{id, fromOrigin, trainStations, times});      
         } else if(type == 2) {
-            // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(AVTrain::MAX_SPEED, mainTrainStations, times);
             // Crea AVTrain
             trains.push_back(new AVTrain{id, fromOrigin, trainStations, times});
         } else if(type == 3) {
-            // Dopo questa funzione, times contiene timetable corretta
-            checkTimetable(SuperAVTrain::MAX_SPEED, mainTrainStations, times);
             // Crea SuperAVTrain
             trains.push_back(new SuperAVTrain{id, fromOrigin, trainStations, times});
         }        
     }
 }
 
-void Railway::checkTimetable(int fast_speed, const std::vector<Station*>& stations, std::vector<int>& times) {
-    for(int i=0; i<stations.size()-1; i++) {
-        // Prendo distanza tra stazioni
-        int all_road = stations[i+1]->getDistance()-stations[i]->getDistance();
-        int slow_road;
-        int time_to_wait;
-        if(i==0) {
-            slow_road = 5;    // TODO: Quel 5 sarebbe meglio metterlo Station::SLOW_ROAD come static const int
-            time_to_wait = 0;
-        } else {
-            slow_road = 5*2;
-            time_to_wait = 5;   // TODO: Questo 5 sarebbe meglio metterlo Station::TIME_TO_WAIT_PASSENGER come static const int
-        }
-        int fast_road = all_road-slow_road;
-
-        // Prendo tempo di percorrenza segnato
-        // Slow speed (TODO: metterla come costante di qualche classe)
-        int slow_speed = 80;
-        // output << "FAST SPEED: " << fast_speed << '\n';
-
-        // Tempo minimo per fare la tratta (converti in km/min)
-        int slow_time = static_cast<int>(slow_road/(slow_speed/60.0)) + 1;
-        int fast_time = static_cast<int>(fast_road/(fast_speed/60.0)) + 1;
-        // output << "SLOW_TIME: " << slow_time << '\n';
-        // output << "FAST_TIME: " << fast_time << '\n';
-        int min_time = static_cast<int>(slow_time+fast_time+time_to_wait);
-        // output << "MIN TIME: " << min_time << '\n';
-        if(i<times.size()-1) {
-            int time_to_do = times[i+1]-times[i];
-            int offset = min_time-time_to_do;
-
-            // Se MIN_TIME > TIME_TO_DO DEVO SPOSTARE TUTTO AVANTI DELLA DIFFERENZA TRA QUEI DUE
-            if(offset > 0) {
-                output << "CAMBIATA TIMETABLE\n";
-                times[i+1] = times[i+1]+offset;
-            }
-        } else {
-            output << "AGGIUNTO VALORE IN TIMETABLE\n";
-            // Se non ci sono abbastanza orari, aggiungi l'orario minimo + 10 minuti
-            times.push_back(times[i]+min_time+10);
-        }
-    }
-}
-
+// DA CONTROLLARE
 void Railway::checkMinimumDistance() {
 
 	int MIN_DIS = 15;		//distanza minima da rispettare (ho messo 15km per avere un margine: il treno pi� veloce da 300km/h pu� fare al massimo 5km al minuto.)
@@ -472,7 +468,7 @@ void Railway::checkMinimumDistance() {
             for (int j = i + 1; j < trains.size(); j++) {
                 if(!trains[j]->getEnd() && trains[j]->isInStation()) {
                     //controllo prima se i due treni stanno andando sullo stesso binario, poi se sono troppo vicini
-                    if ((trains[i]->getLeft() == trains[j]->getLeft()) && (absoluteValue(trains[i]->getCurrentDistance(), trains[j]->getCurrentDistance()) < MIN_DIS)) {
+                    if ((trains[i]->getLeft() == trains[j]->getLeft()) && (std::abs(trains[i]->getCurrentDistance() - trains[j]->getCurrentDistance()) < MIN_DIS)) {
                         std::cout << "VELOCITÀ CAMBIATA\n";
                         //se il treno in trains[i] e' piu' veloce del treno in [j] e si trova anche dietro ad esso, riduco la velocit� di trains[i]
                         if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
@@ -488,11 +484,4 @@ void Railway::checkMinimumDistance() {
             }
         }
 	}
-}
-
-int absoluteValue(int x, int y) {	//funzione per calcolare il valore assoluto della sottrazione
-
-	int diff = x > y ? x - y : y - x;
-
-	return diff;
 }

@@ -1,4 +1,5 @@
 Venezia Mestre
-Mira-Mirano 0 50
-Vigonza-Pianiga 0 80
-Padova 0 120
+Mira-Mirano 1 50
+Busa di Vigonza 1 80
+Vigonza-Pianiga 1 110
+Padova 0 150

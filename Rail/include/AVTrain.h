@@ -13,6 +13,7 @@ public:
     AVTrain(AVTrain&&)=delete;
     AVTrain& operator=(AVTrain&&)=delete;
     ~AVTrain() override ;
+    void checkTimetable() override;
     bool hasToStop() const override;
     bool isRegional() const override { return false; }
     bool isAV() const override { return true; }

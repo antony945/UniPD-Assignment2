@@ -1,367 +1,89 @@
-CAMBIATA TIMETABLE
-CAMBIATA TIMETABLE
-LISTA STAZIONI: Venezia Mestre; Mira-Mirano; Vigonza-Pianiga; Padova; 
-LISTA TRENI
+-------- LISTA STAZIONI --------
+Venezia Mestre; Mira-Mirano; Busa di Vigonza; Vigonza-Pianiga; Padova; 
+
+------- LISTA TRENI --------
 ID: 1
-TIMETABLE: 5; 35; 56; 81; 
+TIMETABLE: 5; 36; 67; 98; 133; 
+STAZIONI: Venezia Mestre, 0; Mira-Mirano, 50; Busa di Vigonza, 80; Vigonza-Pianiga, 110; Padova, 150; 
 
 ---------- START ----------
 
-0
-Speed: 0 km/h
-Distance: 0 km
-
-1
-Speed: 0 km/h
-Distance: 0 km
-
-2
-Speed: 0 km/h
-Distance: 0 km
-
-3
-Speed: 0 km/h
-Distance: 0 km
-
-4
-Speed: 0 km/h
-Distance: 0 km
-
-5
 Treno 1 sta partendo da Venezia Mestre alle ore 00:05.
-Speed: 80 km/h
-Distance: 0 km
-
-6
-Speed: 80 km/h
-Distance: 1.33333 km
-
-7
-Speed: 80 km/h
-Distance: 2.66667 km
-
-8
-Speed: 80 km/h
-Distance: 4 km
-
-9
-Speed: 80 km/h
-Distance: 5.33333 km
-
-10
-Speed: 160 km/h
-Distance: 6.66667 km
-
-11
-Speed: 160 km/h
-Distance: 9.33333 km
-
-12
-Speed: 160 km/h
-Distance: 12 km
-
-13
-Speed: 160 km/h
-Distance: 14.6667 km
-
-14
-Speed: 160 km/h
-Distance: 17.3333 km
-
-15
-Speed: 160 km/h
-Distance: 20 km
-
-16
-Speed: 160 km/h
-Distance: 22.6667 km
-
-17
-Speed: 160 km/h
-Distance: 25.3333 km
-
-18
-Speed: 160 km/h
-Distance: 28 km
-
-19
+Treno 1 sta uscendo da Venezia Mestre alle ore 00:09.
 Treno 1 ha inviato segnalazione a Mira-Mirano alle ore 00:19.
 Treno 1 a breve arriverà a Mira-Mirano.
-Speed: 160 km/h
-Distance: 30.6667 km
-
-20
-Speed: 160 km/h
-Distance: 33.3333 km
-
-21
-Speed: 160 km/h
-Distance: 36 km
-
-22
-Speed: 160 km/h
-Distance: 38.6667 km
-
-23
-Speed: 160 km/h
-Distance: 41.3333 km
-
-24
-Speed: 160 km/h
-Distance: 44 km
-
-25
-Treno 1 sta entrando in Mira-Mirano alle ore 00:25.
-Speed: 160 km/h
-Distance: 46.6667 km
-
-26
-Speed: 80 km/h
-Distance: 49.3333 km
-
-27
-Treno 1 è arrivato a Mira-Mirano alle ore 00:27 con -8 minuti di ritardo.
+Ha il binario normale.
+Treno 1 sta entrando in Mira-Mirano alle ore 00:24.
+Treno 1 è arrivato a Mira-Mirano alle ore 00:27 con -9 minuti di ritardo.
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-28
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-29
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-30
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-31
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-32
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-33
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-34
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-35
+Treno 1 è fermo alla stazione...
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-36
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-37
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-38
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-39
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 50.6667 km
-
-40
-Treno 1 sta partendo da Mira-Mirano alle ore 00:40.
-Speed: 80 km/h
-Distance: 50.6667 km
-
-41
-Speed: 80 km/h
-Distance: 52 km
-
-42
-Speed: 80 km/h
-Distance: 53.3333 km
-
-43
-Speed: 80 km/h
-Distance: 54.6667 km
-
-44
-Speed: 80 km/h
-Distance: 56 km
-
-45
-Speed: 160 km/h
-Distance: 57.3333 km
-
-46
-Treno 1 ha inviato segnalazione a Vigonza-Pianiga alle ore 00:46.
+Treno 1 sta partendo da Mira-Mirano alle ore 00:41.
+Treno 1 sta uscendo da Mira-Mirano alle ore 00:45.
+Treno 1 ha inviato segnalazione a Busa di Vigonza alle ore 00:47.
+Treno 1 a breve arriverà a Busa di Vigonza.
+Ha il binario normale.
+Treno 1 sta entrando in Busa di Vigonza alle ore 00:53.
+Treno 1 è arrivato a Busa di Vigonza alle ore 00:54 con -13 minuti di ritardo.
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 sta facendo salire passeggeri...
+Treno 1 sta facendo salire passeggeri...
+Treno 1 sta facendo salire passeggeri...
+Treno 1 sta facendo salire passeggeri...
+Treno 1 sta facendo salire passeggeri...
+Treno 1 sta partendo da Busa di Vigonza alle ore 01:12.
+Treno 1 sta uscendo da Busa di Vigonza alle ore 01:16.
+Treno 1 ha inviato segnalazione a Vigonza-Pianiga alle ore 01:18.
 Treno 1 a breve arriverà a Vigonza-Pianiga.
-Speed: 160 km/h
-Distance: 60 km
-
-47
-Speed: 160 km/h
-Distance: 62.6667 km
-
-48
-Speed: 160 km/h
-Distance: 65.3333 km
-
-49
-Speed: 160 km/h
-Distance: 68 km
-
-50
-Speed: 160 km/h
-Distance: 70.6667 km
-
-51
-Speed: 160 km/h
-Distance: 73.3333 km
-
-52
-Treno 1 sta entrando in Vigonza-Pianiga alle ore 00:52.
-Speed: 160 km/h
-Distance: 76 km
-
-53
-Speed: 80 km/h
-Distance: 78.6667 km
-
-54
-Treno 1 è arrivato a Vigonza-Pianiga alle ore 00:54 con -2 minuti di ritardo.
+Ha il binario normale.
+Treno 1 sta entrando in Vigonza-Pianiga alle ore 01:24.
+Treno 1 è arrivato a Vigonza-Pianiga alle ore 01:26 con -12 minuti di ritardo.
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 80 km
-
-55
 Treno 1 è fermo alla stazione...
-Speed: 0 km/h
-Distance: 80 km
-
-56
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
+Treno 1 è fermo alla stazione...
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 80 km
-
-57
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 80 km
-
-58
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 80 km
-
-59
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 80 km
-
-60
 Treno 1 sta facendo salire passeggeri...
-Speed: 0 km/h
-Distance: 80 km
-
-61
-Treno 1 sta partendo da Vigonza-Pianiga alle ore 01:01.
-Speed: 80 km/h
-Distance: 80 km
-
-62
-Speed: 80 km/h
-Distance: 81.3333 km
-
-63
-Speed: 80 km/h
-Distance: 82.6667 km
-
-64
-Speed: 80 km/h
-Distance: 84 km
-
-65
-Speed: 80 km/h
-Distance: 85.3333 km
-
-66
-Speed: 160 km/h
-Distance: 86.6667 km
-
-67
-Speed: 160 km/h
-Distance: 89.3333 km
-
-68
-Speed: 160 km/h
-Distance: 92 km
-
-69
-Speed: 160 km/h
-Distance: 94.6667 km
-
-70
-Speed: 160 km/h
-Distance: 97.3333 km
-
-71
-Treno 1 ha inviato segnalazione a Padova alle ore 01:11.
+Treno 1 sta partendo da Vigonza-Pianiga alle ore 01:43.
+Treno 1 sta uscendo da Vigonza-Pianiga alle ore 01:47.
+Treno 1 ha inviato segnalazione a Padova alle ore 01:53.
 Treno 1 a breve arriverà a Padova.
-Speed: 160 km/h
-Distance: 100 km
+Ha il binario normale.
+Treno 1 sta entrando in Padova alle ore 01:58.
+Treno 1 è arrivato a Padova alle ore 02:01 con -12 minuti di ritardo.
 
-72
-Speed: 160 km/h
-Distance: 102.667 km
-
-73
-Speed: 160 km/h
-Distance: 105.333 km
-
-74
-Speed: 160 km/h
-Distance: 108 km
-
-75
-Speed: 160 km/h
-Distance: 110.667 km
-
-76
-Speed: 160 km/h
-Distance: 113.333 km
-
-77
-Treno 1 sta entrando in Padova alle ore 01:17.
-Speed: 160 km/h
-Distance: 116 km
-
-78
-Speed: 80 km/h
-Distance: 118.667 km
-
-79
-Treno 1 è arrivato a Padova alle ore 01:19 con -2 minuti di ritardo.
-Treno 1 ha terminato la sua corsa.
-Speed: 0 km/h
-Distance: 120 km
-
-80
 ---------- END ----------

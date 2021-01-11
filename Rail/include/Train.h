@@ -42,7 +42,6 @@ protected:
     // dice se treno è in parcheggio al momento
     bool parked;
     bool firstTimePre20;
-    bool firstTimePre5;
     bool firstTime0;
     bool firstTimeArrived;
 public:
@@ -56,6 +55,7 @@ public:
     // getter - functions
     bool isParked() const;
     std::vector<int> getTimetable() const;
+    std::vector<Station*> getStations() const { return stations; }
     int getNextStationIndex() const;
     int getTimetableIndex() const;
     double getCurrentSpeed() const;
@@ -86,22 +86,15 @@ public:
     void enterStation();
     // Fa si che il treno esca dalla stazione e si aumenti nextStationIndex
     void exitStation();
-    // Controlla distanza da prossima stazione
-    bool checkTrainDistance(int distance_from_station) const;
+
     bool firstTimePre20km() const {
         return firstTimePre20;
-    }
-    bool firstTimePre5km() const {
-        return firstTimePre5;
     }
     bool firstTime0km() const {
         return firstTime0;
     }
     void setFirstTimePre20km(bool b) {
         firstTimePre20 = b;
-    }
-    void setFirstTimePre5km(bool b) {
-        firstTimePre5 = b;
     }
     void setFirstTime0km(bool b) {
         firstTime0 = b;
@@ -146,6 +139,7 @@ public:
     // dice se deve già prendere i passeggeri oppure no
     bool hasToStart(int currentMinutes) const;
 
+    virtual void checkTimetable() = 0;
     // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
     // dice di che tipo è il treno

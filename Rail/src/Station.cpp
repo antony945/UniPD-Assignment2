@@ -6,23 +6,8 @@
 #include <list>
 
 
-//costruttore di default di default
-Station::Station() : name{ "" }, distance{ 0 } {
-
-	//inizializzo i 4 binari (nelle posizioni pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti)
-	for (int i = 0; i < 4; i++) {	
-		if (i % 2 == 0) {
-			Rail tmp(true);
-			standardRails.push_back(tmp);
-		}
-		else {
-			Rail tmp(false);
-			standardRails.push_back(tmp);
-		}
-	}
-}
-
-Station::Station(const std::string& name_, int distance_) : name{ name_ }, distance{ distance_ } {
+//costruttore
+Station::Station(const std::string& name_, int distanceLeft_) : name{ name_ }, distanceLeft{ distanceLeft_ } {
 	//inizializzo i 4 binari (negli indici pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti
 	for (int i = 0; i < 4; i++) {
 		if (i % 2 == 0) {
@@ -57,6 +42,7 @@ bool Station::railRequest(Train* myTrain) {
 			if (standardRails[i].isOccupied() == false) {
 				standardRails[i].setTrainId(myTrain->getId());
 				standardRails[i].setOccupied(true);
+				std::cout << this->getName() << ": binario ora occupato\n";
 				break;						//esco dal for
 			}
 
@@ -97,8 +83,12 @@ void Station::depositTrain(Train* myTrain) {
 std::string Station::getName() const{
 	return name;
 }
-int Station::getDistance() const{
-	return distance;
+int Station::getDistanceLeft() const{
+	return distanceLeft;
+}
+
+int Station::getDistanceRight() const{
+	return distanceRight;
 }
 
 void Station::manageParking(int currentMinutes) {
@@ -112,8 +102,8 @@ void Station::manageParking(int currentMinutes) {
 		if((*t)->isSuperAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
 			(*t)->sendStationRequest();
 			if((*t)->itCanTransit()) {
-				trainDeposit.remove((*t));
 				(*t)->setParking(false);
+				trainDeposit.remove((*t));
 			}
 		} 
 	}
@@ -123,8 +113,8 @@ void Station::manageParking(int currentMinutes) {
 		if((*t)->isAV() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
 			(*t)->sendStationRequest();
 			if((*t)->itCanTransit()) {
-				trainDeposit.remove((*t));
 				(*t)->setParking(false);
+				trainDeposit.remove((*t));
 			}
 		} 
 	}
@@ -134,8 +124,8 @@ void Station::manageParking(int currentMinutes) {
 		if((*t)->isRegional() && (*t)->hasToStart(currentMinutes+time_from_park_to_station)) {
 			(*t)->sendStationRequest();
 			if((*t)->itCanTransit()) {
-				trainDeposit.remove((*t));
 				(*t)->setParking(false);
+				trainDeposit.remove((*t));
 			}
 		} 
 	}
@@ -144,6 +134,7 @@ void Station::manageParking(int currentMinutes) {
 void Station::freeRail(Train *t) {
     for(Rail r : standardRails){
         if(r.getTrainId() == t->getId()) {
+			std::cout << this->getName() << ": binario liberato\n";
             r.setOccupied(false);
 			break;
         }

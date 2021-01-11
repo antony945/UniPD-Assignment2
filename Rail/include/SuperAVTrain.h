@@ -13,6 +13,7 @@ public:
     SuperAVTrain(SuperAVTrain&&)=delete;
     SuperAVTrain& operator=(SuperAVTrain&&)=delete;
     ~SuperAVTrain() override ;
+    void checkTimetable() override;
     bool hasToStop() const override;
     bool isRegional() const override { return false; }
     bool isAV() const override { return false; }

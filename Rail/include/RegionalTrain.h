@@ -13,6 +13,7 @@ public:
     RegionalTrain(Train&&)=delete;
     RegionalTrain& operator=(RegionalTrain&&)=delete;
     ~RegionalTrain() override ;
+    void checkTimetable() override;
     bool hasToStop() const override;
     bool isRegional() const override { return true; }
     bool isAV() const override { return false; }

@@ -6,7 +6,6 @@ class MainStation : public Station {
 
 public:
 	MainStation(const std::string& name_, int distance_);
-	MainStation();
 	bool isMain() override;
 
 	MainStation(const MainStation&) = delete;
