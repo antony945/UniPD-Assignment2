@@ -1,5 +1,5 @@
-Venezia Mestre
-Vicenza 1 50
-Verona 1 100
-Brescia 1 200
-Milano 0 300
+VENEZIA MESTRE
+VICENZA 1 50
+VERONA 1 100
+BRESCIA 1 200
+MILANO 0 300

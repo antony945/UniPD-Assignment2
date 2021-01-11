@@ -83,8 +83,8 @@ bool Train::hasFinish() const {
         return currentDistance>=stations[stations.size()-1]->getDistanceRight();
 }
 
-Station* Train::NextStation() const {
-    return stations[nextStationIndex];
+Station& Train::nextStation() const {
+    return *stations[nextStationIndex];
 }
 
 // TODO: Da modificare a seconda di left o meno
@@ -112,7 +112,7 @@ void Train::sendStationRequest() {
     // transitare o si deve anche fermare
     // deve anche settare se gli sta dando un binario normale, setRail(true)
     // o un binario di transito, setRail(false)
-    canTransit = NextStation()->railRequest(this);
+    canTransit = nextStation().railRequest(*this);
 }
 
 bool Train::itCanTransit() const {
@@ -172,10 +172,11 @@ void Train::setDelay(int currentMinutes) {
 // TODO: DA CONTROLLARE
 bool Train::inAnticipo(int currentMinutes) const {
     if(hasToStop()) {
-        // se si deve fermare, controlla se il currentMinutes è molto minore (almeno 20 minuti) dell'orario indicato nella timetable
+        // se si deve fermare, controlla se andando alla minore velocità possibile
         // considerando che deve fare ancora 20 km
-        int time_to_reach_station = 20/(currentSpeed/60);
-        return (currentMinutes+time_to_reach_station+20 <= timetable[timetableIndex]);
+        // raggiungerebbe la stazione prima dell'orario indicato dalla timetable
+        int time_to_reach_station = 20/(160/60);
+        return (currentMinutes+time_to_reach_station <= timetable[timetableIndex]);
     } else {
         // Se non si deve fermare sicuramente non dovrà fermarsi in parcheggio a causa dell'anticipo-
         return false;
@@ -196,14 +197,13 @@ bool Train::hasToStart(int currentMinutes) const {
 
 void Train::park() {
     if(left)
-        currentDistance = NextStation()->getDistanceLeft()-5;
+        currentDistance = nextStation().getDistanceLeft()-5;
     else
-        currentDistance = NextStation()->getDistanceRight()-5;
+        currentDistance = nextStation().getDistanceRight()-5;
 
     setStop();
     parked = true;
-    NextStation()->depositTrain(this);
+    nextStation().depositTrain(*this);
 }
-
 
 Train::~Train() = default;

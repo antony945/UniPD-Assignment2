@@ -2,6 +2,7 @@
 #ifndef Train_h
 #define Train_h
 #include <vector>
+#include <string>
 
 class Station;
 
@@ -138,7 +139,7 @@ public:
     void setParking(bool);
 
     //return next station
-    Station* NextStation() const;
+    Station& nextStation() const;
     //return Distance from next Station in km
     double nextStationDistance() const;
 
@@ -156,9 +157,7 @@ public:
     // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
     // dice di che tipo è il treno
-    virtual bool isRegional() const = 0;
-    virtual bool isAV() const = 0;
-    virtual bool isSuperAV() const = 0;
+    virtual std::string getType() const = 0;
 public:
     virtual ~Train();
 };

@@ -15,9 +15,7 @@ public:
     ~SuperAVTrain() override ;
     void checkTimetable() override;
     bool hasToStop() const override;
-    bool isRegional() const override { return false; }
-    bool isAV() const override { return false; }
-    bool isSuperAV() const override { return true; }
+    std::string getType() const override { return "SUPER AV"; }
 };
 
 #endif // SuperAVTrain_h

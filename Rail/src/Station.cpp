@@ -24,12 +24,12 @@ bool Station::parkEmpty() {
 	return trainDeposit.size()==0;
 }
 
-bool Station::railRequest(Train* myTrain) {
-	if(myTrain->hasToStop()) {
+bool Station::railRequest(Train& myTrain) {
+	if(myTrain.hasToStop()) {
 		// Se si deve fermare dì al treno di passare su binari normali
-		myTrain->setRail(true);
+		myTrain.setRail(true);
 
-		bool trainDir = myTrain->getLeft();	//direzione del treno
+		bool trainDir = myTrain.getLeft();	//direzione del treno
 
 		// if(!parkEmpty()) return false;
 		if (isFull(trainDir)) return false;	//se � pieno ritorno false, sar�  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
@@ -43,16 +43,16 @@ bool Station::railRequest(Train* myTrain) {
 
 		for (; i < standardRails.size(); i = i+2) {
 			if (standardRails[i].isOccupied() == false) {
-				standardRails[i].setTrainId(myTrain->getId());
+				standardRails[i].setTrainId(myTrain.getId());
 				standardRails[i].setOccupied(true);
-				myTrain->setStationRail(i);
+				myTrain.setStationRail(i);
 				std::cout << this->getName() << ": binario ora occupato, id = " << standardRails[i].getTrainId() << "\n";
 				break;						//esco dal for
 			}
 		}
 	} else {
 		// Se non si deve fermare dì al treno di passare su binari di transito
-		myTrain->setRail(false);
+		myTrain.setRail(false);
 		// Non servono altri controlli, potrà sempre passare e non serve "riempire" il binario di transito
 	}
 
@@ -77,10 +77,10 @@ bool Station::isFull(bool left) const{	//controlla se i binari in una certa dire
 	return isFull;
 }
 
-void Station::depositTrain(Train* myTrain) {
+void Station::depositTrain(Train& myTrain) {
 	// Controlla se treno è gia presente in deposito, se si non aggiungerlo
 	// Controllo viene fatto in altra funzione
-	trainDeposit.push_back(myTrain);
+	trainDeposit.push_back(&myTrain);
 }
 
 std::string Station::getName() const{
@@ -171,9 +171,11 @@ void Station::manageParking(int currentMinutes) {
 
 }
 
-void Station::freeRail(Train *t) {
-	std::cout << this->getName() << ": binario liberato, id = " << standardRails[t->getStationRail()].getTrainId() << "\n";
-	standardRails[t->getStationRail()].setOccupied(false);
-	standardRails[t->getStationRail()].setTrainId(-999);
-	t->setStationRail(-1);
+void Station::freeRail(Train& myTrain) {
+	if(myTrain.getId() == standardRails[myTrain.getStationRail()].getTrainId()) {
+		std::cout << this->getName() << ": binario liberato, id = " << standardRails[myTrain.getStationRail()].getTrainId() << "\n";
+		standardRails[myTrain.getStationRail()].setOccupied(false);
+		standardRails[myTrain.getStationRail()].setTrainId(-999);
+		myTrain.setStationRail(-1);
+	}
 }

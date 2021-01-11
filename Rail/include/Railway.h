@@ -60,11 +60,11 @@ private:
     void createTrains();
     
     // Controlla e gestisce tutti gli eventi possibili
-    void manageEvents(Train*);
+    void manageEvents(Train&);
     // Gestisci eventi di treno in stazione
-    void trainInStation(Train*);
+    void trainInStation(Train&);
     // Gestisci eventi di treno fuori stazione
-    void trainOutStation(Train*);
+    void trainOutStation(Train&);
     // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
     void checkMinimumDistance();
     // Gestisci i treni parcheggiati per tutte le stazioni e quelli che vuoi far partire falli entrare in stazione

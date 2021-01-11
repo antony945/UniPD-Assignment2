@@ -15,9 +15,7 @@ public:
     ~RegionalTrain() override ;
     void checkTimetable() override;
     bool hasToStop() const override;
-    bool isRegional() const override { return true; }
-    bool isAV() const override { return false; }
-    bool isSuperAV() const override { return false; }
+    std::string getType() const override { return "R"; }
 };
 
 #endif // RegionalTrain_h
