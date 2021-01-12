@@ -5,16 +5,22 @@
 
 class RegionalTrain : public Train {
 public:
+    ///max speed that train can reach
     static constexpr int MAX_SPEED = 160;
 public:
     RegionalTrain(int id_, bool left_,const std::vector<Station*>& stations_,const std::vector<int>& timetable_);
+    //move and copy constructor/assignment disabled
     RegionalTrain(const RegionalTrain&)= delete;
     RegionalTrain& operator=(const RegionalTrain&) =delete;
     RegionalTrain(Train&&)=delete;
     RegionalTrain& operator=(RegionalTrain&&)=delete;
-    ~RegionalTrain() override ;
+    ~RegionalTrain()  override;
     bool checkTimetable() override;
     bool hasToStop() const override;
+    /**
+     * return a string that tells train type
+     * @return string "SUPER AV"
+     */
     std::string getType() const override { return "R"; }
 };
 

@@ -148,8 +148,8 @@ double Train::nextStationDistance() const {
         return currentDistance-stations[nextStationIndex]->getDistanceRight();
 }
 /**
- * //TODO
- * @return
+ * tells if train is waiting for passengers to get on/off and update stationStopTime
+ * @return true if train is waiting, false if it is not
  */
 bool Train::isWaiting() {
     if(stationStopTime < 5) {

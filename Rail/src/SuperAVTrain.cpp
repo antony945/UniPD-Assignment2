@@ -1,17 +1,32 @@
 //Alberto Castagnaro 1219641
 #include "SuperAVTrain.h"
 #include "Station.h"
-
+/**
+ * constructor
+ * @param id_ int that represents train ID
+ * @param left_ true if train goes left, false if right
+ * @param stations_ vector of pointers to station where train is going to transit
+ * @param maxSpeed max speed reachable by the train
+ * @param timetable_ vector of int representing different times where train will stop to station
+ */
 SuperAVTrain::SuperAVTrain(int id_, bool left_, const std::vector<Station *> &stations_,const std::vector<int>& timetable_): Train(id_, left_, stations_,SuperAVTrain::MAX_SPEED, timetable_) {}
 
 SuperAVTrain::~SuperAVTrain() = default;
 
+/**
+ * check if train has to stop or transit in the next station
+ * @return true if the next station is main, false if it is secondary
+ */
 bool SuperAVTrain::hasToStop() const {
     return getStations()[getNextStationIndex()]->isMain();
 }
 
+/**
+ * check if timetable is compatible with physical features of the train
+ * *for Super AV train, timetable considers just main stations
+ * @return true if timetable has been edited, false if it has not
+ */
 bool SuperAVTrain::checkTimetable() {
-    // Crea vettore di stazioni principali da utilizzare in checkTable
     std::vector<Station*> mainTrainStations;
     for(Station* s : getStations())
         if(s->isMain()) mainTrainStations.push_back(s);
@@ -19,7 +34,6 @@ bool SuperAVTrain::checkTimetable() {
     bool edited = false;
 
     for(int i=0; i<mainTrainStations.size()-1; i++) {
-        // Prendo distanza tra stazioni
         int all_road;
         if(getLeft())
             all_road = mainTrainStations[i+1]->getDistanceLeft()-mainTrainStations[i]->getDistanceLeft();
@@ -37,23 +51,17 @@ bool SuperAVTrain::checkTimetable() {
         }
         int fast_road = all_road-slow_road;
 
-        // Prendo tempo di percorrenza segnato
-        // Slow speed
         int slow_speed = STATION_MAX_SPEED;
         int fast_speed = MAX_SPEED;
 
-        // Tempo minimo per fare la tratta (converti in km/min)
         int slow_time = static_cast<int>(slow_road/(slow_speed/60.0)) + 1;
         int fast_time = static_cast<int>(fast_road/(fast_speed/60.0)) + 1;
-        // output << "SLOW_TIME: " << slow_time << '\n';
-        // output << "FAST_TIME: " << fast_time << '\n';
         int min_time = static_cast<int>(slow_time+fast_time+time_to_wait);
-        // output << "MIN TIME: " << min_time << '\n';
+
         if(i<timetable.size()-1) {
             int time_to_do = timetable[i+1]-timetable[i];
             int offset = min_time-time_to_do;
 
-            // Se MIN_TIME > TIME_TO_DO DEVO SPOSTARE TUTTO AVANTI DELLA DIFFERENZA TRA QUEI DUE
             if(offset > 0) {
                 std::cout << "CAMBIATA TIMETABLE\n";
                 edited = true;
@@ -61,7 +69,7 @@ bool SuperAVTrain::checkTimetable() {
             }
         } else {
             std::cout << "AGGIUNTO VALORE IN TIMETABLE\n";
-            // Se non ci sono abbastanza orari, aggiungi l'orario minimo + 10 minuti
+
             timetable.push_back(timetable[i]+min_time+10);
         }
     }

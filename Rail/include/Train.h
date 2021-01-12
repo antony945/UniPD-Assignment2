@@ -61,7 +61,7 @@ protected:
     Train(int id_, bool left_,const std::vector<Station*>& stations_, int maxSpeed, const std::vector<int>& timetable_);
 
 public:
-    // move and copy constructors/operator= disabled
+    //move and copy constructor/assignment disabled
     Train(const Train&) = delete;
     Train& operator=(const Train&) = delete;
     Train(Train&&) = delete;
