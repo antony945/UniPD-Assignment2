@@ -7,7 +7,11 @@
 
 //costruttore
 Station::Station(const std::string& name_, int distanceLeft_) : name{ name_ }, distanceLeft{ distanceLeft_ } {
-	//inizializzo i 4 binari (negli indici pari vanno quelle dall'orgine al capolinea, nei dispari i rimanenti
+	// Inizializzo i 4 binari (negli indici pari vanno quelle dall'origine al capolinea, nei dispari i rimanenti
+	
+	// Inizializzo questa variabile anche se in seguito la modificheremo
+	distanceRight = 0;
+
 	for (int i = 0; i < 4; i++) {
 		if (i % 2 == 0) {
 			Rail tmp(true);
@@ -24,47 +28,8 @@ bool Station::parkEmpty() {
 	return trainDeposit.size()==0;
 }
 
-bool Station::railRequest(Train& myTrain) {
-	bool trainDir = myTrain.getLeft();	//direzione del treno
 
-	if(myTrain.hasToStop()) {
-		// Se si deve fermare dì al treno di passare su binari normali
-		myTrain.setRail(true);
-
-		// if(!parkEmpty()) return false;
-		if (isFull(trainDir)) return false;	//se � pieno ritorno false, sar�  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
-		
-		int i;
-		
-		if (trainDir)
-			i = 0;
-		else
-			i = 1;
-
-		for (; i < standardRails.size(); i = i+2) {
-			if (standardRails[i].isOccupied() == false) {
-				standardRails[i].setTrainId(myTrain.getId());
-				standardRails[i].setOccupied(true);
-				myTrain.setStationRail(i);
-				// std::cout << this->getName() << ": binario ora occupato, id = " << standardRails[i].getTrainId() << "\n";
-				break;						//esco dal for
-			}
-		}
-	} else {
-		// Se non si deve fermare dì al treno di passare su binari di transito
-		myTrain.setRail(false);
-		if(trainDir) {
-			myTrain.setStationRail(4);
-		} else {
-			myTrain.setStationRail(5);
-		}
-		// Non servono altri controlli, potrà sempre passare e non serve "riempire" il binario di transito
-	}
-
-	return true;						//il treno ha ricevuto un binario su cui fermarsi/passare
-}
-
-bool Station::isFull(bool left) const{	//controlla se i binari in una certa direzione sono pieni, left a true guarda gli indici pari, false quelli dispari
+bool Station::isFull(bool left) const{
 
 	bool isFull = true;
 
@@ -74,7 +39,8 @@ bool Station::isFull(bool left) const{	//controlla se i binari in una certa dire
 	else
 		i = 1;
 
-	for (; i < standardRails.size(); i = i + 2) {	//controllo se � presente un binario libero
+	// For per controllare solo i binari di una certa direzione (Ricordiamo che i binari sono messi nell'array in maniera alternata in base alla loro direzione, vedi costruttore)
+	for (; i < standardRails.size(); i = i + 2) {
 		if (standardRails[i].isOccupied() == false)
 			isFull = false;
 	}
@@ -83,8 +49,6 @@ bool Station::isFull(bool left) const{	//controlla se i binari in una certa dire
 }
 
 void Station::depositTrain(Train& myTrain) {
-	// Controlla se treno è gia presente in deposito, se si non aggiungerlo
-	// Controllo viene fatto in altra funzione
 	trainDeposit.push_back(&myTrain);
 }
 
@@ -104,19 +68,8 @@ void Station::manageParking(int currentMinutes) {
 	// Controlla se treno in parcheggio deve partire
 	int time_from_park_to_station = Train::STATION_AREA_KM/(Train::STATION_MAX_SPEED/60);
 
-	// Finchè la stazione non è piena e il parcheggio non è vuoto
-	// Scorro tutti i treni, vedo quello che avrebbe la timetable corrente prima di tutti gli altri
-	// A quello li lo faccio entrare dentro
-	// std::cout << getName() << '\n';
-	// if(!isFull(true) && !trainDeposit.empty()) {
-	// 	std::cout << "stazione non piena e deposito non vuoto\n";
-	// } else {
-	// 	std::cout << "stazione piena o deposito vuoto\n";
-	// }
-
-	// controllo i treni nel deposito a sinistra
+	// Finche' il deposito non e' vuoto e c'e' posto nei binari di sosta che vanno verso sinistra, controllo quale treno deve partire prima, in base alla sua timetable
 	while(!isFull(true) && !trainDeposit.empty()) {
-		// std::cout << "controllo se ci sono treni a sx da fare uscire\n";
 		Train* to_remove = nullptr;
 		int min_starting_time = 1000000000;
 
@@ -130,9 +83,8 @@ void Station::manageParking(int currentMinutes) {
 			}
 		}
 
-		// Se non c'è nessun treno che voglia uscire
+		// Se non c'e' nessun treno che voglia uscire
 		if(to_remove==nullptr) {
-			// std::cout << "treni parcheggiati a sx non vogliono uscire\n";
 			break;
 		}
 
@@ -143,9 +95,8 @@ void Station::manageParking(int currentMinutes) {
 		trainDeposit.remove(to_remove);
 	}
 
-	// controllo i treni nel deposito a destra
+	// Finche' il deposito non e' vuoto e c'e' posto nei binari di sosta che vanno verso destra, controllo quale treno deve partire prima, in base alla sua timetable
 	while(!isFull(false) && !trainDeposit.empty()) {
-		// std::cout << "controllo se ci sono treni a dx da fare uscire\n";
 
 		Train* to_remove = nullptr;
 		int min_starting_time = 1000000000;
@@ -162,7 +113,6 @@ void Station::manageParking(int currentMinutes) {
 
 		// Se non c'è nessun treno che voglia uscire
 		if(to_remove==nullptr) {
-			// std::cout << "treni parcheggiati a dx non vogliono uscire\n";
 			break;
 		}
 
@@ -176,10 +126,13 @@ void Station::manageParking(int currentMinutes) {
 }
 
 void Station::freeRail(Train& myTrain) {
+	// Controllo se l'ID del treno corrisponde a quello presente nel binario
 	if(myTrain.getId() == standardRails[myTrain.getStationRail()].getTrainId()) {
 		std::cout << this->getName() << ": binario liberato, id = " << standardRails[myTrain.getStationRail()].getTrainId() << "\n";
+		// Libero il binario
 		standardRails[myTrain.getStationRail()].setOccupied(false);
 		standardRails[myTrain.getStationRail()].setTrainId(-999);
+		// Tolgo il riferimento del binario al treno
 		myTrain.setStationRail(-1);
 	}
 }

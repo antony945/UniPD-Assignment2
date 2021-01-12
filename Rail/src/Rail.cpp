@@ -5,8 +5,7 @@ Rail::Rail(bool dirOfTravel_) : occupied{ false }, dirOfTravel{ dirOfTravel_ }, 
 Rail::Rail() : occupied{ false }, dirOfTravel{ true }, trainId{ -999 }	{}	//direzione del binario settata in automatico a true(dall'origine al capolinea)
 
 int Rail::getTrainId() const{
-	//invece di lanciare un eccezione, avviso e restituisco un valore inusuale: -999
-	//if (isOccupied() == false) std::cout << "Attenzione, il binario � libero. Nessun treno in sosta."; 
+	// Invece di lanciare un eccezione, avviso e restituisco un valore inusuale: -999
 	return trainId;
 }
 
@@ -15,8 +14,9 @@ void Rail::setTrainId(int id){
 }
 
 void Rail::setOccupied(bool occupied_){
-	if (!occupied_) trainId = -999;	//"cancello" l'id del treno che c'era prima (anche se in realta sostituisco con un valore inusuale) 
-
+	
+	// Quando si vuole rimuovere l'ID del treno che occupava questo binario, sostituisco il suo ID con un valore 'inusuale': -999
+	if (!occupied_) trainId = -999;
 	occupied = occupied_;
 }
 
