@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(Rail VERSION 1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.5)
+project(Rail LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
@@ -11,3 +11,6 @@ add_executable(${EXEC}
     main.cpp
     ${SOURCES}
 )
+
+# add_compile_options(-O2)
+target_compile_options(${EXEC} PUBLIC -O2)
