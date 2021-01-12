@@ -4,15 +4,17 @@
 #include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-// printInfo() - CORRETTA
+// printInfo()
 void Railway::printInfo() {
-    output << "-------- LISTA STAZIONI --------\n";
+    // Stampa lista stazioni
+    output << "---------------------- LISTA STAZIONI ----------------------\n";
     for(auto s : stations) {
         output << s->getName() << "; ";
     }
     output << "\n\n";
 
-    output << "------- LISTA TRENI --------\n";
+    // Stampa lista treni con relative stazioni
+    output << "----------------------- LISTA TRENI ------------------------\n";
     for(auto t : trains) {
         output << "ID: " << t->getId() << '\n';
         output << "TIMETABLE: ";
@@ -35,119 +37,121 @@ void Railway::printInfo() {
     output << '\n';
 }
 
-// daySimulation() - CORRETTA (forse)
+// daySimulation()
 void Railway::daySimulation() {
     // INIZIO
-    output << "---------- START ----------\n";
-    // QUI DENTRO FA LA SIMULAZIONE COMPLETA DI 1 GIORNO
+    output << "-------------------------- START --------------------------\n";
+    // Controlla se tutti i treni hanno finito il loro viaggio
     bool end = false;
     while(!end) {
         end = true;
 
+        // Imposta stampa del giorno dato che simulazione può finire anche nel giorno successivo
         if(currentMinutes%DAY_MINUTES == 0) {
             output << "GIORNO " << currentMinutes/DAY_MINUTES << '\n'; 
         }
 
-        // output << getCurrentTime() << '\n';
-
-        // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
+            // Solo se il treno non ha finito la sua corsa
             if(!t->getEnd()) {
-                // output << "Il treno " << t.getType() << " " << t.getId() << '\n';
                 end = false;
+                // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
                 manageEvents(*t);
             }
         }
 
         // Gestisci i treni parcheggiati per tutte le stazioni e in caso aggiusta velocità
         manageParkedTrains();
-        // Controlla distanza tra treni e in caso aggiusta velocità
+        // Controlla distanza tra treni fuori dalla stazione e in caso aggiusta velocità
         checkMinimumDistance();
-
-        // for(Train* t : trains) {
-        //     if(!t->getEnd()) {
-        //         output << "Speed: " << t->getCurrentSpeed() << " km/h\n";
-        //         output << "Distance: " << t->getCurrentDistance() << " km\n";
-        //         output << '\n';
-        //     }
-        // }
-
         // Avanza di un minuto la simulazione
         advanceTrains();
     }
 
     // FINE
-    output << "\n---------- END ----------\n";
+    output << "\n--------------------------- END ---------------------------\n";
 }
 
-// manageEvents() - CORRETTA
+// manageEvents()
 void Railway::manageEvents(Train& t) {
+    // Se treno è in area della stazione (cioè se si trova sui binari della stazione)
     if(t.isInStation()) {
+        // Gestisci eventi di treno in stazione
         trainInStation(t); 
     } else {
+        // Gestisci eventi di treno fuori stazione
         trainOutStation(t);
     }
 }
 
-// trainOutStation() - CORRETTA
+// trainOutStation()
 void Railway::trainOutStation(Train& t) {
-    // Questa funzione deve settare alla massima velocità consentita dal treno la velocita
+    // Setta alla massima velocità consentita dal treno la velocita
     t.setMaxSpeed();
 
-    // QUI È MAGGIORE DI -5, DEVE ENTRARE IN STAZIONE
+    // Caso in cui il treno debba entrare nell'area della stazione
     if(t.nextStationDistance() >= -5) {
+        // Se ha il binario su cui transitare
         if(t.itCanTransit()) {
-            // Se ha il binario su cui transitare entra in stazione e isInStation() diventa true
+            // Entra in stazione e isInStation() diventa true
             t.enterStation();
             // Treno ha il permesso di entrare in zona stazione
             output << "Il treno " << t.getType() << " " << t.getId() << " sta entrando al binario " << t.getStationRail() << " di " << t.nextStation().getName() << " alle ore " << getCurrentTime() << "." << '\n';
         } else {
-            // QUA DEVE ANDARE IN PARCHEGGIO
+            // Altrimenti se deve parcheggiare e non è gia parcheggiato
             if(!t.isParked()) {
+                // Parcheggia il treno
                 t.park();
                 // Treno deve andare in parcheggio
                 output << "Il treno " << t.getType() << " " << t.getId() << " è andato in parcheggio a " << t.nextStation().getName() << " alle ore " << getCurrentTime() << "." << '\n';
             }
+            // Setta velocità del treno a 0 km/h
             t.setStop();
         }
 
+        // Esci dalla funzione
         return;
     }
 
-    // QUA È TRA -20 E -5
+    // Caso in cui il treno superi per la prima volta la distanza di -20 km dalla prossima stazione
     if(t.nextStationDistance() >= -20 && t.firstTimePre20km()) {
-        // QUI È IN ANTICIPO, NON INVIA SEGNALAZIONE, SI METTE CHE ANDRÀ IN PARCHEGGIO
+        // Se riconosce di essere in anticipo non invia segnalazione e si mette in parcheggio
         if(t.isEarly(currentMinutes)) {
             // Setta canTransit a false
             t.setTransit(false);
+            // Treno andrà in parcheggio
             output << "Il treno " << t.getType() << " " << t.getId() << " è in anticipo. Andrà in parcheggio a " << t.nextStation().getName() << "." << '\n';
+            // Serve per evitare di eseguire l'enunciato più di una volta
             t.setFirstTimePre20km(false);
             return;
         }
 
-        // QUI MANDA LA SEGNALAZIONE E ASPETTA RISPOSTA
-        // Manda segnalazione a stazione
+        // Se non è in anticipo manda segnalazione a stazione che gli setta il fatto di poter entrare in stazione o meno
         t.sendStationRequest();
         // Treno ha inviato segnalazione a stazione
         output << "Il treno " << t.getType() << " " << t.getId() << " ha inviato segnalazione a " << t.nextStation().getName() << " alle ore " << getCurrentTime() << "." << '\n';
         
+        // Se stazione fa entrare treno in stazione
         if(t.itCanTransit()) {
             output << "Permesso accordato. Il treno " << t.getType() << " " << t.getId() << " arriverà a " << t.nextStation().getName();
+            // Se è sui binari standard
             if(t.onNormalRail())
                 output << " al binario " << t.getStationRail() << ".\n";
-            else
+            else    // Se è sul binario di transito
                 output << " al binario di transito.\n";
         } else {
+            // Treno non fatto entrare nella stazione, andrà in parcheggio
             output << "Permesso non accordato. Il treno " << t.getType() << " " << t.getId() << " andrà in parcheggio a " << t.nextStation().getName() << "." << '\n';
         }
+        // Serve per evitare di eseguire l'enunciato più di una volta
         t.setFirstTimePre20km(false);
         return;
     }
 
-    // QUI È CIÒ CHE FA SE NON HA EVENTI DA GESTIRE, OVVERO PROCEDERE CON VELOCITÀ MAX_SPEED
+    // Se non è in stazione e non ha eventi da gestire, procede con velocità max_speed
 }
 
-// trainInStation() - CORRETTA (forse)
+// trainInStation()
 void Railway::trainInStation(Train& t) {
     // CONTROLLA SU CHE BINARIO DEVE PASSARE IL TRENO
     if(t.onNormalRail())
