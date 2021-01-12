@@ -128,7 +128,6 @@ void Station::manageParking(int currentMinutes) {
 void Station::freeRail(Train& myTrain) {
 	// Controllo se l'ID del treno corrisponde a quello presente nel binario
 	if(myTrain.getId() == standardRails[myTrain.getStationRail()].getTrainId()) {
-		std::cout << this->getName() << ": binario liberato, id = " << standardRails[myTrain.getStationRail()].getTrainId() << "\n";
 		// Libero il binario
 		standardRails[myTrain.getStationRail()].setOccupied(false);
 		standardRails[myTrain.getStationRail()].setTrainId(-999);

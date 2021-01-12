@@ -1,0 +1,313 @@
+-------- LISTA STAZIONI --------
+VENEZIA S.LUCIA; VENEZIA MESTRE; MIRA-MIRANO; BUSA DI VIGONZA; VIGONZA-PIANIGA; PADOVA; 
+
+------- LISTA TRENI --------
+ID: 1
+TIMETABLE: 4; 23; 68; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+ID: 2
+TIMETABLE: 50; 80; 109; 137; 165; 194; 
+STAZIONI: PADOVA, 0; VIGONZA-PIANIGA, 45; BUSA DI VIGONZA, 70; MIRA-MIRANO, 93; VENEZIA MESTRE, 115; VENEZIA S.LUCIA, 140; 
+ID: 3
+TIMETABLE: 50; 80; 109; 137; 165; 194; 
+STAZIONI: PADOVA, 0; VIGONZA-PIANIGA, 45; BUSA DI VIGONZA, 70; MIRA-MIRANO, 93; VENEZIA MESTRE, 115; VENEZIA S.LUCIA, 140; 
+ID: 4
+TIMETABLE: 35; 55; 105; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+ID: 5
+TIMETABLE: 70; 92; 120; 148; 177; 214; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+ID: 6
+TIMETABLE: 70; 90; 140; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+ID: 7
+TIMETABLE: 100; 137; 164; 
+STAZIONI: PADOVA, 0; VIGONZA-PIANIGA, 45; BUSA DI VIGONZA, 70; MIRA-MIRANO, 93; VENEZIA MESTRE, 115; VENEZIA S.LUCIA, 140; 
+ID: 8
+TIMETABLE: 105; 124; 169; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+ID: 9
+TIMETABLE: 80; 122; 149; 
+STAZIONI: PADOVA, 0; VIGONZA-PIANIGA, 45; BUSA DI VIGONZA, 70; MIRA-MIRANO, 93; VENEZIA MESTRE, 115; VENEZIA S.LUCIA, 140; 
+ID: 10
+TIMETABLE: 200; 222; 250; 278; 307; 344; 
+STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
+
+---------- START ----------
+GIORNO 0
+Il treno SUPER AV 1 è in partenza dal binario 0 di VENEZIA S.LUCIA alle ore 00:04 con 0 minuti di ritardo.
+Il treno SUPER AV 1 sta uscendo da VENEZIA S.LUCIA alle ore 00:08.
+Il treno SUPER AV 1 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno SUPER AV 1 è andato in parcheggio a VENEZIA MESTRE alle ore 00:11.
+Il treno SUPER AV 1 sta entrando al binario 0 di VENEZIA MESTRE alle ore 00:19.
+Il treno SUPER AV 1 è arrivato al binario 0 di VENEZIA MESTRE alle ore 00:20 con -3 minuti di ritardo.
+Il treno SUPER AV 1 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 00:28.
+Il treno SUPER AV 1 sta uscendo da VENEZIA MESTRE alle ore 00:31.
+Il treno SUPER AV 1 ha inviato segnalazione a MIRA-MIRANO alle ore 00:32.
+Permesso accordato. Il treno SUPER AV 1 arriverà a MIRA-MIRANO al binario di transito.
+Il treno SUPER AV 1 sta entrando al binario 4 di MIRA-MIRANO alle ore 00:34.
+Il treno AV 4 è in partenza dal binario 0 di VENEZIA S.LUCIA alle ore 00:35 con 0 minuti di ritardo.
+Il treno SUPER AV 1 sta uscendo da MIRA-MIRANO alle ore 00:36.
+Il treno SUPER AV 1 ha inviato segnalazione a BUSA DI VIGONZA alle ore 00:37.
+Permesso accordato. Il treno SUPER AV 1 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno SUPER AV 1 sta entrando al binario 4 di BUSA DI VIGONZA alle ore 00:38.
+Il treno AV 4 sta uscendo da VENEZIA S.LUCIA alle ore 00:39.
+Il treno SUPER AV 1 sta uscendo da BUSA DI VIGONZA alle ore 00:40.
+Il treno AV 4 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno SUPER AV 1 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 00:41.
+Permesso accordato. Il treno SUPER AV 1 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno SUPER AV 1 sta entrando al binario 4 di VIGONZA-PIANIGA alle ore 00:43.
+Il treno AV 4 è andato in parcheggio a VENEZIA MESTRE alle ore 00:43.
+Il treno SUPER AV 1 sta uscendo da VIGONZA-PIANIGA alle ore 00:45.
+Il treno SUPER AV 1 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno R 2 è in partenza dal binario 1 di PADOVA alle ore 00:50 con 0 minuti di ritardo.
+Il treno R 3 è in partenza dal binario 3 di PADOVA alle ore 00:50 con 0 minuti di ritardo.
+Il treno AV 4 sta entrando al binario 0 di VENEZIA MESTRE alle ore 00:51.
+Il treno SUPER AV 1 è andato in parcheggio a PADOVA alle ore 00:52.
+Il treno AV 4 è arrivato al binario 0 di VENEZIA MESTRE alle ore 00:52 con -3 minuti di ritardo.
+Il treno R 2 sta uscendo da PADOVA alle ore 00:54.
+Il treno AV 4 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 01:00.
+Il treno R 2 è in anticipo. Andrà in parcheggio a VIGONZA-PIANIGA.
+Il treno SUPER AV 1 sta entrando al binario 0 di PADOVA alle ore 01:04.
+Il treno AV 4 sta uscendo da VENEZIA MESTRE alle ore 01:04.
+Il treno SUPER AV 1 è arrivato al binario 0 di PADOVA alle ore 01:05 con -3 minuti di ritardo.
+Il treno SUPER AV 1 ha terminato la sua corsa.
+Il treno AV 4 ha inviato segnalazione a MIRA-MIRANO alle ore 01:05.
+Permesso accordato. Il treno AV 4 arriverà a MIRA-MIRANO al binario di transito.
+Il treno AV 4 sta entrando al binario 4 di MIRA-MIRANO alle ore 01:07.
+Il treno R 2 è andato in parcheggio a VIGONZA-PIANIGA alle ore 01:08.
+Il treno AV 4 sta uscendo da MIRA-MIRANO alle ore 01:10.
+Il treno R 5 è in partenza dal binario 0 di VENEZIA S.LUCIA alle ore 01:10 con 0 minuti di ritardo.
+Il treno AV 6 è in partenza dal binario 2 di VENEZIA S.LUCIA alle ore 01:10 con 0 minuti di ritardo.
+Il treno AV 4 ha inviato segnalazione a BUSA DI VIGONZA alle ore 01:11.
+Permesso accordato. Il treno AV 4 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno AV 4 sta entrando al binario 4 di BUSA DI VIGONZA alle ore 01:13.
+Il treno AV 6 sta uscendo da VENEZIA S.LUCIA alle ore 01:14.
+Il treno AV 6 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno R 2 sta entrando al binario 1 di VIGONZA-PIANIGA alle ore 01:16.
+Il treno AV 4 sta uscendo da BUSA DI VIGONZA alle ore 01:16.
+Il treno AV 4 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 01:17.
+Permesso accordato. Il treno AV 4 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno R 2 è arrivato al binario 1 di VIGONZA-PIANIGA alle ore 01:18 con -2 minuti di ritardo.
+Il treno AV 6 è andato in parcheggio a VENEZIA MESTRE alle ore 01:18.
+Il treno AV 4 sta entrando al binario 4 di VIGONZA-PIANIGA alle ore 01:19.
+Il treno AV 9 è in partenza dal binario 1 di PADOVA alle ore 01:20 con 0 minuti di ritardo.
+Il treno AV 4 sta uscendo da VIGONZA-PIANIGA alle ore 01:22.
+Il treno AV 9 sta uscendo da PADOVA alle ore 01:24.
+Il treno R 2 è in partenza dal binario 1 di VIGONZA-PIANIGA alle ore 01:25.
+Il treno AV 6 sta entrando al binario 0 di VENEZIA MESTRE alle ore 01:26.
+Il treno AV 4 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno AV 6 è arrivato al binario 0 di VENEZIA MESTRE alle ore 01:27 con -3 minuti di ritardo.
+Il treno R 2 sta uscendo da VIGONZA-PIANIGA alle ore 01:29.
+Il treno AV 9 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 01:29.
+Permesso accordato. Il treno AV 9 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno R 2 è in anticipo. Andrà in parcheggio a BUSA DI VIGONZA.
+Il treno AV 4 è andato in parcheggio a PADOVA alle ore 01:31.
+Il treno AV 9 sta entrando al binario 5 di VIGONZA-PIANIGA alle ore 01:33.
+Il treno R 2 è andato in parcheggio a BUSA DI VIGONZA alle ore 01:35.
+Il treno AV 6 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 01:35.
+Il treno AV 9 sta uscendo da VIGONZA-PIANIGA alle ore 01:36.
+Il treno AV 9 ha inviato segnalazione a BUSA DI VIGONZA alle ore 01:37.
+Permesso accordato. Il treno AV 9 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno AV 6 sta uscendo da VENEZIA MESTRE alle ore 01:39.
+Il treno AV 9 sta entrando al binario 5 di BUSA DI VIGONZA alle ore 01:39.
+Il treno AV 6 ha inviato segnalazione a MIRA-MIRANO alle ore 01:40.
+Permesso accordato. Il treno AV 6 arriverà a MIRA-MIRANO al binario di transito.
+Il treno SUPER AV 7 è in partenza dal binario 1 di PADOVA alle ore 01:40 con 0 minuti di ritardo.
+Il treno AV 4 sta entrando al binario 0 di PADOVA alle ore 01:41.
+Il treno AV 4 è arrivato al binario 0 di PADOVA alle ore 01:42 con -3 minuti di ritardo.
+Il treno AV 4 ha terminato la sua corsa.
+Il treno AV 6 sta entrando al binario 4 di MIRA-MIRANO alle ore 01:42.
+Il treno AV 9 sta uscendo da BUSA DI VIGONZA alle ore 01:42.
+Il treno AV 9 ha inviato segnalazione a MIRA-MIRANO alle ore 01:43.
+Permesso accordato. Il treno AV 9 arriverà a MIRA-MIRANO al binario di transito.
+Il treno SUPER AV 7 sta uscendo da PADOVA alle ore 01:44.
+Il treno R 2 sta entrando al binario 1 di BUSA DI VIGONZA alle ore 01:45.
+Il treno AV 6 sta uscendo da MIRA-MIRANO alle ore 01:45.
+Il treno SUPER AV 8 è in partenza dal binario 2 di VENEZIA S.LUCIA alle ore 01:45 con 0 minuti di ritardo.
+Il treno AV 9 sta entrando al binario 5 di MIRA-MIRANO alle ore 01:45.
+Il treno R 3 sta uscendo da PADOVA alle ore 01:46.
+Il treno AV 6 ha inviato segnalazione a BUSA DI VIGONZA alle ore 01:46.
+Permesso accordato. Il treno AV 6 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno R 2 è arrivato al binario 1 di BUSA DI VIGONZA alle ore 01:47 con -2 minuti di ritardo.
+Il treno AV 6 sta entrando al binario 4 di BUSA DI VIGONZA alle ore 01:48.
+Il treno SUPER AV 7 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 01:48.
+Permesso accordato. Il treno SUPER AV 7 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno AV 9 sta uscendo da MIRA-MIRANO alle ore 01:48.
+Il treno SUPER AV 8 sta uscendo da VENEZIA S.LUCIA alle ore 01:49.
+Il treno AV 9 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno SUPER AV 8 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno R 5 sta uscendo da VENEZIA S.LUCIA alle ore 01:51.
+Il treno AV 6 sta uscendo da BUSA DI VIGONZA alle ore 01:51.
+Il treno SUPER AV 7 sta entrando al binario 5 di VIGONZA-PIANIGA alle ore 01:51.
+Il treno AV 9 è andato in parcheggio a VENEZIA MESTRE alle ore 01:51.
+Il treno R 5 ha inviato segnalazione a VENEZIA MESTRE alle ore 01:52.
+Permesso accordato. Il treno R 5 arriverà a VENEZIA MESTRE al binario 0.
+Il treno AV 6 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 01:52.
+Permesso accordato. Il treno AV 6 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno SUPER AV 8 è andato in parcheggio a VENEZIA MESTRE alle ore 01:52.
+Il treno SUPER AV 7 sta uscendo da VIGONZA-PIANIGA alle ore 01:53.
+Il treno R 2 è in partenza dal binario 1 di BUSA DI VIGONZA alle ore 01:54.
+Il treno R 3 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 01:54.
+Permesso accordato. Il treno R 3 arriverà a VIGONZA-PIANIGA al binario 1.
+Il treno AV 6 sta entrando al binario 4 di VIGONZA-PIANIGA alle ore 01:54.
+Il treno SUPER AV 7 ha inviato segnalazione a BUSA DI VIGONZA alle ore 01:54.
+Permesso accordato. Il treno SUPER AV 7 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno SUPER AV 7 sta entrando al binario 5 di BUSA DI VIGONZA alle ore 01:56.
+Il treno R 5 sta entrando al binario 0 di VENEZIA MESTRE alle ore 01:57.
+Il treno AV 6 sta uscendo da VIGONZA-PIANIGA alle ore 01:57.
+Il treno SUPER AV 7 sta uscendo da BUSA DI VIGONZA alle ore 01:58.
+Il treno AV 9 sta entrando al binario 1 di VENEZIA MESTRE alle ore 01:58.
+Il treno R 5 è arrivato al binario 0 di VENEZIA MESTRE alle ore 01:59 con 27 minuti di ritardo.
+Il treno SUPER AV 7 ha inviato segnalazione a MIRA-MIRANO alle ore 01:59.
+Permesso accordato. Il treno SUPER AV 7 arriverà a MIRA-MIRANO al binario di transito.
+Il treno AV 9 è arrivato al binario 1 di VENEZIA MESTRE alle ore 01:59 con -3 minuti di ritardo.
+Il treno R 3 sta entrando al binario 1 di VIGONZA-PIANIGA alle ore 02:00.
+Il treno SUPER AV 8 sta entrando al binario 2 di VENEZIA MESTRE alle ore 02:00.
+Il treno R 2 sta uscendo da BUSA DI VIGONZA alle ore 02:01.
+Il treno R 3 è arrivato al binario 1 di VIGONZA-PIANIGA alle ore 02:01 con 41 minuti di ritardo.
+Il treno SUPER AV 7 sta entrando al binario 5 di MIRA-MIRANO alle ore 02:01.
+Il treno SUPER AV 8 è arrivato al binario 2 di VENEZIA MESTRE alle ore 02:01 con -3 minuti di ritardo.
+Il treno R 2 è in anticipo. Andrà in parcheggio a MIRA-MIRANO.
+Il treno AV 6 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno SUPER AV 7 sta uscendo da MIRA-MIRANO alle ore 02:03.
+Il treno R 5 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 02:04.
+Il treno SUPER AV 7 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno SUPER AV 7 è andato in parcheggio a VENEZIA MESTRE alle ore 02:05.
+Il treno R 2 è andato in parcheggio a MIRA-MIRANO alle ore 02:06.
+Il treno R 3 è in partenza dal binario 1 di VIGONZA-PIANIGA alle ore 02:06.
+Il treno AV 6 è andato in parcheggio a PADOVA alle ore 02:06.
+Il treno AV 9 è in partenza dal binario 1 di VENEZIA MESTRE alle ore 02:07.
+Il treno SUPER AV 8 è in partenza dal binario 2 di VENEZIA MESTRE alle ore 02:09.
+Il treno R 3 sta uscendo da VIGONZA-PIANIGA alle ore 02:10.
+Il treno R 3 ha inviato segnalazione a BUSA DI VIGONZA alle ore 02:11.
+Permesso accordato. Il treno R 3 arriverà a BUSA DI VIGONZA al binario 1.
+Il treno AV 9 sta uscendo da VENEZIA MESTRE alle ore 02:11.
+Il treno SUPER AV 8 sta uscendo da VENEZIA MESTRE alle ore 02:12.
+Il treno AV 9 è in anticipo. Andrà in parcheggio a VENEZIA S.LUCIA.
+Il treno R 2 sta entrando al binario 1 di MIRA-MIRANO alle ore 02:13.
+Il treno SUPER AV 7 sta entrando al binario 1 di VENEZIA MESTRE alle ore 02:13.
+Il treno SUPER AV 8 ha inviato segnalazione a MIRA-MIRANO alle ore 02:13.
+Permesso accordato. Il treno SUPER AV 8 arriverà a MIRA-MIRANO al binario di transito.
+Il treno SUPER AV 7 è arrivato al binario 1 di VENEZIA MESTRE alle ore 02:14 con -3 minuti di ritardo.
+Il treno R 2 è arrivato al binario 1 di MIRA-MIRANO alle ore 02:15 con -2 minuti di ritardo.
+Il treno R 5 sta uscendo da VENEZIA MESTRE alle ore 02:15.
+Il treno SUPER AV 8 sta entrando al binario 4 di MIRA-MIRANO alle ore 02:15.
+Il treno AV 9 è andato in parcheggio a VENEZIA S.LUCIA alle ore 02:15.
+Il treno R 3 sta entrando al binario 1 di BUSA DI VIGONZA alle ore 02:16.
+Il treno R 5 ha inviato segnalazione a MIRA-MIRANO alle ore 02:16.
+Permesso accordato. Il treno R 5 arriverà a MIRA-MIRANO al binario 0.
+Il treno AV 6 sta entrando al binario 0 di PADOVA alle ore 02:16.
+Il treno AV 6 è arrivato al binario 0 di PADOVA alle ore 02:17 con -3 minuti di ritardo.
+Il treno AV 6 ha terminato la sua corsa.
+Il treno SUPER AV 8 sta uscendo da MIRA-MIRANO alle ore 02:17.
+Il treno R 3 è arrivato al binario 1 di BUSA DI VIGONZA alle ore 02:18 con 29 minuti di ritardo.
+Il treno SUPER AV 8 ha inviato segnalazione a BUSA DI VIGONZA alle ore 02:18.
+Permesso accordato. Il treno SUPER AV 8 arriverà a BUSA DI VIGONZA al binario di transito.
+Il treno SUPER AV 8 sta entrando al binario 4 di BUSA DI VIGONZA alle ore 02:19.
+Il treno R 5 sta entrando al binario 0 di MIRA-MIRANO alle ore 02:20.
+Il treno SUPER AV 8 sta uscendo da BUSA DI VIGONZA alle ore 02:21.
+Il treno R 2 è in partenza dal binario 1 di MIRA-MIRANO alle ore 02:22.
+Il treno R 5 è arrivato al binario 0 di MIRA-MIRANO alle ore 02:22 con 22 minuti di ritardo.
+Il treno SUPER AV 7 è in partenza dal binario 1 di VENEZIA MESTRE alle ore 02:22.
+Il treno SUPER AV 8 ha inviato segnalazione a VIGONZA-PIANIGA alle ore 02:22.
+Permesso accordato. Il treno SUPER AV 8 arriverà a VIGONZA-PIANIGA al binario di transito.
+Il treno R 3 è in partenza dal binario 1 di BUSA DI VIGONZA alle ore 02:23.
+Il treno SUPER AV 8 sta entrando al binario 4 di VIGONZA-PIANIGA alle ore 02:24.
+Il treno SUPER AV 7 sta uscendo da VENEZIA MESTRE alle ore 02:25.
+Il treno AV 9 sta entrando al binario 1 di VENEZIA S.LUCIA alle ore 02:25.
+Il treno R 2 sta uscendo da MIRA-MIRANO alle ore 02:26.
+Il treno SUPER AV 7 è in anticipo. Andrà in parcheggio a VENEZIA S.LUCIA.
+Il treno SUPER AV 8 sta uscendo da VIGONZA-PIANIGA alle ore 02:26.
+Il treno AV 9 è arrivato al binario 1 di VENEZIA S.LUCIA alle ore 02:26 con -3 minuti di ritardo.
+Il treno AV 9 ha terminato la sua corsa.
+Il treno R 2 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno R 3 sta uscendo da BUSA DI VIGONZA alle ore 02:27.
+Il treno R 5 è in partenza dal binario 0 di MIRA-MIRANO alle ore 02:27.
+Il treno R 3 ha inviato segnalazione a MIRA-MIRANO alle ore 02:28.
+Permesso accordato. Il treno R 3 arriverà a MIRA-MIRANO al binario 1.
+Il treno SUPER AV 7 è andato in parcheggio a VENEZIA S.LUCIA alle ore 02:28.
+Il treno SUPER AV 8 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno R 2 è andato in parcheggio a VENEZIA MESTRE alle ore 02:31.
+Il treno R 5 sta uscendo da MIRA-MIRANO alle ore 02:31.
+Il treno R 3 sta entrando al binario 1 di MIRA-MIRANO alle ore 02:32.
+Il treno R 5 ha inviato segnalazione a BUSA DI VIGONZA alle ore 02:32.
+Permesso accordato. Il treno R 5 arriverà a BUSA DI VIGONZA al binario 0.
+Il treno SUPER AV 8 è andato in parcheggio a PADOVA alle ore 02:33.
+Il treno R 3 è arrivato al binario 1 di MIRA-MIRANO alle ore 02:34 con 17 minuti di ritardo.
+Il treno R 5 sta entrando al binario 0 di BUSA DI VIGONZA alle ore 02:36.
+Il treno R 5 è arrivato al binario 0 di BUSA DI VIGONZA alle ore 02:38 con 10 minuti di ritardo.
+Il treno R 3 è in partenza dal binario 1 di MIRA-MIRANO alle ore 02:39.
+Il treno SUPER AV 7 sta entrando al binario 1 di VENEZIA S.LUCIA alle ore 02:40.
+Il treno R 2 sta entrando al binario 1 di VENEZIA MESTRE alle ore 02:41.
+Il treno SUPER AV 7 è arrivato al binario 1 di VENEZIA S.LUCIA alle ore 02:41 con -3 minuti di ritardo.
+Il treno SUPER AV 7 ha terminato la sua corsa.
+Il treno R 2 è arrivato al binario 1 di VENEZIA MESTRE alle ore 02:43 con -2 minuti di ritardo.
+Il treno R 3 sta uscendo da MIRA-MIRANO alle ore 02:43.
+Il treno R 5 è in partenza dal binario 0 di BUSA DI VIGONZA alle ore 02:43.
+Il treno R 3 ha inviato segnalazione a VENEZIA MESTRE alle ore 02:44.
+Permesso accordato. Il treno R 3 arriverà a VENEZIA MESTRE al binario 3.
+Il treno SUPER AV 8 sta entrando al binario 0 di PADOVA alle ore 02:45.
+Il treno SUPER AV 8 è arrivato al binario 0 di PADOVA alle ore 02:46 con -3 minuti di ritardo.
+Il treno SUPER AV 8 ha terminato la sua corsa.
+Il treno R 5 sta uscendo da BUSA DI VIGONZA alle ore 02:47.
+Il treno R 3 sta entrando al binario 3 di VENEZIA MESTRE alle ore 02:48.
+Il treno R 5 è in anticipo. Andrà in parcheggio a VIGONZA-PIANIGA.
+Il treno R 2 è in partenza dal binario 1 di VENEZIA MESTRE alle ore 02:50.
+Il treno R 3 è arrivato al binario 3 di VENEZIA MESTRE alle ore 02:50 con 5 minuti di ritardo.
+Il treno R 5 è andato in parcheggio a VIGONZA-PIANIGA alle ore 02:53.
+Il treno R 2 sta uscendo da VENEZIA MESTRE alle ore 02:54.
+Il treno R 5 sta entrando al binario 0 di VIGONZA-PIANIGA alle ore 02:54.
+Il treno R 2 è in anticipo. Andrà in parcheggio a VENEZIA S.LUCIA.
+Il treno R 3 è in partenza dal binario 3 di VENEZIA MESTRE alle ore 02:55.
+Il treno R 5 è arrivato al binario 0 di VIGONZA-PIANIGA alle ore 02:56 con -1 minuti di ritardo.
+Il treno R 3 sta uscendo da VENEZIA MESTRE alle ore 02:59.
+Il treno R 2 è andato in parcheggio a VENEZIA S.LUCIA alle ore 03:00.
+Il treno R 3 è in anticipo. Andrà in parcheggio a VENEZIA S.LUCIA.
+Il treno R 5 è in partenza dal binario 0 di VIGONZA-PIANIGA alle ore 03:02.
+Il treno R 3 è andato in parcheggio a VENEZIA S.LUCIA alle ore 03:05.
+Il treno R 5 sta uscendo da VIGONZA-PIANIGA alle ore 03:06.
+Il treno R 2 sta entrando al binario 1 di VENEZIA S.LUCIA alle ore 03:10.
+Il treno R 3 sta entrando al binario 3 di VENEZIA S.LUCIA alle ore 03:10.
+Il treno R 2 è arrivato al binario 1 di VENEZIA S.LUCIA alle ore 03:12 con -2 minuti di ritardo.
+Il treno R 2 ha terminato la sua corsa.
+Il treno R 3 è arrivato al binario 3 di VENEZIA S.LUCIA alle ore 03:12 con -2 minuti di ritardo.
+Il treno R 3 ha terminato la sua corsa.
+Il treno R 5 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno R 5 è andato in parcheggio a PADOVA alle ore 03:19.
+Il treno R 10 è in partenza dal binario 0 di VENEZIA S.LUCIA alle ore 03:20 con 0 minuti di ritardo.
+Il treno R 10 sta uscendo da VENEZIA S.LUCIA alle ore 03:24.
+Il treno R 10 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
+Il treno R 5 sta entrando al binario 0 di PADOVA alle ore 03:30.
+Il treno R 10 è andato in parcheggio a VENEZIA MESTRE alle ore 03:30.
+Il treno R 5 è arrivato al binario 0 di PADOVA alle ore 03:32 con -2 minuti di ritardo.
+Il treno R 5 ha terminato la sua corsa.
+Il treno R 10 sta entrando al binario 0 di VENEZIA MESTRE alle ore 03:38.
+Il treno R 10 è arrivato al binario 0 di VENEZIA MESTRE alle ore 03:40 con -2 minuti di ritardo.
+Il treno R 10 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 03:47.
+Il treno R 10 sta uscendo da VENEZIA MESTRE alle ore 03:51.
+Il treno R 10 è in anticipo. Andrà in parcheggio a MIRA-MIRANO.
+Il treno R 10 è andato in parcheggio a MIRA-MIRANO alle ore 03:56.
+Il treno R 10 sta entrando al binario 0 di MIRA-MIRANO alle ore 04:06.
+Il treno R 10 è arrivato al binario 0 di MIRA-MIRANO alle ore 04:08 con -2 minuti di ritardo.
+Il treno R 10 è in partenza dal binario 0 di MIRA-MIRANO alle ore 04:15.
+Il treno R 10 sta uscendo da MIRA-MIRANO alle ore 04:19.
+Il treno R 10 è in anticipo. Andrà in parcheggio a BUSA DI VIGONZA.
+Il treno R 10 è andato in parcheggio a BUSA DI VIGONZA alle ore 04:24.
+Il treno R 10 sta entrando al binario 0 di BUSA DI VIGONZA alle ore 04:34.
+Il treno R 10 è arrivato al binario 0 di BUSA DI VIGONZA alle ore 04:36 con -2 minuti di ritardo.
+Il treno R 10 è in partenza dal binario 0 di BUSA DI VIGONZA alle ore 04:43.
+Il treno R 10 sta uscendo da BUSA DI VIGONZA alle ore 04:47.
+Il treno R 10 è in anticipo. Andrà in parcheggio a VIGONZA-PIANIGA.
+Il treno R 10 è andato in parcheggio a VIGONZA-PIANIGA alle ore 04:53.
+Il treno R 10 sta entrando al binario 0 di VIGONZA-PIANIGA alle ore 05:03.
+Il treno R 10 è arrivato al binario 0 di VIGONZA-PIANIGA alle ore 05:05 con -2 minuti di ritardo.
+Il treno R 10 è in partenza dal binario 0 di VIGONZA-PIANIGA alle ore 05:12.
+Il treno R 10 sta uscendo da VIGONZA-PIANIGA alle ore 05:16.
+Il treno R 10 è in anticipo. Andrà in parcheggio a PADOVA.
+Il treno R 10 è andato in parcheggio a PADOVA alle ore 05:29.
+Il treno R 10 sta entrando al binario 0 di PADOVA alle ore 05:40.
+Il treno R 10 è arrivato al binario 0 di PADOVA alle ore 05:42 con -2 minuti di ritardo.
+Il treno R 10 ha terminato la sua corsa.
+
+---------- END ----------

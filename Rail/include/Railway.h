@@ -56,7 +56,7 @@ public:
     // Metodo per svolgere simulazione di linea ferroviaria
     void daySimulation();
     // Tester
-    void tester();
+    void printInfo();
 
 private:
     // Inizializza vettore di stations

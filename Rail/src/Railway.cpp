@@ -4,8 +4,8 @@
 #include <algorithm>
 
 /* ---------------------------------------------------------- METODI PER SIMULAZIONE DEL GIORNO */
-// tester() - CORRETTA
-void Railway::tester() {
+// printInfo() - CORRETTA
+void Railway::printInfo() {
     output << "-------- LISTA STAZIONI --------\n";
     for(auto s : stations) {
         output << s->getName() << "; ";
@@ -539,8 +539,6 @@ void Railway::checkMinimumDistance() {
 
             //controllo prima se i due treni stanno andando sullo stesso binario, poi se sono troppo vicini
             if ((trains[i]->getLeft() == trains[j]->getLeft()) && (std::abs(trains[i]->getCurrentDistance() - trains[j]->getCurrentDistance()) < MIN_DIS)) {
-                output << "distanza: " << std::abs(trains[i]->getCurrentDistance() - trains[j]->getCurrentDistance()) << '\n';
-                output << "VELOCITÀ CAMBIATA\n";
                 //se il treno in trains[i] e' piu' veloce del treno in [j] e si trova anche dietro ad esso, riduco la velocit� di trains[i]
                 if (trains[i]->getCurrentSpeed() > trains[j]->getCurrentSpeed() && trains[i]->getCurrentDistance() < trains[j]->getCurrentDistance()) {
                     trains[i]->setSpeed(trains[j]->getCurrentSpeed());
