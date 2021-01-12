@@ -16,7 +16,7 @@ bool RegionalTrain::checkTimetable() {
     for(int i=0; i<stations.size()-1; i++) {
         // Prendo distanza tra stazioni
         int all_road;
-        if(left)
+        if(getLeft())
             all_road = stations[i+1]->getDistanceLeft()-stations[i]->getDistanceLeft();
         else
             all_road = stations[i+1]->getDistanceRight()-stations[i]->getDistanceRight();

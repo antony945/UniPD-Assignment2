@@ -7,13 +7,13 @@ AVTrain::AVTrain(int id_, bool left_, const std::vector<Station *> &stations_,co
 AVTrain::~AVTrain() =default;
 
 bool AVTrain::hasToStop() const {
-    return stations[nextStationIndex]->isMain();
+    return getStations()[getNextStationIndex()]->isMain();
 }
 
 bool AVTrain::checkTimetable() {
     // Crea vettore di stazioni principali da utilizzare in checkTable
     std::vector<Station*> mainTrainStations;
-    for(Station* s : stations)
+    for(Station* s : getStations())
         if(s->isMain()) mainTrainStations.push_back(s);
 
     bool edited = false;
@@ -21,7 +21,7 @@ bool AVTrain::checkTimetable() {
     for(int i=0; i<mainTrainStations.size()-1; i++) {
         // Prendo distanza tra stazioni
         int all_road;
-        if(left)
+        if(getLeft())
             all_road = mainTrainStations[i+1]->getDistanceLeft()-mainTrainStations[i]->getDistanceLeft();
         else
             all_road = mainTrainStations[i+1]->getDistanceRight()-mainTrainStations[i]->getDistanceRight();
