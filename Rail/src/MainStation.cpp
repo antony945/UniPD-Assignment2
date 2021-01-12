@@ -38,6 +38,9 @@ bool MainStation::railRequest(Train& myTrain) {
 	return true;
 }
 
+MainStation::~MainStation() = default;
+
+
 bool MainStation::isMain(){
 	return true;
 }

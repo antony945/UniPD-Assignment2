@@ -16,6 +16,7 @@ public:
 	MainStation(MainStation&&) = delete;
 	MainStation& operator=(const MainStation&) = delete;
 	MainStation& operator=(MainStation&&) = delete;
+	~MainStation() override;
 
 };
 

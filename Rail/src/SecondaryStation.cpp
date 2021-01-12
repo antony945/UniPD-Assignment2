@@ -57,3 +57,5 @@ bool SecondaryStation::isMain() {
 	return false;
 }
 
+SecondaryStation::~SecondaryStation() = default;
+

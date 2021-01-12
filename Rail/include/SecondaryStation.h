@@ -16,6 +16,7 @@ public:
     SecondaryStation(SecondaryStation&&) = delete;
     SecondaryStation& operator=(const SecondaryStation&) = delete;
     SecondaryStation& operator=(SecondaryStation&&) = delete;
+    ~SecondaryStation() override;
 
 private:
     // Di fatto, questi binari di transito non verranno mai occupati perche' nessun treno ci si fermera', ma al massimo ci transitera' senza occuparlo
