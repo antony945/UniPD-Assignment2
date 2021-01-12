@@ -4,13 +4,11 @@ set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
 
-set(EXEC main)
 file(GLOB SOURCES src/*.cpp)
 
-add_executable(${EXEC}
-    main.cpp
-    ${SOURCES}
-)
+add_library(Railway ${SOURCES})
+add_executable(RailwayTester main.cpp)
+target_link_libraries(RailwayTester Railway)
 
 # add_compile_options(-O2)
-target_compile_options(${EXEC} PUBLIC -O2)
+target_compile_options(RailwayTester PUBLIC -O2)
