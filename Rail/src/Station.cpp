@@ -112,7 +112,6 @@ void Station::manageParking(int currentMinutes) {
 	// controllo i treni nel deposito a sinistra
 	while(!isFull(true) && !trainDeposit.empty()) {
 		// std::cout << "controllo se ci sono treni a sx da fare uscire\n";
-
 		Train* to_remove = nullptr;
 		int min_starting_time = 1000000000;
 

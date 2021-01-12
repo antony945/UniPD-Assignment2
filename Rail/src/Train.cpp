@@ -161,6 +161,10 @@ void Train::exitStation() {
     setFirstTimeArrived(true);
 }
 
+int Train::getMaxSpeed() const {
+    return MAX_SPEED;
+}
+
 bool Train::justArrived() const {
     return (stationStopTime==0) && firstTimeArrived;
 }

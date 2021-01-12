@@ -2,58 +2,80 @@
 VENEZIA MESTRE; VICENZA; VERONA; BRESCIA; MILANO; 
 
 ------- LISTA TRENI --------
-ID: 25634
-TIMETABLE: 600; 674; 
+ID: 1
+TIMETABLE: 5; 36; 75; 132; 189; 
 STAZIONI: VENEZIA MESTRE, 0; VICENZA, 50; VERONA, 100; BRESCIA, 200; MILANO, 300; 
-ID: 12345
-TIMETABLE: 300; 350; 407; 446; 485; 
-STAZIONI: MILANO, 0; BRESCIA, 100; VERONA, 200; VICENZA, 250; VENEZIA MESTRE, 300; 
+ID: 2
+TIMETABLE: 5; 93; 
+STAZIONI: VENEZIA MESTRE, 0; VICENZA, 50; VERONA, 100; BRESCIA, 200; MILANO, 300; 
+ID: 3
+TIMETABLE: 7; 95; 
+STAZIONI: VENEZIA MESTRE, 0; VICENZA, 50; VERONA, 100; BRESCIA, 200; MILANO, 300; 
 
 ---------- START ----------
 GIORNO 0
-Il treno R 12345 sta partendo da MILANO alle ore 05:00 con 0 minuti di ritardo.
-Il treno R 12345 sta uscendo da MILANO alle ore 05:04.
-Il treno R 12345 è in anticipo. Andrà in parcheggio a BRESCIA.
-Il treno R 12345 è andato in parcheggio a BRESCIA alle ore 05:38.
-Il treno R 12345 sta entrando a BRESCIA alle ore 05:46.
-Il treno R 12345 è arrivato a BRESCIA alle ore 05:48 con -2 minuti di ritardo.
-Il treno R 12345 sta partendo da BRESCIA alle ore 05:55.
-Il treno R 12345 sta uscendo da BRESCIA alle ore 05:59.
-Il treno R 12345 è in anticipo. Andrà in parcheggio a VERONA.
-Il treno R 12345 è andato in parcheggio a VERONA alle ore 06:33.
-Il treno R 12345 sta entrando a VERONA alle ore 06:43.
-Il treno R 12345 è arrivato a VERONA alle ore 06:45 con -2 minuti di ritardo.
-Il treno R 12345 sta partendo da VERONA alle ore 06:52.
-Il treno R 12345 sta uscendo da VERONA alle ore 06:56.
-Il treno R 12345 è in anticipo. Andrà in parcheggio a VICENZA.
-Il treno R 12345 è andato in parcheggio a VICENZA alle ore 07:11.
-Il treno R 12345 sta entrando a VICENZA alle ore 07:22.
-Il treno R 12345 è arrivato a VICENZA alle ore 07:24 con -2 minuti di ritardo.
-Il treno R 12345 sta partendo da VICENZA alle ore 07:31.
-Il treno R 12345 sta uscendo da VICENZA alle ore 07:35.
-Il treno R 12345 è in anticipo. Andrà in parcheggio a VENEZIA MESTRE.
-Il treno R 12345 è andato in parcheggio a VENEZIA MESTRE alle ore 07:50.
-Il treno R 12345 sta entrando a VENEZIA MESTRE alle ore 08:01.
-Il treno R 12345 è arrivato a VENEZIA MESTRE alle ore 08:03 con -2 minuti di ritardo.
-Il treno R 12345 ha terminato la sua corsa.
-Il treno SUPER AV 25634 sta partendo da VENEZIA MESTRE alle ore 10:00 con 0 minuti di ritardo.
-Il treno SUPER AV 25634 sta uscendo da VENEZIA MESTRE alle ore 10:04.
-Il treno SUPER AV 25634 ha inviato segnalazione a VICENZA alle ore 10:09.
-Il treno SUPER AV 25634 a breve arriverà a VICENZA al binario di transito.
-Il treno SUPER AV 25634 sta entrando a VICENZA alle ore 10:12.
-Il treno SUPER AV 25634 sta uscendo da VICENZA alle ore 10:14.
-Il treno SUPER AV 25634 ha inviato segnalazione a VERONA alle ore 10:19.
-Il treno SUPER AV 25634 a breve arriverà a VERONA al binario di transito.
-Il treno SUPER AV 25634 sta entrando a VERONA alle ore 10:22.
-Il treno SUPER AV 25634 sta uscendo da VERONA alle ore 10:24.
-Il treno SUPER AV 25634 ha inviato segnalazione a BRESCIA alle ore 10:39.
-Il treno SUPER AV 25634 a breve arriverà a BRESCIA al binario di transito.
-Il treno SUPER AV 25634 sta entrando a BRESCIA alle ore 10:42.
-Il treno SUPER AV 25634 sta uscendo da BRESCIA alle ore 10:44.
-Il treno SUPER AV 25634 è in anticipo. Andrà in parcheggio a MILANO.
-Il treno SUPER AV 25634 è andato in parcheggio a MILANO alle ore 11:02.
-Il treno SUPER AV 25634 sta entrando a MILANO alle ore 11:10.
-Il treno SUPER AV 25634 è arrivato a MILANO alle ore 11:11 con -3 minuti di ritardo.
-Il treno SUPER AV 25634 ha terminato la sua corsa.
+Il treno R 1 è in partenza dal binario 0 di VENEZIA MESTRE alle ore 00:05 con 0 minuti di ritardo.
+Il treno AV 2 è in partenza dal binario 2 di VENEZIA MESTRE alle ore 00:05 con 0 minuti di ritardo.
+Il treno AV 2 sta uscendo da VENEZIA MESTRE alle ore 00:09.
+Il treno AV 3 è in partenza dal binario 2 di VENEZIA MESTRE alle ore 00:09 con 2 minuti di ritardo.
+Il treno AV 3 sta uscendo da VENEZIA MESTRE alle ore 00:13.
+Il treno R 1 sta uscendo da VENEZIA MESTRE alle ore 00:16.
+Il treno AV 2 ha inviato segnalazione a VICENZA alle ore 00:16.
+Permesso accordato. Il treno AV 2 arriverà a VICENZA al binario di transito.
+Il treno AV 2 sta entrando al binario -1 di VICENZA alle ore 00:19.
+Il treno AV 3 ha inviato segnalazione a VICENZA alle ore 00:20.
+Permesso accordato. Il treno AV 3 arriverà a VICENZA al binario di transito.
+Il treno AV 2 sta uscendo da VICENZA alle ore 00:22.
+Il treno AV 3 sta entrando al binario -1 di VICENZA alle ore 00:23.
+Il treno R 1 è in anticipo. Andrà in parcheggio a VICENZA.
+Il treno AV 3 sta uscendo da VICENZA alle ore 00:26.
+Il treno AV 2 ha inviato segnalazione a VERONA alle ore 00:28.
+Permesso accordato. Il treno AV 2 arriverà a VERONA al binario di transito.
+Il treno R 1 è andato in parcheggio a VICENZA alle ore 00:31.
+Il treno R 1 sta entrando al binario 0 di VICENZA alle ore 00:32.
+Il treno AV 2 sta entrando al binario -1 di VERONA alle ore 00:32.
+Il treno AV 3 ha inviato segnalazione a VERONA alle ore 00:32.
+Permesso accordato. Il treno AV 3 arriverà a VERONA al binario di transito.
+Il treno R 1 è arrivato al binario 0 di VICENZA alle ore 00:34 con -2 minuti di ritardo.
+Il treno AV 2 sta uscendo da VERONA alle ore 00:34.
+Il treno AV 3 sta entrando al binario -1 di VERONA alle ore 00:36.
+Il treno AV 3 sta uscendo da VERONA alle ore 00:38.
+Il treno R 1 è in partenza dal binario 0 di VICENZA alle ore 00:41.
+Il treno R 1 sta uscendo da VICENZA alle ore 00:45.
+Il treno AV 2 ha inviato segnalazione a BRESCIA alle ore 00:53.
+Permesso accordato. Il treno AV 2 arriverà a BRESCIA al binario di transito.
+Il treno R 1 è in anticipo. Andrà in parcheggio a VERONA.
+Il treno AV 2 sta entrando al binario -1 di BRESCIA alle ore 00:57.
+Il treno AV 3 ha inviato segnalazione a BRESCIA alle ore 00:57.
+Permesso accordato. Il treno AV 3 arriverà a BRESCIA al binario di transito.
+Il treno AV 2 sta uscendo da BRESCIA alle ore 00:59.
+Il treno R 1 è andato in parcheggio a VERONA alle ore 01:00.
+Il treno AV 3 sta entrando al binario -1 di BRESCIA alle ore 01:01.
+Il treno AV 3 sta uscendo da BRESCIA alle ore 01:03.
+Il treno R 1 sta entrando al binario 0 di VERONA alle ore 01:11.
+Il treno R 1 è arrivato al binario 0 di VERONA alle ore 01:13 con -2 minuti di ritardo.
+Il treno AV 2 è in anticipo. Andrà in parcheggio a MILANO.
+Il treno R 1 è in partenza dal binario 0 di VERONA alle ore 01:20.
+Il treno AV 2 è andato in parcheggio a MILANO alle ore 01:22.
+Il treno AV 3 è in anticipo. Andrà in parcheggio a MILANO.
+Il treno R 1 sta uscendo da VERONA alle ore 01:24.
+Il treno AV 3 è andato in parcheggio a MILANO alle ore 01:26.
+Il treno AV 2 sta entrando al binario 0 di MILANO alle ore 01:29.
+Il treno AV 2 è arrivato al binario 0 di MILANO alle ore 01:30 con -3 minuti di ritardo.
+Il treno AV 2 ha terminato la sua corsa.
+Il treno AV 3 sta entrando al binario 0 di MILANO alle ore 01:31.
+Il treno AV 3 è arrivato al binario 0 di MILANO alle ore 01:32 con -3 minuti di ritardo.
+Il treno AV 3 ha terminato la sua corsa.
+Il treno R 1 è in anticipo. Andrà in parcheggio a BRESCIA.
+Il treno R 1 è andato in parcheggio a BRESCIA alle ore 01:58.
+Il treno R 1 sta entrando al binario 0 di BRESCIA alle ore 02:08.
+Il treno R 1 è arrivato al binario 0 di BRESCIA alle ore 02:10 con -2 minuti di ritardo.
+Il treno R 1 è in partenza dal binario 0 di BRESCIA alle ore 02:17.
+Il treno R 1 sta uscendo da BRESCIA alle ore 02:21.
+Il treno R 1 è in anticipo. Andrà in parcheggio a MILANO.
+Il treno R 1 è andato in parcheggio a MILANO alle ore 02:55.
+Il treno R 1 sta entrando al binario 0 di MILANO alle ore 03:05.
+Il treno R 1 è arrivato al binario 0 di MILANO alle ore 03:07 con -2 minuti di ritardo.
+Il treno R 1 ha terminato la sua corsa.
 
 ---------- END ----------

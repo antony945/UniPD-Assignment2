@@ -73,6 +73,7 @@ public:
     int getCurrentDelay() const;
     int getId() const;
     double getCurrentDistance() const; //KM
+    int getMaxSpeed() const;
     // Setta la rail sulla quale il treno andrà dentro la stazione (true se rail con limite di 80, false se quella di transito)
     void setRail(bool);
     // dice se treno sta andando sulle rail normali con limite di 80 o su quelle di transito

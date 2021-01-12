@@ -65,7 +65,9 @@ private:
     void trainInStation(Train&);
     // Gestisci eventi di treno fuori stazione
     void trainOutStation(Train&);
-    // Controlla la distanza tra tutti i treni IN STAZIONE (!!!) e in caso aggiusta le velocità
+    // Controlle le distanze tra i treni all'uscita della stazione e in caso aggiusta le velocità
+    bool checkOutStationDistance(Train&);
+    // Controlla la distanza tra tutti i treni fuori dalla stazione e in caso aggiusta le velocità
     void checkMinimumDistance();
     // Gestisci i treni parcheggiati per tutte le stazioni e quelli che vuoi far partire falli entrare in stazione
     void manageParkedTrains();
