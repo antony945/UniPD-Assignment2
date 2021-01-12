@@ -1,3 +1,4 @@
+// Antonio Franzoso, matricola 1219610
 #ifndef Railway_h
 #define Railway_h
 #include <fstream>
@@ -31,12 +32,12 @@ private:
     std::vector<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
-    // Indici di timetable ottenuti da eliminare
+    // Indici di valori in timetable da eliminare
     std::vector<int> timetable_index_to_delete;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
-    // Costruttore prende in input tre file, uno per creare stazioni, uno per creare treni, uno per restituire output, DEBUGGATO
+    // Costruttore prende in input tre file, uno per creare stazioni, uno per creare treni, uno per restituire output
     Railway(const std::string&, const std::string&, const std::string&);
     // Copy constructor (disabilitato)
     Railway(const Railway&) = delete;
@@ -55,7 +56,7 @@ public:
     std::string getCurrentTime() const;
     // Metodo per svolgere simulazione di linea ferroviaria
     void daySimulation();
-    // Tester
+    // Stampa informazioni sui treni e stazioni della simulazione
     void printInfo();
 
 private:
