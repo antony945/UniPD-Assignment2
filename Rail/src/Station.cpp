@@ -136,3 +136,5 @@ void Station::freeRail(Train& myTrain) {
 		myTrain.setStationRail(-1);
 	}
 }
+
+Station::~Station() = default;

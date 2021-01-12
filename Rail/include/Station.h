@@ -50,6 +50,7 @@ public:
     Station(Station&&) = delete;
     Station& operator=(const Station&) = delete;
     Station& operator=(Station&&) = delete;
+    virtual ~Station();
 };
 
 #endif // Station_h
