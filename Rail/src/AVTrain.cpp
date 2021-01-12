@@ -56,11 +56,9 @@ bool AVTrain::checkTimetable() {
             // Se MIN_TIME > TIME_TO_DO DEVO SPOSTARE TUTTO AVANTI DELLA DIFFERENZA TRA QUEI DUE
             if(offset > 0) {
                 edited = false;
-                std::cout << "CAMBIATA TIMETABLE\n";
                 timetable[i+1] = timetable[i+1]+offset;
             }
         } else {
-            std::cout << "AGGIUNTO VALORE IN TIMETABLE\n";
             // Se non ci sono abbastanza orari, aggiungi l'orario minimo + 10 minuti
             timetable.push_back(timetable[i]+min_time+10);
         }

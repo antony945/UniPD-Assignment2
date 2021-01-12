@@ -1,7 +1,7 @@
--------- LISTA STAZIONI --------
+---------------------- LISTA STAZIONI ----------------------
 VENEZIA S.LUCIA; VENEZIA MESTRE; MIRA-MIRANO; BUSA DI VIGONZA; VIGONZA-PIANIGA; PADOVA; 
 
-------- LISTA TRENI --------
+----------------------- LISTA TRENI ------------------------
 ID: 1
 TIMETABLE: 5; 27; 55; 83; 112; 149; 
 STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
@@ -48,7 +48,7 @@ ID: 15
 TIMETABLE: 100; 120; 170; 
 STAZIONI: VENEZIA S.LUCIA, 0; VENEZIA MESTRE, 25; MIRA-MIRANO, 47; BUSA DI VIGONZA, 70; VIGONZA-PIANIGA, 95; PADOVA, 140; 
 
----------- START ----------
+-------------------------- START --------------------------
 GIORNO 0
 Il treno R 1 è in partenza dal binario 0 di VENEZIA S.LUCIA alle ore 00:05 con 0 minuti di ritardo.
 Il treno AV 2 è in partenza dal binario 2 di VENEZIA S.LUCIA alle ore 00:08 con 0 minuti di ritardo.
@@ -468,4 +468,4 @@ Il treno R 5 sta entrando al binario 0 di PADOVA alle ore 04:19.
 Il treno R 5 è arrivato al binario 0 di PADOVA alle ore 04:21 con 44 minuti di ritardo.
 Il treno R 5 ha terminato la sua corsa.
 
----------- END ----------
+--------------------------- END ---------------------------
