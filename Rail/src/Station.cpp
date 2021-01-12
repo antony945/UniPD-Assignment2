@@ -25,11 +25,11 @@ bool Station::parkEmpty() {
 }
 
 bool Station::railRequest(Train& myTrain) {
+	bool trainDir = myTrain.getLeft();	//direzione del treno
+
 	if(myTrain.hasToStop()) {
 		// Se si deve fermare dì al treno di passare su binari normali
 		myTrain.setRail(true);
-
-		bool trainDir = myTrain.getLeft();	//direzione del treno
 
 		// if(!parkEmpty()) return false;
 		if (isFull(trainDir)) return false;	//se � pieno ritorno false, sar�  compito  di railway chiamare la funzione depositTrain per mettere il treno nel deposito
@@ -53,6 +53,11 @@ bool Station::railRequest(Train& myTrain) {
 	} else {
 		// Se non si deve fermare dì al treno di passare su binari di transito
 		myTrain.setRail(false);
+		if(trainDir) {
+			myTrain.setStationRail(4);
+		} else {
+			myTrain.setStationRail(5);
+		}
 		// Non servono altri controlli, potrà sempre passare e non serve "riempire" il binario di transito
 	}
 

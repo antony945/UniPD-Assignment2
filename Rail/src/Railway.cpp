@@ -48,7 +48,7 @@ void Railway::startSimulation() {
             output << "GIORNO " << currentMinutes/DAY_MINUTES << '\n'; 
         }
 
-        // output << getCurrentTime() << '\n';
+        output << getCurrentTime() << '\n';
 
         // Controlla tutti gli eventi dei treni e preparali per l'avanzamento di un minuto
         for(Train* t : trains) {
