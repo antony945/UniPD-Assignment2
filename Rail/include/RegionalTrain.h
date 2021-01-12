@@ -13,7 +13,7 @@ public:
     RegionalTrain(Train&&)=delete;
     RegionalTrain& operator=(RegionalTrain&&)=delete;
     ~RegionalTrain() override ;
-    void checkTimetable() override;
+    bool checkTimetable() override;
     bool hasToStop() const override;
     std::string getType() const override { return "R"; }
 };

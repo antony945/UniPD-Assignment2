@@ -7,11 +7,13 @@
 class Station;
 
 class Train {
+public:
+    static constexpr int STATION_AREA_KM = 5;
+    static constexpr int MINIMUM_STOP_TIME = 5;
+    static constexpr int STATION_MAX_SPEED = 80;
 protected:
     //stations where the train is going to stop
     std::vector<Station*> stations;
-    // minimum distance between trains
-    static constexpr int MINIMUM_DISTANCE = 10;
     //train timetable
     std::vector<int> timetable;
     //max speed of train (KM/H)
@@ -149,12 +151,12 @@ public:
     void setDelay(int currentMinutes);
     // controlla se treno è almeno 20 minuti in anticipo considerando che
     // questo dato verrà controllato 20km prima di stazione
-    bool inAnticipo(int currentMinutes) const;
+    bool isEarly(int currentMinutes) const;
 
     // dice se deve già prendere i passeggeri oppure no
     bool hasToStart(int currentMinutes) const;
-
-    virtual void checkTimetable() = 0;
+    // ritorna true se timetable è stata modificata per incompatibilità con treno
+    virtual bool checkTimetable() = 0;
     // dice se deve fermarsi alla stazione nextStation
     virtual bool hasToStop() const = 0;
     // dice di che tipo è il treno

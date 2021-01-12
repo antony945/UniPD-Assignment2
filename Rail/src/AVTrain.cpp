@@ -10,12 +10,13 @@ bool AVTrain::hasToStop() const {
     return stations[nextStationIndex]->isMain();
 }
 
-void AVTrain::checkTimetable() {
+bool AVTrain::checkTimetable() {
     // Crea vettore di stazioni principali da utilizzare in checkTable
     std::vector<Station*> mainTrainStations;
     for(Station* s : stations)
         if(s->isMain()) mainTrainStations.push_back(s);
 
+    bool edited = false;
 
     for(int i=0; i<mainTrainStations.size()-1; i++) {
         // Prendo distanza tra stazioni
@@ -28,19 +29,18 @@ void AVTrain::checkTimetable() {
         int slow_road;
         int time_to_wait;
         if(i==0) {
-            slow_road = 5;    // TODO: Quel 5 sarebbe meglio metterlo Station::SLOW_ROAD come static const int
+            slow_road = STATION_AREA_KM;
             time_to_wait = 0;
         } else {
-            slow_road = 5*2;
-            time_to_wait = 5;   // TODO: Questo 5 sarebbe meglio metterlo Station::TIME_TO_WAIT_PASSENGER come static const int
+            slow_road = STATION_AREA_KM*2;
+            time_to_wait = MINIMUM_STOP_TIME;
         }
         int fast_road = all_road-slow_road;
 
         // Prendo tempo di percorrenza segnato
-        // Slow speed (TODO: metterla come costante di qualche classe)
-        int slow_speed = 80;
+        // Slow speed
+        int slow_speed = STATION_MAX_SPEED;
         int fast_speed = MAX_SPEED;
-        // output << "FAST SPEED: " << fast_speed << '\n';
 
         // Tempo minimo per fare la tratta (converti in km/min)
         int slow_time = static_cast<int>(slow_road/(slow_speed/60.0)) + 1;
@@ -55,6 +55,7 @@ void AVTrain::checkTimetable() {
 
             // Se MIN_TIME > TIME_TO_DO DEVO SPOSTARE TUTTO AVANTI DELLA DIFFERENZA TRA QUEI DUE
             if(offset > 0) {
+                edited = false;
                 std::cout << "CAMBIATA TIMETABLE\n";
                 timetable[i+1] = timetable[i+1]+offset;
             }
@@ -64,4 +65,6 @@ void AVTrain::checkTimetable() {
             timetable.push_back(timetable[i]+min_time+10);
         }
     }
+
+    return edited;
 }

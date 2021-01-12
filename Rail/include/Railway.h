@@ -13,6 +13,9 @@
 #include "SuperAVTrain.h"
 
 class Railway {
+public:
+    // Minimum distance between trains
+    static constexpr int MINIMUM_DISTANCE = 10;
 private:
     // Minuti totali in un giorno
     static const int DAY_MINUTES = 1440;
@@ -28,6 +31,8 @@ private:
     std::vector<Train*> trains;
     // Minuti attualmente passati
     int currentMinutes;
+    // Indici di timetable ottenuti da eliminare
+    std::vector<int> timetable_index_to_delete;
 
 /* ---------------------------------------------------------- METODI INIZIALIZZAZIONE FERROVIA */
 public:
@@ -49,7 +54,7 @@ public:
     // Minuti in stringa (es. se minuti sono 90 deve restituire 01:30)
     std::string getCurrentTime() const;
     // Metodo per svolgere simulazione di linea ferroviaria
-    void startSimulation();
+    void daySimulation();
     // Tester
     void tester();
 

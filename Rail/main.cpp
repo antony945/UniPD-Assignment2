@@ -6,6 +6,6 @@ using namespace std;
 int main() {
     Railway myRailway{"../line_description.txt", "../timetables.txt", "../output.txt"};
     myRailway.tester();
-    myRailway.startSimulation();
+    myRailway.daySimulation();
     return 0;
 }

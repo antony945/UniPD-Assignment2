@@ -135,7 +135,7 @@ void Train::setMaxSpeed() {
 
 // Set limited speed
 void Train::setLimitedSpeed() {
-    setSpeed(80);
+    setSpeed(STATION_MAX_SPEED);
 }
 
 // Has to be true if train is in station area (is setted by outside)
@@ -174,12 +174,12 @@ void Train::setDelay(int currentMinutes) {
 }
 
 // TODO: DA CONTROLLARE
-bool Train::inAnticipo(int currentMinutes) const {
+bool Train::isEarly(int currentMinutes) const {
     if(hasToStop()) {
         // se si deve fermare, controlla se andando alla minore velocità possibile
         // considerando che deve fare ancora 20 km
         // raggiungerebbe la stazione prima dell'orario indicato dalla timetable
-        int time_to_reach_station = 20/(160/60);
+        int time_to_reach_station = 20/(currentSpeed/60);
         return (currentMinutes+time_to_reach_station <= timetable[timetableIndex]);
     } else {
         // Se non si deve fermare sicuramente non dovrà fermarsi in parcheggio a causa dell'anticipo-

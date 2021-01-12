@@ -13,7 +13,7 @@ public:
     AVTrain(AVTrain&&)=delete;
     AVTrain& operator=(AVTrain&&)=delete;
     ~AVTrain() override ;
-    void checkTimetable() override;
+    bool checkTimetable() override;
     bool hasToStop() const override;
     std::string getType() const override { return "AV"; }
 };

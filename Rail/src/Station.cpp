@@ -46,7 +46,7 @@ bool Station::railRequest(Train& myTrain) {
 				standardRails[i].setTrainId(myTrain.getId());
 				standardRails[i].setOccupied(true);
 				myTrain.setStationRail(i);
-				std::cout << this->getName() << ": binario ora occupato, id = " << standardRails[i].getTrainId() << "\n";
+				// std::cout << this->getName() << ": binario ora occupato, id = " << standardRails[i].getTrainId() << "\n";
 				break;						//esco dal for
 			}
 		}
@@ -102,7 +102,7 @@ int Station::getDistanceRight() const{
 
 void Station::manageParking(int currentMinutes) {
 	// Controlla se treno in parcheggio deve partire
-	int time_from_park_to_station = 5/(80/60);
+	int time_from_park_to_station = Train::STATION_AREA_KM/(Train::STATION_MAX_SPEED/60);
 
 	// Finchè la stazione non è piena e il parcheggio non è vuoto
 	// Scorro tutti i treni, vedo quello che avrebbe la timetable corrente prima di tutti gli altri

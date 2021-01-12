@@ -13,7 +13,7 @@ public:
     SuperAVTrain(SuperAVTrain&&)=delete;
     SuperAVTrain& operator=(SuperAVTrain&&)=delete;
     ~SuperAVTrain() override ;
-    void checkTimetable() override;
+    bool checkTimetable() override;
     bool hasToStop() const override;
     std::string getType() const override { return "SUPER AV"; }
 };
