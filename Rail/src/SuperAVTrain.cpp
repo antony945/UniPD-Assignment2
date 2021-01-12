@@ -63,12 +63,10 @@ bool SuperAVTrain::checkTimetable() {
             int offset = min_time-time_to_do;
 
             if(offset > 0) {
-                std::cout << "CAMBIATA TIMETABLE\n";
                 edited = true;
                 timetable[i+1] = timetable[i+1]+offset;
             }
         } else {
-            std::cout << "AGGIUNTO VALORE IN TIMETABLE\n";
 
             timetable.push_back(timetable[i]+min_time+10);
         }

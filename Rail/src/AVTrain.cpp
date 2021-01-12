@@ -65,11 +65,9 @@ bool AVTrain::checkTimetable() {
 
             if(offset > 0) {
                 edited = false;
-                std::cout << "CAMBIATA TIMETABLE\n";
                 timetable[i+1] = timetable[i+1]+offset;
             }
         } else {
-            std::cout << "AGGIUNTO VALORE IN TIMETABLE\n";
             timetable.push_back(timetable[i]+min_time+10);
         }
     }
