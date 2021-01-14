@@ -1,0 +1,191 @@
+---------------------- LISTA STAZIONI ----------------------
+Bassano Del Grappa; Castelfranco Veneto; Campodarsego; Padova; 
+
+----------------------- LISTA TRENI ------------------------
+ID: 1
+TIMETABLE: 5; 100; 145; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 2
+TIMETABLE: 8; 80; 130; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 3
+TIMETABLE: 70; 93; 138; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 4
+TIMETABLE: 15; 85; 600; 
+STAZIONI: Padova, 0; Campodarsego, 82; Castelfranco Veneto, 116; Bassano Del Grappa, 164; 
+ID: 5
+TIMETABLE: 20; 60; 156; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 6
+TIMETABLE: 90; 146; 177; 
+STAZIONI: Padova, 0; Campodarsego, 82; Castelfranco Veneto, 116; Bassano Del Grappa, 164; 
+ID: 7
+TIMETABLE: 600; 625; 675; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 9
+TIMETABLE: 800; 1000; 1050; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+ID: 10
+TIMETABLE: 900; 1000; 1033; 1084; 
+STAZIONI: Bassano Del Grappa, 0; Castelfranco Veneto, 48; Campodarsego, 82; Padova, 164; 
+
+-------------------------- START --------------------------
+GIORNO 0
+Il treno SUPER AV 1 è in partenza dal binario 0 di Bassano Del Grappa alle ore 00:05 con 0 minuti di ritardo.
+Il treno AV 2 è in partenza dal binario 2 di Bassano Del Grappa alle ore 00:08 con 0 minuti di ritardo.
+Il treno SUPER AV 1 sta uscendo da Bassano Del Grappa alle ore 00:09.
+Il treno SUPER AV 1 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno AV 4 è in partenza dal binario 1 di Padova alle ore 00:15 con 0 minuti di ritardo.
+Il treno SUPER AV 1 è andato in parcheggio a Castelfranco Veneto alle ore 00:17.
+Il treno SUPER AV 5 è in partenza dal binario 0 di Bassano Del Grappa alle ore 00:20 con 0 minuti di ritardo.
+Il treno SUPER AV 5 sta uscendo da Bassano Del Grappa alle ore 00:24.
+Il treno SUPER AV 5 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno SUPER AV 5 è andato in parcheggio a Castelfranco Veneto alle ore 00:32.
+Il treno SUPER AV 5 sta entrando al binario 0 di Castelfranco Veneto alle ore 00:56.
+Il treno SUPER AV 5 è arrivato al binario 0 di Castelfranco Veneto alle ore 00:57 con -3 minuti di ritardo.
+Il treno SUPER AV 5 è in partenza dal binario 0 di Castelfranco Veneto alle ore 01:05.
+Il treno SUPER AV 5 sta uscendo da Castelfranco Veneto alle ore 01:08.
+Il treno SUPER AV 3 è in partenza dal binario 0 di Bassano Del Grappa alle ore 01:10 con 0 minuti di ritardo.
+Il treno SUPER AV 5 ha inviato segnalazione a Campodarsego alle ore 01:10.
+Permesso accordato. Il treno SUPER AV 5 arriverà a Campodarsego al binario di transito.
+Il treno SUPER AV 5 sta entrando al binario 4 di Campodarsego alle ore 01:13.
+Il treno SUPER AV 3 sta uscendo da Bassano Del Grappa alle ore 01:14.
+Il treno SUPER AV 5 sta uscendo da Campodarsego alle ore 01:15.
+Il treno AV 2 sta uscendo da Bassano Del Grappa alle ore 01:16.
+Il treno SUPER AV 3 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno AV 2 ha inviato segnalazione a Castelfranco Veneto alle ore 01:22.
+Permesso accordato. Il treno AV 2 arriverà a Castelfranco Veneto al binario 0.
+Il treno SUPER AV 3 è andato in parcheggio a Castelfranco Veneto alle ore 01:22.
+Il treno AV 2 sta entrando al binario 0 di Castelfranco Veneto alle ore 01:26.
+Il treno AV 2 è arrivato al binario 0 di Castelfranco Veneto alle ore 01:27 con 7 minuti di ritardo.
+Il treno SUPER AV 5 è in anticipo. Andrà in parcheggio a Padova.
+Il treno SUPER AV 3 sta entrando al binario 2 di Castelfranco Veneto alle ore 01:29.
+Il treno SUPER AV 3 è arrivato al binario 2 di Castelfranco Veneto alle ore 01:30 con -3 minuti di ritardo.
+Il treno SUPER AV 5 è andato in parcheggio a Padova alle ore 01:30.
+Il treno SUPER AV 6 è in partenza dal binario 3 di Padova alle ore 01:30 con 0 minuti di ritardo.
+Il treno AV 2 è in partenza dal binario 0 di Castelfranco Veneto alle ore 01:32.
+Il treno SUPER AV 6 sta uscendo da Padova alle ore 01:34.
+Il treno AV 4 sta uscendo da Padova alle ore 01:36.
+Il treno SUPER AV 3 è in partenza dal binario 2 di Castelfranco Veneto alle ore 01:38.
+Il treno SUPER AV 3 sta uscendo da Castelfranco Veneto alle ore 01:41.
+Il treno SUPER AV 1 sta entrando al binario 2 di Castelfranco Veneto alle ore 01:42.
+Il treno SUPER AV 1 è arrivato al binario 2 di Castelfranco Veneto alle ore 01:43 con 3 minuti di ritardo.
+Il treno SUPER AV 3 ha inviato segnalazione a Campodarsego alle ore 01:43.
+Permesso accordato. Il treno SUPER AV 3 arriverà a Campodarsego al binario di transito.
+Il treno SUPER AV 3 sta entrando al binario 4 di Campodarsego alle ore 01:46.
+Il treno SUPER AV 6 ha inviato segnalazione a Campodarsego alle ore 01:46.
+Permesso accordato. Il treno SUPER AV 6 arriverà a Campodarsego al binario di transito.
+Il treno SUPER AV 1 è in partenza dal binario 2 di Castelfranco Veneto alle ore 01:48.
+Il treno SUPER AV 3 sta uscendo da Campodarsego alle ore 01:48.
+Il treno SUPER AV 6 sta entrando al binario 5 di Campodarsego alle ore 01:49.
+Il treno SUPER AV 1 sta uscendo da Castelfranco Veneto alle ore 01:51.
+Il treno AV 4 ha inviato segnalazione a Campodarsego alle ore 01:51.
+Permesso accordato. Il treno AV 4 arriverà a Campodarsego al binario di transito.
+Il treno SUPER AV 6 sta uscendo da Campodarsego alle ore 01:51.
+Il treno SUPER AV 1 ha inviato segnalazione a Campodarsego alle ore 01:53.
+Permesso accordato. Il treno SUPER AV 1 arriverà a Campodarsego al binario di transito.
+Il treno AV 2 sta uscendo da Castelfranco Veneto alle ore 01:53.
+Il treno SUPER AV 6 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno AV 4 sta entrando al binario 5 di Campodarsego alle ore 01:54.
+Il treno SUPER AV 1 sta entrando al binario 4 di Campodarsego alle ore 01:56.
+Il treno AV 2 ha inviato segnalazione a Campodarsego alle ore 01:56.
+Permesso accordato. Il treno AV 2 arriverà a Campodarsego al binario di transito.
+Il treno SUPER AV 6 è andato in parcheggio a Castelfranco Veneto alle ore 01:56.
+Il treno AV 4 sta uscendo da Campodarsego alle ore 01:57.
+Il treno SUPER AV 1 sta uscendo da Campodarsego alle ore 01:58.
+Il treno AV 2 sta entrando al binario 4 di Campodarsego alle ore 01:59.
+Il treno AV 4 ha inviato segnalazione a Castelfranco Veneto alle ore 01:59.
+Permesso accordato. Il treno AV 4 arriverà a Castelfranco Veneto al binario 1.
+Il treno SUPER AV 3 è in anticipo. Andrà in parcheggio a Padova.
+Il treno AV 2 sta uscendo da Campodarsego alle ore 02:02.
+Il treno SUPER AV 3 è andato in parcheggio a Padova alle ore 02:03.
+Il treno AV 4 sta entrando al binario 1 di Castelfranco Veneto alle ore 02:03.
+Il treno AV 4 è arrivato al binario 1 di Castelfranco Veneto alle ore 02:04 con 39 minuti di ritardo.
+Il treno AV 4 è in partenza dal binario 1 di Castelfranco Veneto alle ore 02:09.
+Il treno SUPER AV 1 è in anticipo. Andrà in parcheggio a Padova.
+Il treno AV 4 sta uscendo da Castelfranco Veneto alle ore 02:12.
+Il treno SUPER AV 1 è andato in parcheggio a Padova alle ore 02:13.
+Il treno SUPER AV 3 sta entrando al binario 0 di Padova alle ore 02:14.
+Il treno SUPER AV 3 è arrivato al binario 0 di Padova alle ore 02:15 con -3 minuti di ritardo.
+Il treno SUPER AV 3 ha terminato la sua corsa.
+Il treno AV 2 ha inviato segnalazione a Padova alle ore 02:16.
+Permesso accordato. Il treno AV 2 arriverà a Padova al binario 0.
+Il treno AV 4 è in anticipo. Andrà in parcheggio a Bassano Del Grappa.
+Il treno AV 2 sta entrando al binario 0 di Padova alle ore 02:20.
+Il treno SUPER AV 1 sta entrando al binario 2 di Padova alle ore 02:21.
+Il treno AV 2 è arrivato al binario 0 di Padova alle ore 02:21 con 11 minuti di ritardo.
+Il treno AV 2 ha terminato la sua corsa.
+Il treno SUPER AV 1 è arrivato al binario 2 di Padova alle ore 02:22 con -3 minuti di ritardo.
+Il treno SUPER AV 1 ha terminato la sua corsa.
+Il treno AV 4 è andato in parcheggio a Bassano Del Grappa alle ore 02:22.
+Il treno SUPER AV 6 sta entrando al binario 1 di Castelfranco Veneto alle ore 02:22.
+Il treno SUPER AV 6 è arrivato al binario 1 di Castelfranco Veneto alle ore 02:23 con -3 minuti di ritardo.
+Il treno SUPER AV 6 è in partenza dal binario 1 di Castelfranco Veneto alle ore 02:31.
+Il treno SUPER AV 5 sta entrando al binario 0 di Padova alle ore 02:32.
+Il treno SUPER AV 5 è arrivato al binario 0 di Padova alle ore 02:33 con -3 minuti di ritardo.
+Il treno SUPER AV 5 ha terminato la sua corsa.
+Il treno SUPER AV 6 sta uscendo da Castelfranco Veneto alle ore 02:34.
+Il treno SUPER AV 6 è in anticipo. Andrà in parcheggio a Bassano Del Grappa.
+Il treno SUPER AV 6 è andato in parcheggio a Bassano Del Grappa alle ore 02:42.
+Il treno SUPER AV 6 sta entrando al binario 1 di Bassano Del Grappa alle ore 02:53.
+Il treno SUPER AV 6 è arrivato al binario 1 di Bassano Del Grappa alle ore 02:54 con -3 minuti di ritardo.
+Il treno SUPER AV 6 ha terminato la sua corsa.
+Il treno AV 4 sta entrando al binario 1 di Bassano Del Grappa alle ore 09:56.
+Il treno AV 4 è arrivato al binario 1 di Bassano Del Grappa alle ore 09:57 con -3 minuti di ritardo.
+Il treno AV 4 ha terminato la sua corsa.
+Il treno AV 7 è in partenza dal binario 0 di Bassano Del Grappa alle ore 10:00 con 0 minuti di ritardo.
+Il treno AV 7 sta uscendo da Bassano Del Grappa alle ore 10:04.
+Il treno AV 7 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno AV 7 è andato in parcheggio a Castelfranco Veneto alle ore 10:14.
+Il treno AV 7 sta entrando al binario 0 di Castelfranco Veneto alle ore 10:21.
+Il treno AV 7 è arrivato al binario 0 di Castelfranco Veneto alle ore 10:22 con -3 minuti di ritardo.
+Il treno AV 7 è in partenza dal binario 0 di Castelfranco Veneto alle ore 10:30.
+Il treno AV 7 sta uscendo da Castelfranco Veneto alle ore 10:34.
+Il treno AV 7 ha inviato segnalazione a Campodarsego alle ore 10:37.
+Permesso accordato. Il treno AV 7 arriverà a Campodarsego al binario di transito.
+Il treno AV 7 sta entrando al binario 4 di Campodarsego alle ore 10:40.
+Il treno AV 7 sta uscendo da Campodarsego alle ore 10:43.
+Il treno AV 7 è in anticipo. Andrà in parcheggio a Padova.
+Il treno AV 7 è andato in parcheggio a Padova alle ore 11:01.
+Il treno AV 7 sta entrando al binario 0 di Padova alle ore 11:11.
+Il treno AV 7 è arrivato al binario 0 di Padova alle ore 11:12 con -3 minuti di ritardo.
+Il treno AV 7 ha terminato la sua corsa.
+Il treno AV 9 è in partenza dal binario 0 di Bassano Del Grappa alle ore 13:20 con 0 minuti di ritardo.
+Il treno AV 9 sta uscendo da Bassano Del Grappa alle ore 13:24.
+Il treno AV 9 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno AV 9 è andato in parcheggio a Castelfranco Veneto alle ore 13:34.
+Il treno R 10 è in partenza dal binario 0 di Bassano Del Grappa alle ore 15:00 con 0 minuti di ritardo.
+Il treno R 10 sta uscendo da Bassano Del Grappa alle ore 15:04.
+Il treno R 10 è in anticipo. Andrà in parcheggio a Castelfranco Veneto.
+Il treno R 10 è andato in parcheggio a Castelfranco Veneto alle ore 15:19.
+Il treno AV 9 sta entrando al binario 0 di Castelfranco Veneto alle ore 16:36.
+Il treno R 10 sta entrando al binario 2 di Castelfranco Veneto alle ore 16:36.
+Il treno AV 9 è arrivato al binario 0 di Castelfranco Veneto alle ore 16:37 con -3 minuti di ritardo.
+Il treno R 10 è arrivato al binario 2 di Castelfranco Veneto alle ore 16:38 con -2 minuti di ritardo.
+Il treno AV 9 è in partenza dal binario 0 di Castelfranco Veneto alle ore 16:45.
+Il treno R 10 è in partenza dal binario 2 di Castelfranco Veneto alle ore 16:45.
+Il treno AV 9 sta uscendo da Castelfranco Veneto alle ore 16:49.
+Il treno AV 9 ha inviato segnalazione a Campodarsego alle ore 16:52.
+Permesso accordato. Il treno AV 9 arriverà a Campodarsego al binario di transito.
+Il treno R 10 sta uscendo da Castelfranco Veneto alle ore 16:52.
+Il treno AV 9 sta entrando al binario 4 di Campodarsego alle ore 16:55.
+Il treno R 10 è in anticipo. Andrà in parcheggio a Campodarsego.
+Il treno AV 9 sta uscendo da Campodarsego alle ore 16:58.
+Il treno R 10 è andato in parcheggio a Campodarsego alle ore 17:01.
+Il treno R 10 sta entrando al binario 0 di Campodarsego alle ore 17:09.
+Il treno R 10 è arrivato al binario 0 di Campodarsego alle ore 17:11 con -2 minuti di ritardo.
+Il treno AV 9 è in anticipo. Andrà in parcheggio a Padova.
+Il treno AV 9 è andato in parcheggio a Padova alle ore 17:16.
+Il treno R 10 è in partenza dal binario 0 di Campodarsego alle ore 17:18.
+Il treno R 10 sta uscendo da Campodarsego alle ore 17:22.
+Il treno AV 9 sta entrando al binario 0 di Padova alle ore 17:26.
+Il treno AV 9 è arrivato al binario 0 di Padova alle ore 17:27 con -3 minuti di ritardo.
+Il treno AV 9 ha terminato la sua corsa.
+Il treno R 10 è in anticipo. Andrà in parcheggio a Padova.
+Il treno R 10 è andato in parcheggio a Padova alle ore 17:49.
+Il treno R 10 sta entrando al binario 0 di Padova alle ore 18:00.
+Il treno R 10 è arrivato al binario 0 di Padova alle ore 18:02 con -2 minuti di ritardo.
+Il treno R 10 ha terminato la sua corsa.
+
+--------------------------- END ---------------------------

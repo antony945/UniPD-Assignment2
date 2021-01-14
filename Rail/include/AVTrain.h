@@ -13,10 +13,9 @@ public:
     AVTrain(AVTrain&&)=delete;
     AVTrain& operator=(AVTrain&&)=delete;
     ~AVTrain() override ;
+    bool checkTimetable() override;
     bool hasToStop() const override;
-    bool isRegional() const override { return false; }
-    bool isAV() const override { return true; }
-    bool isSuperAV() const override { return false; }
+    std::string getType() const override { return "AV"; }
 };
 
 #endif // AVTrain_h

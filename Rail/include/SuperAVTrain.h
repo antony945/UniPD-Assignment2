@@ -5,6 +5,7 @@
 
 class SuperAVTrain : public Train {
 public:
+    ///max speed that train can reach
     static constexpr int MAX_SPEED = 300;
 public:
     SuperAVTrain(int id_, bool left_,const std::vector<Station*>& stations_,const std::vector<int>& timetable_);
@@ -12,11 +13,10 @@ public:
     SuperAVTrain& operator=(const SuperAVTrain&) =delete;
     SuperAVTrain(SuperAVTrain&&)=delete;
     SuperAVTrain& operator=(SuperAVTrain&&)=delete;
-    ~SuperAVTrain() override ;
+    ~SuperAVTrain();
+    bool checkTimetable() override;
     bool hasToStop() const override;
-    bool isRegional() const override { return false; }
-    bool isAV() const override { return false; }
-    bool isSuperAV() const override { return true; }
+    std::string getType() const override { return "SUPER AV"; }
 };
 
 #endif // SuperAVTrain_h
