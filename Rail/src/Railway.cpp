@@ -52,6 +52,9 @@ void Railway::daySimulation() {
             output << "GIORNO " << currentMinutes/DAY_MINUTES << '\n'; 
         }
 
+        // Stampa orario
+        // output << getCurrentTime() << '\n';
+
         for(Train* t : trains) {
             // Solo se il treno non ha finito la sua corsa
             if(!t->getEnd()) {
@@ -65,6 +68,13 @@ void Railway::daySimulation() {
         manageParkedTrains();
         // Controlla distanza tra treni fuori dalla stazione e in caso aggiusta velocità
         checkMinimumDistance();
+        
+        // for(auto t : trains) {
+        //     output << "TRENO " << t->getType() << " " << t->getId();
+        //     output << "; speed: " << t->getCurrentSpeed();
+        //     output << "; distance: " << t->getCurrentDistance() << '\n';
+        // }
+
         // Avanza di un minuto la simulazione
         advanceTrains();
     }
